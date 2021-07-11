@@ -20,17 +20,23 @@
     owner_id, owner_type, owner_name, owner_sex, owner_birth, owner_nation, owner_education, 
     owner_notype, owner_no, owner_work, owner_phone, urgent_name, urgent_phone
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByTOwnerKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_owner
     where owner_id = #{ownerId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectAllTOwners" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_owner
+    where owner_name like #{value} or urgent_name like #{value}
+  </select>
+  <delete id="deleteByTOwnerKey" parameterType="java.lang.Integer">
     delete from t_owner
     where owner_id = #{ownerId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="owner_id" keyProperty="ownerId" parameterType="com.trkj.property.entity.TOwner" useGeneratedKeys="true">
+  <insert id="addTOwner" keyColumn="owner_id" keyProperty="ownerId" parameterType="com.trkj.property.entity.TOwner" useGeneratedKeys="true">
     insert into t_owner (owner_type, owner_name, owner_sex, 
       owner_birth, owner_nation, owner_education, 
       owner_notype, owner_no, owner_work, 
@@ -42,86 +48,7 @@
       #{ownerPhone,jdbcType=VARCHAR}, #{urgentName,jdbcType=VARCHAR}, #{urgentPhone,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="owner_id" keyProperty="ownerId" parameterType="com.trkj.property.entity.TOwner" useGeneratedKeys="true">
-    insert into t_owner
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ownerType != null">
-        owner_type,
-      </if>
-      <if test="ownerName != null">
-        owner_name,
-      </if>
-      <if test="ownerSex != null">
-        owner_sex,
-      </if>
-      <if test="ownerBirth != null">
-        owner_birth,
-      </if>
-      <if test="ownerNation != null">
-        owner_nation,
-      </if>
-      <if test="ownerEducation != null">
-        owner_education,
-      </if>
-      <if test="ownerNotype != null">
-        owner_notype,
-      </if>
-      <if test="ownerNo != null">
-        owner_no,
-      </if>
-      <if test="ownerWork != null">
-        owner_work,
-      </if>
-      <if test="ownerPhone != null">
-        owner_phone,
-      </if>
-      <if test="urgentName != null">
-        urgent_name,
-      </if>
-      <if test="urgentPhone != null">
-        urgent_phone,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ownerType != null">
-        #{ownerType,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerName != null">
-        #{ownerName,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerSex != null">
-        #{ownerSex,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerBirth != null">
-        #{ownerBirth,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ownerNation != null">
-        #{ownerNation,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerEducation != null">
-        #{ownerEducation,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerNotype != null">
-        #{ownerNotype,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerNo != null">
-        #{ownerNo,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerWork != null">
-        #{ownerWork,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerPhone != null">
-        #{ownerPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="urgentName != null">
-        #{urgentName,jdbcType=VARCHAR},
-      </if>
-      <if test="urgentPhone != null">
-        #{urgentPhone,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.TOwner">
+  <update id="updateByTOwnerKeySelective" parameterType="com.trkj.property.entity.TOwner">
     update t_owner
     <set>
       <if test="ownerType != null">
@@ -163,7 +90,7 @@
     </set>
     where owner_id = #{ownerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TOwner">
+  <update id="updateByTOwnerKey" parameterType="com.trkj.property.entity.TOwner">
     update t_owner
     set owner_type = #{ownerType,jdbcType=VARCHAR},
       owner_name = #{ownerName,jdbcType=VARCHAR},

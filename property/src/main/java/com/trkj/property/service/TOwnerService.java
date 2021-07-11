@@ -1,11 +1,15 @@
-package com.trkj.property.dao;
+package com.trkj.property.service;
 
 import com.trkj.property.entity.TOwner;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-@Mapper
-public interface TOwnerDao {
+
+/**
+ * @author 胡志远
+ * @version 1.0
+ * @date 2021/7/11 19:22
+ */
+public interface TOwnerService {
     void deleteByTOwnerKey(Integer ownerId);
 
     void addTOwner(TOwner record);
