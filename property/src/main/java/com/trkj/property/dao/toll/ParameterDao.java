@@ -1,17 +1,16 @@
 package com.trkj.property.dao.toll;
-
-import com.trkj.property.entity.toll.Parameter;
+import com.trkj.property.entity.toll.ParameterEntity;
 
 public interface ParameterDao {
     int deleteByPrimaryKey(Integer parId);
 
-    int insert(Parameter record);
+    int insert(ParameterEntity record);
 
-    int insertSelective(Parameter record);
+    int insertSelective(ParameterEntity record);
 
-    Parameter selectByPrimaryKey(Integer parId);
+    ParameterEntity selectByPrimaryKey(Integer parId);
 
-    int updateByPrimaryKeySelective(Parameter record);
+    int updateByPrimaryKeySelective(ParameterEntity record);
 
-    int updateByPrimaryKey(Parameter record);
+    int updateByPrimaryKey(ParameterEntity record);
 }
