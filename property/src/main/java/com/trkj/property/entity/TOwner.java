@@ -2,13 +2,18 @@ package com.trkj.property.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * t_owner
  * @author 
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TOwner implements Serializable {
     private Integer ownerId;
 
