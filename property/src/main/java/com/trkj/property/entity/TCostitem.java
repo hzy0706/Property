@@ -1,0 +1,43 @@
+package com.trkj.property.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+/**
+ * t_costitem
+ * @author 
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class TCostitem implements Serializable {
+    private Integer ctId;
+
+    private Integer residenceId;
+
+    private Integer parDeId;
+
+    private String ctName;
+
+    private Integer ctChargecycle;
+
+    private BigDecimal ctSubtotal;
+
+    private Integer overdue;
+
+    private String overduefine;
+
+    private String ctRelation;
+
+    private String chco;
+
+    private String ifprice;
+
+    private static final long serialVersionUID = 1L;
+}
