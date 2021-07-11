@@ -10,8 +10,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.SignatureException;
 
-/**
- * 全局异常处理
+/***
+ * @author 胡志远
+ * @date 2021-07-11
  */
 @ControllerAdvice
 @Slf4j

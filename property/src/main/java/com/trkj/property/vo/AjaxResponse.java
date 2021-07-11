@@ -4,7 +4,10 @@ import com.trkj.property.exception.CustomError;
 import com.trkj.property.exception.CustomErrorType;
 import lombok.Data;
 
-
+/***
+ * @author 胡志远
+ * @date 2021-07-11
+ */
 @Data
 public class AjaxResponse {
 

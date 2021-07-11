@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TOwnerDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TOwner">
+    <id column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="owner_type" jdbcType="VARCHAR" property="ownerType" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="owner_sex" jdbcType="VARCHAR" property="ownerSex" />
+    <result column="owner_birth" jdbcType="TIMESTAMP" property="ownerBirth" />
+    <result column="owner_nation" jdbcType="VARCHAR" property="ownerNation" />
+    <result column="owner_education" jdbcType="VARCHAR" property="ownerEducation" />
+    <result column="owner_notype" jdbcType="VARCHAR" property="ownerNotype" />
+    <result column="owner_no" jdbcType="VARCHAR" property="ownerNo" />
+    <result column="owner_work" jdbcType="VARCHAR" property="ownerWork" />
+    <result column="owner_phone" jdbcType="VARCHAR" property="ownerPhone" />
+    <result column="urgent_name" jdbcType="VARCHAR" property="urgentName" />
+    <result column="urgent_phone" jdbcType="VARCHAR" property="urgentPhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    owner_id, owner_type, owner_name, owner_sex, owner_birth, owner_nation, owner_education, 
+    owner_notype, owner_no, owner_work, owner_phone, urgent_name, urgent_phone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_owner
+    where owner_id = #{ownerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_owner
+    where owner_id = #{ownerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="owner_id" keyProperty="ownerId" parameterType="com.trkj.property.entity.TOwner" useGeneratedKeys="true">
+    insert into t_owner (owner_type, owner_name, owner_sex, 
+      owner_birth, owner_nation, owner_education, 
+      owner_notype, owner_no, owner_work, 
+      owner_phone, urgent_name, urgent_phone
+      )
+    values (#{ownerType,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, #{ownerSex,jdbcType=VARCHAR}, 
+      #{ownerBirth,jdbcType=TIMESTAMP}, #{ownerNation,jdbcType=VARCHAR}, #{ownerEducation,jdbcType=VARCHAR}, 
+      #{ownerNotype,jdbcType=VARCHAR}, #{ownerNo,jdbcType=VARCHAR}, #{ownerWork,jdbcType=VARCHAR}, 
+      #{ownerPhone,jdbcType=VARCHAR}, #{urgentName,jdbcType=VARCHAR}, #{urgentPhone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="owner_id" keyProperty="ownerId" parameterType="com.trkj.property.entity.TOwner" useGeneratedKeys="true">
+    insert into t_owner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ownerType != null">
+        owner_type,
+      </if>
+      <if test="ownerName != null">
+        owner_name,
+      </if>
+      <if test="ownerSex != null">
+        owner_sex,
+      </if>
+      <if test="ownerBirth != null">
+        owner_birth,
+      </if>
+      <if test="ownerNation != null">
+        owner_nation,
+      </if>
+      <if test="ownerEducation != null">
+        owner_education,
+      </if>
+      <if test="ownerNotype != null">
+        owner_notype,
+      </if>
+      <if test="ownerNo != null">
+        owner_no,
+      </if>
+      <if test="ownerWork != null">
+        owner_work,
+      </if>
+      <if test="ownerPhone != null">
+        owner_phone,
+      </if>
+      <if test="urgentName != null">
+        urgent_name,
+      </if>
+      <if test="urgentPhone != null">
+        urgent_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ownerType != null">
+        #{ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null">
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerSex != null">
+        #{ownerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerBirth != null">
+        #{ownerBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerNation != null">
+        #{ownerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerEducation != null">
+        #{ownerEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNotype != null">
+        #{ownerNotype,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNo != null">
+        #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerWork != null">
+        #{ownerWork,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPhone != null">
+        #{ownerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentName != null">
+        #{urgentName,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentPhone != null">
+        #{urgentPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.TOwner">
+    update t_owner
+    <set>
+      <if test="ownerType != null">
+        owner_type = #{ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null">
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerSex != null">
+        owner_sex = #{ownerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerBirth != null">
+        owner_birth = #{ownerBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerNation != null">
+        owner_nation = #{ownerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerEducation != null">
+        owner_education = #{ownerEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNotype != null">
+        owner_notype = #{ownerNotype,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNo != null">
+        owner_no = #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerWork != null">
+        owner_work = #{ownerWork,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPhone != null">
+        owner_phone = #{ownerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentName != null">
+        urgent_name = #{urgentName,jdbcType=VARCHAR},
+      </if>
+      <if test="urgentPhone != null">
+        urgent_phone = #{urgentPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where owner_id = #{ownerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TOwner">
+    update t_owner
+    set owner_type = #{ownerType,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      owner_sex = #{ownerSex,jdbcType=VARCHAR},
+      owner_birth = #{ownerBirth,jdbcType=TIMESTAMP},
+      owner_nation = #{ownerNation,jdbcType=VARCHAR},
+      owner_education = #{ownerEducation,jdbcType=VARCHAR},
+      owner_notype = #{ownerNotype,jdbcType=VARCHAR},
+      owner_no = #{ownerNo,jdbcType=VARCHAR},
+      owner_work = #{ownerWork,jdbcType=VARCHAR},
+      owner_phone = #{ownerPhone,jdbcType=VARCHAR},
+      urgent_name = #{urgentName,jdbcType=VARCHAR},
+      urgent_phone = #{urgentPhone,jdbcType=VARCHAR}
+    where owner_id = #{ownerId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,5 +1,8 @@
 package com.trkj.property.exception;
-
+/***
+ * @author 胡志远
+ * @date 2021-07-11
+ */
 public enum CustomErrorType {
 
     USER_INPUT_ERROR(400,"用户输入异常"),
@@ -9,9 +12,9 @@ public enum CustomErrorType {
     ACCOUNT_ERROR1(601,"账户权限"),
     PAGE_NOT_FOUND_ERROR(404,"无法找到对应的资源"),
     SIGNATURE_ERROR(700,"签名异常");
-    //异常类型中文描述
+    /*异常类型中文描述*/
     private String typeDesc;
-    //异常code
+    /*异常code*/
     private int code;
 
 

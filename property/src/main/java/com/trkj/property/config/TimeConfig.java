@@ -10,6 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * @author 胡志远
+ * @date 2021-07-11
+ */
 @Configuration
 public class TimeConfig {
     @Bean

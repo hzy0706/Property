@@ -1,11 +1,14 @@
 package com.trkj.property.exception;
 
-import com.trkj.property.exception.CustomErrorType;
 
+/***
+ * @author 胡志远
+ * @date 2021-07-11
+ */
 public class CustomError extends RuntimeException {
-    //异常错误编码
+    /*异常错误编码*/
     private int code ;
-    //异常信息
+    /*异常信息*/
     private String message;
 
     private CustomError(){}
