@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.toll.DetailBillsCostsitemDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.toll.DetailBillsCostsitemEntity">
+    <id column="detail_charges_id" jdbcType="INTEGER" property="detailChargesId" />
+    <result column="bill_detail_id" jdbcType="INTEGER" property="billDetailId" />
+    <result column="charge_costs_id" jdbcType="INTEGER" property="chargeCostsId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    detail_charges_id, bill_detail_id, charge_costs_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_detail_bills_costsitem
+    where detail_charges_id = #{detailChargesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_detail_bills_costsitem
+    where detail_charges_id = #{detailChargesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="detail_charges_id" keyProperty="detailChargesId" parameterType="com.trkj.property.entity.toll.DetailBillsCostsitemEntity" useGeneratedKeys="true">
+    insert into t_detail_bills_costsitem (bill_detail_id, charge_costs_id)
+    values (#{billDetailId,jdbcType=INTEGER}, #{chargeCostsId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="detail_charges_id" keyProperty="detailChargesId" parameterType="com.trkj.property.entity.toll.DetailBillsCostsitemEntity" useGeneratedKeys="true">
+    insert into t_detail_bills_costsitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billDetailId != null">
+        bill_detail_id,
+      </if>
+      <if test="chargeCostsId != null">
+        charge_costs_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billDetailId != null">
+        #{billDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeCostsId != null">
+        #{chargeCostsId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.toll.DetailBillsCostsitemEntity">
+    update t_detail_bills_costsitem
+    <set>
+      <if test="billDetailId != null">
+        bill_detail_id = #{billDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeCostsId != null">
+        charge_costs_id = #{chargeCostsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where detail_charges_id = #{detailChargesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.toll.DetailBillsCostsitemEntity">
+    update t_detail_bills_costsitem
+    set bill_detail_id = #{billDetailId,jdbcType=INTEGER},
+      charge_costs_id = #{chargeCostsId,jdbcType=INTEGER}
+    where detail_charges_id = #{detailChargesId,jdbcType=INTEGER}
+  </update>
+</mapper>

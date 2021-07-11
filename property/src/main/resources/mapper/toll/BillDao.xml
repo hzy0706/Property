@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.toll.BillDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.toll.BillEntity">
+    <id column="bill_id" jdbcType="INTEGER" property="billId" />
+    <result column="bill_detail_id" jdbcType="INTEGER" property="billDetailId" />
+    <result column="bill_chargetime" jdbcType="TIMESTAMP" property="billChargetime" />
+    <result column="bill_state" jdbcType="INTEGER" property="billState" />
+    <result column="bill_realmoney" jdbcType="DECIMAL" property="billRealmoney" />
+    <result column="bill_type" jdbcType="INTEGER" property="billType" />
+    <result column="bill_receiptnumber" jdbcType="VARCHAR" property="billReceiptnumber" />
+    <result column="bill_invoicenumber" jdbcType="VARCHAR" property="billInvoicenumber" />
+    <result column="bill_name" jdbcType="VARCHAR" property="billName" />
+    <result column="bill_cause" jdbcType="VARCHAR" property="billCause" />
+    <result column="bill_modifier" jdbcType="VARCHAR" property="billModifier" />
+    <result column="bill_modififerdate" jdbcType="TIMESTAMP" property="billModififerdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bill_id, bill_detail_id, bill_chargetime, bill_state, bill_realmoney, bill_type, 
+    bill_receiptnumber, bill_invoicenumber, bill_name, bill_cause, bill_modifier, bill_modififerdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_bill
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_bill
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="bill_id" keyProperty="billId" parameterType="com.trkj.property.entity.toll.BillEntity" useGeneratedKeys="true">
+    insert into t_bill (bill_detail_id, bill_chargetime, bill_state, 
+      bill_realmoney, bill_type, bill_receiptnumber, 
+      bill_invoicenumber, bill_name, bill_cause, 
+      bill_modifier, bill_modififerdate)
+    values (#{billDetailId,jdbcType=INTEGER}, #{billChargetime,jdbcType=TIMESTAMP}, #{billState,jdbcType=INTEGER}, 
+      #{billRealmoney,jdbcType=DECIMAL}, #{billType,jdbcType=INTEGER}, #{billReceiptnumber,jdbcType=VARCHAR}, 
+      #{billInvoicenumber,jdbcType=VARCHAR}, #{billName,jdbcType=VARCHAR}, #{billCause,jdbcType=VARCHAR}, 
+      #{billModifier,jdbcType=VARCHAR}, #{billModififerdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="bill_id" keyProperty="billId" parameterType="com.trkj.property.entity.toll.BillEntity" useGeneratedKeys="true">
+    insert into t_bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billDetailId != null">
+        bill_detail_id,
+      </if>
+      <if test="billChargetime != null">
+        bill_chargetime,
+      </if>
+      <if test="billState != null">
+        bill_state,
+      </if>
+      <if test="billRealmoney != null">
+        bill_realmoney,
+      </if>
+      <if test="billType != null">
+        bill_type,
+      </if>
+      <if test="billReceiptnumber != null">
+        bill_receiptnumber,
+      </if>
+      <if test="billInvoicenumber != null">
+        bill_invoicenumber,
+      </if>
+      <if test="billName != null">
+        bill_name,
+      </if>
+      <if test="billCause != null">
+        bill_cause,
+      </if>
+      <if test="billModifier != null">
+        bill_modifier,
+      </if>
+      <if test="billModififerdate != null">
+        bill_modififerdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billDetailId != null">
+        #{billDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="billChargetime != null">
+        #{billChargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billState != null">
+        #{billState,jdbcType=INTEGER},
+      </if>
+      <if test="billRealmoney != null">
+        #{billRealmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="billType != null">
+        #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billReceiptnumber != null">
+        #{billReceiptnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billInvoicenumber != null">
+        #{billInvoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billName != null">
+        #{billName,jdbcType=VARCHAR},
+      </if>
+      <if test="billCause != null">
+        #{billCause,jdbcType=VARCHAR},
+      </if>
+      <if test="billModifier != null">
+        #{billModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="billModififerdate != null">
+        #{billModififerdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.toll.BillEntity">
+    update t_bill
+    <set>
+      <if test="billDetailId != null">
+        bill_detail_id = #{billDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="billChargetime != null">
+        bill_chargetime = #{billChargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billState != null">
+        bill_state = #{billState,jdbcType=INTEGER},
+      </if>
+      <if test="billRealmoney != null">
+        bill_realmoney = #{billRealmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="billType != null">
+        bill_type = #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billReceiptnumber != null">
+        bill_receiptnumber = #{billReceiptnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billInvoicenumber != null">
+        bill_invoicenumber = #{billInvoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billName != null">
+        bill_name = #{billName,jdbcType=VARCHAR},
+      </if>
+      <if test="billCause != null">
+        bill_cause = #{billCause,jdbcType=VARCHAR},
+      </if>
+      <if test="billModifier != null">
+        bill_modifier = #{billModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="billModififerdate != null">
+        bill_modififerdate = #{billModififerdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.toll.BillEntity">
+    update t_bill
+    set bill_detail_id = #{billDetailId,jdbcType=INTEGER},
+      bill_chargetime = #{billChargetime,jdbcType=TIMESTAMP},
+      bill_state = #{billState,jdbcType=INTEGER},
+      bill_realmoney = #{billRealmoney,jdbcType=DECIMAL},
+      bill_type = #{billType,jdbcType=INTEGER},
+      bill_receiptnumber = #{billReceiptnumber,jdbcType=VARCHAR},
+      bill_invoicenumber = #{billInvoicenumber,jdbcType=VARCHAR},
+      bill_name = #{billName,jdbcType=VARCHAR},
+      bill_cause = #{billCause,jdbcType=VARCHAR},
+      bill_modifier = #{billModifier,jdbcType=VARCHAR},
+      bill_modififerdate = #{billModififerdate,jdbcType=TIMESTAMP}
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </update>
+</mapper>

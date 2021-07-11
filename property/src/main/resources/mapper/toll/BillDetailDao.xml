@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.toll.BillDetailDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.toll.BillDetail">
+    <id column="bill_detail_id" jdbcType="INTEGER" property="billDetailId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="bill_id" jdbcType="INTEGER" property="billId" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="bill_receiptnumber" jdbcType="VARCHAR" property="billReceiptnumber" />
+    <result column="bill_invoicenumber" jdbcType="VARCHAR" property="billInvoicenumber" />
+    <result column="bill_type" jdbcType="INTEGER" property="billType" />
+    <result column="bill_detail_receivable" jdbcType="DECIMAL" property="billDetailReceivable" />
+    <result column="bill_realmoney" jdbcType="DECIMAL" property="billRealmoney" />
+    <result column="bill_detail_payee" jdbcType="VARCHAR" property="billDetailPayee" />
+    <result column="bill_detail_mark" jdbcType="VARCHAR" property="billDetailMark" />
+    <result column="bill_Arrearage" jdbcType="INTEGER" property="billArrearage" />
+    <result column="bill_selectornum" jdbcType="INTEGER" property="billSelectornum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bill_detail_id, house_id, bill_id, owner_id, bill_receiptnumber, bill_invoicenumber, 
+    bill_type, bill_detail_receivable, bill_realmoney, bill_detail_payee, bill_detail_mark, 
+    bill_Arrearage, bill_selectornum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_bill_detail
+    where bill_detail_id = #{billDetailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_bill_detail
+    where bill_detail_id = #{billDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="bill_detail_id" keyProperty="billDetailId" parameterType="com.trkj.property.entity.toll.BillDetail" useGeneratedKeys="true">
+    insert into t_bill_detail (house_id, bill_id, owner_id, 
+      bill_receiptnumber, bill_invoicenumber, bill_type, 
+      bill_detail_receivable, bill_realmoney, bill_detail_payee, 
+      bill_detail_mark, bill_Arrearage, bill_selectornum
+      )
+    values (#{houseId,jdbcType=INTEGER}, #{billId,jdbcType=INTEGER}, #{ownerId,jdbcType=INTEGER}, 
+      #{billReceiptnumber,jdbcType=VARCHAR}, #{billInvoicenumber,jdbcType=VARCHAR}, #{billType,jdbcType=INTEGER}, 
+      #{billDetailReceivable,jdbcType=DECIMAL}, #{billRealmoney,jdbcType=DECIMAL}, #{billDetailPayee,jdbcType=VARCHAR}, 
+      #{billDetailMark,jdbcType=VARCHAR}, #{billArrearage,jdbcType=INTEGER}, #{billSelectornum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="bill_detail_id" keyProperty="billDetailId" parameterType="com.trkj.property.entity.toll.BillDetail" useGeneratedKeys="true">
+    insert into t_bill_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="houseId != null">
+        house_id,
+      </if>
+      <if test="billId != null">
+        bill_id,
+      </if>
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="billReceiptnumber != null">
+        bill_receiptnumber,
+      </if>
+      <if test="billInvoicenumber != null">
+        bill_invoicenumber,
+      </if>
+      <if test="billType != null">
+        bill_type,
+      </if>
+      <if test="billDetailReceivable != null">
+        bill_detail_receivable,
+      </if>
+      <if test="billRealmoney != null">
+        bill_realmoney,
+      </if>
+      <if test="billDetailPayee != null">
+        bill_detail_payee,
+      </if>
+      <if test="billDetailMark != null">
+        bill_detail_mark,
+      </if>
+      <if test="billArrearage != null">
+        bill_Arrearage,
+      </if>
+      <if test="billSelectornum != null">
+        bill_selectornum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="houseId != null">
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="billId != null">
+        #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="billReceiptnumber != null">
+        #{billReceiptnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billInvoicenumber != null">
+        #{billInvoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null">
+        #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billDetailReceivable != null">
+        #{billDetailReceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="billRealmoney != null">
+        #{billRealmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="billDetailPayee != null">
+        #{billDetailPayee,jdbcType=VARCHAR},
+      </if>
+      <if test="billDetailMark != null">
+        #{billDetailMark,jdbcType=VARCHAR},
+      </if>
+      <if test="billArrearage != null">
+        #{billArrearage,jdbcType=INTEGER},
+      </if>
+      <if test="billSelectornum != null">
+        #{billSelectornum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.toll.BillDetail">
+    update t_bill_detail
+    <set>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="billId != null">
+        bill_id = #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="billReceiptnumber != null">
+        bill_receiptnumber = #{billReceiptnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billInvoicenumber != null">
+        bill_invoicenumber = #{billInvoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null">
+        bill_type = #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billDetailReceivable != null">
+        bill_detail_receivable = #{billDetailReceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="billRealmoney != null">
+        bill_realmoney = #{billRealmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="billDetailPayee != null">
+        bill_detail_payee = #{billDetailPayee,jdbcType=VARCHAR},
+      </if>
+      <if test="billDetailMark != null">
+        bill_detail_mark = #{billDetailMark,jdbcType=VARCHAR},
+      </if>
+      <if test="billArrearage != null">
+        bill_Arrearage = #{billArrearage,jdbcType=INTEGER},
+      </if>
+      <if test="billSelectornum != null">
+        bill_selectornum = #{billSelectornum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bill_detail_id = #{billDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.toll.BillDetail">
+    update t_bill_detail
+    set house_id = #{houseId,jdbcType=INTEGER},
+      bill_id = #{billId,jdbcType=INTEGER},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      bill_receiptnumber = #{billReceiptnumber,jdbcType=VARCHAR},
+      bill_invoicenumber = #{billInvoicenumber,jdbcType=VARCHAR},
+      bill_type = #{billType,jdbcType=INTEGER},
+      bill_detail_receivable = #{billDetailReceivable,jdbcType=DECIMAL},
+      bill_realmoney = #{billRealmoney,jdbcType=DECIMAL},
+      bill_detail_payee = #{billDetailPayee,jdbcType=VARCHAR},
+      bill_detail_mark = #{billDetailMark,jdbcType=VARCHAR},
+      bill_Arrearage = #{billArrearage,jdbcType=INTEGER},
+      bill_selectornum = #{billSelectornum,jdbcType=INTEGER}
+    where bill_detail_id = #{billDetailId,jdbcType=INTEGER}
+  </update>
+</mapper>
