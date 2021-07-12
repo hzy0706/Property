@@ -3,10 +3,7 @@ package com.trkj.property.controller;
 import com.trkj.property.entity.TParking;
 import com.trkj.property.service.TParKingService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -29,6 +26,12 @@ public class TParKingController {
         log.debug("添加成功");
         tParKingService.insertTRarKing(tParking);
         return tParking;
+    }
+
+    @GetMapping("/selectstate/{value3}")
+    public List<TParking> selectstate(@PathVariable("value3") String value3){
+        log.debug("根据车位状态查询");
+        return tParKingService.selectstate(value3);
     }
 
 }

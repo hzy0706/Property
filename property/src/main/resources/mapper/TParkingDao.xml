@@ -28,20 +28,64 @@
       <result column="developer" jdbcType="VARCHAR" property="developer" />
     </association>
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="TParKing">
     p.parking_id, p.saleContract_id, p.LeaseContract_id, p.residence_id, p.p_number, p.`state`, p.`type`,
     p.types, p.managemen, p.preSale, p.prePrice, p.`position`, p.area, p.remarks
   </sql>
-  <sql id="Base_Column_List1">
+  <sql id="TResidence">
     r.residence_id, r.residence_name, r.green_area, r.floor_area, r.address, r.covered_area, r.road_area,
     r.task_name, r.developer
   </sql>
 <!--  显示车位信息-->
   <select id="selectTParKing" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />,
-    <include refid="Base_Column_List1"/>
+    <include refid="TParKing" />,
+    <include refid="TResidence"/>
     from t_parking p inner join t_residence r on p.residence_id=r.residence_id
+  </select>
+<!--模糊查询-->
+<!--  <select id="select1" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List"/>,-->
+<!--    <include refid="TResidence"/>-->
+<!--    from t_parking p-->
+<!--    inner join t_residence r on p.residence_id=r.residence_id-->
+<!--    <if test="value1=='2' and value15!=null">-->
+<!--      and e.`Emp_Name` like CONCAT('%' ,#{value15}, '%')-->
+
+<!--    </if>-->
+<!--    <if test='value5 == "1"'>-->
+<!--      and m.Mail_Title like CONCAT('%' ,#{value15}, '%')-->
+<!--    </if>-->
+<!--  </select>-->
+<!--  根据车位编号查询-->
+<!--  <select id="selectnumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List"/>-->
+<!--    from t_parking p-->
+<!--    <where>order by AddTime desc-->
+<!--      <if test="value2! = null">1-->
+<!--        and p.`p_number` like CONCAT('%' ,#{value2}, '%')-->
+<!--      </if>-->
+<!--    </where>-->
+<!--  </select>-->
+<!--  根据车位状态查询-->
+  <select id="selectstate" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="TParKing"/>
+    from t_parking p
+    <where>order by AddTime desc
+      <if test="value3==0">
+        p.state =0
+      </if>
+      <if test="value3==1">
+        p.state =1
+      </if>
+      <if test="value3==2">
+        p.state =2
+      </if>
+    </where>
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_parking

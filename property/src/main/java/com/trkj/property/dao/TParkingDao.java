@@ -17,5 +17,7 @@ public interface TParkingDao {
 
     int updateTParKing(TParking tParking);//修改车位信息
 
+    List<TParking> selectstate(String value3);//根据车位状态查询
+
     int updateByPrimaryKey(TParking record);
 }
