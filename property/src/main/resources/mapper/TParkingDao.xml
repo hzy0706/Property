@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TParkingDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TParking">
+    <id column="parking_id" jdbcType="INTEGER" property="parkingId" />
+    <result column="saleContract_id" jdbcType="INTEGER" property="salecontractId" />
+    <result column="LeaseContract_id" jdbcType="INTEGER" property="leasecontractId" />
+    <result column="residence_id" jdbcType="INTEGER" property="residenceId" />
+    <result column="p_number" jdbcType="INTEGER" property="pNumber" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="types" jdbcType="INTEGER" property="types" />
+    <result column="managemen" jdbcType="INTEGER" property="managemen" />
+    <result column="preSale" jdbcType="DECIMAL" property="presale" />
+    <result column="prePrice" jdbcType="DECIMAL" property="preprice" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="area" jdbcType="DECIMAL" property="area" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <association property="tResidence" javaType="com.trkj.property.entity.TResidence">
+      <id column="residence_id" jdbcType="INTEGER" property="residenceId" />
+      <result column="residence_name" jdbcType="VARCHAR" property="residenceName" />
+      <result column="green_area" jdbcType="DECIMAL" property="greenArea" />
+      <result column="floor_area" jdbcType="DECIMAL" property="floorArea" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="covered_area" jdbcType="DECIMAL" property="coveredArea" />
+      <result column="road_area" jdbcType="DECIMAL" property="roadArea" />
+      <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+      <result column="developer" jdbcType="VARCHAR" property="developer" />
+    </association>
+  </resultMap>
+  <sql id="TParKing">
+    p.parking_id, p.saleContract_id, p.LeaseContract_id, p.residence_id, p.p_number, p.`state`, p.`type`,
+    p.types, p.managemen, p.preSale, p.prePrice, p.`position`, p.area, p.remarks
+  </sql>
+  <sql id="TResidence">
+    r.residence_id, r.residence_name, r.green_area, r.floor_area, r.address, r.covered_area, r.road_area,
+    r.task_name, r.developer
+  </sql>
+<!--  显示车位信息-->
+  <select id="selectTParKing" resultMap="BaseResultMap">
+    select 
+    <include refid="TParKing" />,
+    <include refid="TResidence"/>
+    from t_parking p inner join t_residence r on p.residence_id=r.residence_id
+  </select>
+<!--模糊查询-->
+<!--  <select id="select1" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List"/>,-->
+<!--    <include refid="TResidence"/>-->
+<!--    from t_parking p-->
+<!--    inner join t_residence r on p.residence_id=r.residence_id-->
+<!--    <if test="value1=='2' and value15!=null">-->
+<!--      and e.`Emp_Name` like CONCAT('%' ,#{value15}, '%')-->
+
+<!--    </if>-->
+<!--    <if test='value5 == "1"'>-->
+<!--      and m.Mail_Title like CONCAT('%' ,#{value15}, '%')-->
+<!--    </if>-->
+<!--  </select>-->
+<!--  根据车位编号查询-->
+<!--  <select id="selectnumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List"/>-->
+<!--    from t_parking p-->
+<!--    <where>order by AddTime desc-->
+<!--      <if test="value2! = null">1-->
+<!--        and p.`p_number` like CONCAT('%' ,#{value2}, '%')-->
+<!--      </if>-->
+<!--    </where>-->
+<!--  </select>-->
+<!--  根据车位状态查询-->
+  <select id="selectstate" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="TParKing"/>
+    from t_parking p
+    <where>order by AddTime desc
+      <if test="value3==0">
+        p.state =0
+      </if>
+      <if test="value3==1">
+        p.state =1
+      </if>
+      <if test="value3==2">
+        p.state =2
+      </if>
+    </where>
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_parking
+    where parking_id = #{parkingId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="parking_id" keyProperty="parkingId" parameterType="com.trkj.property.entity.TParking" useGeneratedKeys="true">
+    insert into t_parking (saleContract_id, LeaseContract_id, 
+      residence_id, p_number, `state`, 
+      `type`, types, managemen, 
+      preSale, prePrice, `position`, 
+      area, remarks)
+    values (#{salecontractId,jdbcType=INTEGER}, #{leasecontractId,jdbcType=INTEGER}, 
+      #{residenceId,jdbcType=INTEGER}, #{pNumber,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{types,jdbcType=INTEGER}, #{managemen,jdbcType=INTEGER}, 
+      #{presale,jdbcType=DECIMAL}, #{preprice,jdbcType=DECIMAL}, #{position,jdbcType=VARCHAR}, 
+      #{area,jdbcType=DECIMAL}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <!--  新增车位信息-->
+  <insert id="insertTRarKing" keyColumn="parking_id" keyProperty="parkingId" parameterType="com.trkj.property.entity.TParking" useGeneratedKeys="true">
+    insert into t_parking
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salecontractId != null">
+        saleContract_id,
+      </if>
+      <if test="leasecontractId != null">
+        LeaseContract_id,
+      </if>
+      <if test="residenceId != null">
+        residence_id,
+      </if>
+      <if test="pNumber != null">
+        p_number,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="types != null">
+        types,
+      </if>
+      <if test="managemen != null">
+        managemen,
+      </if>
+      <if test="presale != null">
+        preSale,
+      </if>
+      <if test="preprice != null">
+        prePrice,
+      </if>
+      <if test="position != null">
+        `position`,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salecontractId != null">
+        #{salecontractId,jdbcType=INTEGER},
+      </if>
+      <if test="leasecontractId != null">
+        #{leasecontractId,jdbcType=INTEGER},
+      </if>
+      <if test="residenceId != null">
+        #{residenceId,jdbcType=INTEGER},
+      </if>
+      <if test="pNumber != null">
+        #{pNumber,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="types != null">
+        #{types,jdbcType=INTEGER},
+      </if>
+      <if test="managemen != null">
+        #{managemen,jdbcType=INTEGER},
+      </if>
+      <if test="presale != null">
+        #{presale,jdbcType=DECIMAL},
+      </if>
+      <if test="preprice != null">
+        #{preprice,jdbcType=DECIMAL},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+<!--  修改车位信息-->
+  <update id="updateTParKing" parameterType="com.trkj.property.entity.TParking">
+    update t_parking
+    <set>
+      <if test="salecontractId != null">
+        saleContract_id = #{salecontractId,jdbcType=INTEGER},
+      </if>
+      <if test="leasecontractId != null">
+        LeaseContract_id = #{leasecontractId,jdbcType=INTEGER},
+      </if>
+      <if test="residenceId != null">
+        residence_id = #{residenceId,jdbcType=INTEGER},
+      </if>
+      <if test="pNumber != null">
+        p_number = #{pNumber,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="types != null">
+        types = #{types,jdbcType=INTEGER},
+      </if>
+      <if test="managemen != null">
+        managemen = #{managemen,jdbcType=INTEGER},
+      </if>
+      <if test="presale != null">
+        preSale = #{presale,jdbcType=DECIMAL},
+      </if>
+      <if test="preprice != null">
+        prePrice = #{preprice,jdbcType=DECIMAL},
+      </if>
+      <if test="position != null">
+        `position` = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where parking_id = #{parkingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TParking">
+    update t_parking
+    set saleContract_id = #{salecontractId,jdbcType=INTEGER},
+      LeaseContract_id = #{leasecontractId,jdbcType=INTEGER},
+      residence_id = #{residenceId,jdbcType=INTEGER},
+      p_number = #{pNumber,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=VARCHAR},
+      types = #{types,jdbcType=INTEGER},
+      managemen = #{managemen,jdbcType=INTEGER},
+      preSale = #{presale,jdbcType=DECIMAL},
+      prePrice = #{preprice,jdbcType=DECIMAL},
+      `position` = #{position,jdbcType=VARCHAR},
+      area = #{area,jdbcType=DECIMAL},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where parking_id = #{parkingId,jdbcType=INTEGER}
+  </update>
+</mapper>

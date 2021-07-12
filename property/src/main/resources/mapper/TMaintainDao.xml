@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TMaintainDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TMaintain">
+    <id column="maintain_id" jdbcType="INTEGER" property="maintainId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+    <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+    <result column="maintain_phone" jdbcType="VARCHAR" property="maintainPhone" />
+    <result column="create_name" jdbcType="VARCHAR" property="createName" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="maintain_state" jdbcType="INTEGER" property="maintainState" />
+    <result column="maintain_content" jdbcType="VARCHAR" property="maintainContent" />
+    <result column="maintain_bail" jdbcType="DECIMAL" property="maintainBail" />
+    <result column="approval_suggest" jdbcType="VARCHAR" property="approvalSuggest" />
+    <result column="approval_name" jdbcType="VARCHAR" property="approvalName" />
+    <result column="approval_date" jdbcType="TIMESTAMP" property="approvalDate" />
+    <result column="build_unit" jdbcType="VARCHAR" property="buildUnit" />
+    <result column="build_name" jdbcType="VARCHAR" property="buildName" />
+    <result column="build_phone" jdbcType="VARCHAR" property="buildPhone" />
+    <result column="build_start_date" jdbcType="TIMESTAMP" property="buildStartDate" />
+    <result column="build_end_date" jdbcType="TIMESTAMP" property="buildEndDate" />
+    <result column="check_name" jdbcType="VARCHAR" property="checkName" />
+    <result column="check_date" jdbcType="TIMESTAMP" property="checkDate" />
+    <result column="check_suggest" jdbcType="VARCHAR" property="checkSuggest" />
+    <result column="maintain_remark" jdbcType="VARCHAR" property="maintainRemark" />
+    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    maintain_id, house_id, house_name, apply_name, maintain_phone, create_name, create_date, 
+    maintain_state, maintain_content, maintain_bail, approval_suggest, approval_name, 
+    approval_date, build_unit, build_name, build_phone, build_start_date, build_end_date, 
+    check_name, check_date, check_suggest, maintain_remark, apply_date
+  </sql>
+  <select id="selectByTMaintainKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_maintain
+    where maintain_id = #{maintainId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllTMaintainByState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_maintain
+    where maintain_state = #{param1} and (apply_name like #{param2} or maintain_content like #{param2})
+  </select>
+
+  <delete id="deleteByTMaintainKey" parameterType="java.lang.Integer">
+    delete from t_maintain
+    where maintain_id = #{maintainId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addTMaintain" keyColumn="maintain_id" keyProperty="maintainId" parameterType="com.trkj.property.entity.TMaintain" useGeneratedKeys="true">
+    insert into t_maintain (house_id, house_name, apply_name, 
+      maintain_phone, create_name, create_date, 
+      maintain_state, maintain_content, maintain_bail, 
+      approval_suggest, approval_name, approval_date, 
+      build_unit, build_name, build_phone, 
+      build_start_date, build_end_date, check_name, 
+      check_date, check_suggest, maintain_remark, 
+      apply_date)
+    values (#{houseId,jdbcType=INTEGER}, #{houseName,jdbcType=VARCHAR}, #{applyName,jdbcType=VARCHAR}, 
+      #{maintainPhone,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{maintainState,jdbcType=INTEGER}, #{maintainContent,jdbcType=VARCHAR}, #{maintainBail,jdbcType=DECIMAL}, 
+      #{approvalSuggest,jdbcType=VARCHAR}, #{approvalName,jdbcType=VARCHAR}, #{approvalDate,jdbcType=TIMESTAMP}, 
+      #{buildUnit,jdbcType=VARCHAR}, #{buildName,jdbcType=VARCHAR}, #{buildPhone,jdbcType=VARCHAR}, 
+      #{buildStartDate,jdbcType=TIMESTAMP}, #{buildEndDate,jdbcType=TIMESTAMP}, #{checkName,jdbcType=VARCHAR}, 
+      #{checkDate,jdbcType=TIMESTAMP}, #{checkSuggest,jdbcType=VARCHAR}, #{maintainRemark,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByTMaintainKeySelective" parameterType="com.trkj.property.entity.TMaintain">
+    update t_maintain
+    <set>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="houseName != null">
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        apply_name = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainPhone != null">
+        maintain_phone = #{maintainPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maintainState != null">
+        maintain_state = #{maintainState,jdbcType=INTEGER},
+      </if>
+      <if test="maintainContent != null">
+        maintain_content = #{maintainContent,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainBail != null">
+        maintain_bail = #{maintainBail,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalSuggest != null">
+        approval_suggest = #{approvalSuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalName != null">
+        approval_name = #{approvalName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null">
+        approval_date = #{approvalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buildUnit != null">
+        build_unit = #{buildUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="buildName != null">
+        build_name = #{buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildPhone != null">
+        build_phone = #{buildPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="buildStartDate != null">
+        build_start_date = #{buildStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buildEndDate != null">
+        build_end_date = #{buildEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkName != null">
+        check_name = #{checkName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null">
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkSuggest != null">
+        check_suggest = #{checkSuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainRemark != null">
+        maintain_remark = #{maintainRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where maintain_id = #{maintainId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByTMaintainKey" parameterType="com.trkj.property.entity.TMaintain">
+    update t_maintain
+    set house_id = #{houseId,jdbcType=INTEGER},
+      house_name = #{houseName,jdbcType=VARCHAR},
+      apply_name = #{applyName,jdbcType=VARCHAR},
+      maintain_phone = #{maintainPhone,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      maintain_state = #{maintainState,jdbcType=INTEGER},
+      maintain_content = #{maintainContent,jdbcType=VARCHAR},
+      maintain_bail = #{maintainBail,jdbcType=DECIMAL},
+      approval_suggest = #{approvalSuggest,jdbcType=VARCHAR},
+      approval_name = #{approvalName,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=TIMESTAMP},
+      build_unit = #{buildUnit,jdbcType=VARCHAR},
+      build_name = #{buildName,jdbcType=VARCHAR},
+      build_phone = #{buildPhone,jdbcType=VARCHAR},
+      build_start_date = #{buildStartDate,jdbcType=TIMESTAMP},
+      build_end_date = #{buildEndDate,jdbcType=TIMESTAMP},
+      check_name = #{checkName,jdbcType=VARCHAR},
+      check_date = #{checkDate,jdbcType=TIMESTAMP},
+      check_suggest = #{checkSuggest,jdbcType=VARCHAR},
+      maintain_remark = #{maintainRemark,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP}
+    where maintain_id = #{maintainId,jdbcType=INTEGER}
+  </update>
+</mapper>

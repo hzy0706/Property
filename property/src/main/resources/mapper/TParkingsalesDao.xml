@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TParkingsalesDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TParkingsales">
+    <id column="parkingSales_id" jdbcType="INTEGER" property="parkingsalesId" />
+    <result column="saleContract_id" jdbcType="INTEGER" property="salecontractId" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="license" jdbcType="VARCHAR" property="license" />
+    <result column="Parking" jdbcType="VARCHAR" property="parking" />
+    <result column="parking_id" jdbcType="INTEGER" property="parkingId" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <association property="tParking" javaType="com.trkj.property.entity.TParking">
+      <id column="parking_id" jdbcType="INTEGER" property="parkingId" />
+      <result column="saleContract_id" jdbcType="INTEGER" property="salecontractId" />
+      <result column="LeaseContract_id" jdbcType="INTEGER" property="leasecontractId" />
+      <result column="residence_id" jdbcType="INTEGER" property="residenceId" />
+      <result column="p_number" jdbcType="INTEGER" property="pNumber" />
+      <result column="state" jdbcType="INTEGER" property="state" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
+      <result column="types" jdbcType="INTEGER" property="types" />
+      <result column="managemen" jdbcType="INTEGER" property="managemen" />
+      <result column="preSale" jdbcType="DECIMAL" property="presale" />
+      <result column="prePrice" jdbcType="DECIMAL" property="preprice" />
+      <result column="position" jdbcType="VARCHAR" property="position" />
+      <result column="area" jdbcType="DECIMAL" property="area" />
+      <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    </association>
+  </resultMap>
+  <sql id="TParKingsales">
+    s.parkingSales_id, s.saleContract_id, s.price, s.license, s.Parking, s.parking_id
+  </sql>
+  <sql id="TParKing">
+    p.parking_id, p.saleContract_id, p.LeaseContract_id, p.residence_id, p.p_number, p.`state`, p.`type`,
+    p.types, p.managemen, p.preSale, p.prePrice, p.`position`, p.area, p.remarks
+  </sql>
+  <select id="selectTParKingsales" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="TParKingsales" />
+    from t_parkingSales s
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_parkingSales
+    where parkingSales_id = #{parkingsalesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="parkingSales_id" keyProperty="parkingsalesId" parameterType="com.trkj.property.entity.TParkingsales" useGeneratedKeys="true">
+    insert into t_parkingSales (saleContract_id, price, license, 
+      Parking, parking_id)
+    values (#{salecontractId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{license,jdbcType=VARCHAR}, 
+      #{parking,jdbcType=VARCHAR}, #{parkingId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="parkingSales_id" keyProperty="parkingsalesId" parameterType="com.trkj.property.entity.TParkingsales" useGeneratedKeys="true">
+    insert into t_parkingSales
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salecontractId != null">
+        saleContract_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="license != null">
+        license,
+      </if>
+      <if test="parking != null">
+        Parking,
+      </if>
+      <if test="parkingId != null">
+        parking_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salecontractId != null">
+        #{salecontractId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="license != null">
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="parking != null">
+        #{parking,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingId != null">
+        #{parkingId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.TParkingsales">
+    update t_parkingSales
+    <set>
+      <if test="salecontractId != null">
+        saleContract_id = #{salecontractId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="license != null">
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="parking != null">
+        Parking = #{parking,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingId != null">
+        parking_id = #{parkingId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where parkingSales_id = #{parkingsalesId,jdbcType=INTEGER}
+  </update>
+<!--  修改车位销售信息-->
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TParkingsales">
+    update t_parkingSales s
+    set saleContract_id = #{salecontractId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      license = #{license,jdbcType=VARCHAR},
+      Parking = #{parking,jdbcType=VARCHAR},
+      parking_id = #{parkingId,jdbcType=INTEGER}
+    where parkingSales_id = #{parkingsalesId,jdbcType=INTEGER}
+  </update>
+</mapper>
