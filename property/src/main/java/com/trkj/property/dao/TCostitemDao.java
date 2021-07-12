@@ -1,17 +1,12 @@
 package com.trkj.property.dao;
 
 import com.trkj.property.entity.TCostitem;
+import com.trkj.property.vo.form.TCostitemQueryForm;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface TCostitemDao {
-    int deleteByPrimaryKey(Integer ctId);
-
-    int insert(TCostitem record);
-
-    int insertSelective(TCostitem record);
-
-    TCostitem selectByPrimaryKey(Integer ctId);
-
-    int updateByPrimaryKeySelective(TCostitem record);
-
-    int updateByPrimaryKey(TCostitem record);
+    List<TCostitem> queryAll(TCostitemQueryForm tCostitemQueryForm);
 }

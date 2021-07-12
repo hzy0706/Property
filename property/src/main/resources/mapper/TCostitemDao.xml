@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.property.dao.TCostitemDao">
-  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TCostitem">
+  <resultMap id="TCostitemMap" type="com.trkj.property.entity.TCostitem">
     <id column="ct_id" jdbcType="INTEGER" property="ctId" />
     <result column="residence_id" jdbcType="INTEGER" property="residenceId" />
-    <result column="par_de_id" jdbcType="INTEGER" property="parDeId" />
     <result column="ct_name" jdbcType="VARCHAR" property="ctName" />
     <result column="ct_chargecycle" jdbcType="INTEGER" property="ctChargecycle" />
     <result column="ct_subtotal" jdbcType="DECIMAL" property="ctSubtotal" />
@@ -14,145 +13,13 @@
     <result column="chco" jdbcType="VARCHAR" property="chco" />
     <result column="ifprice" jdbcType="CHAR" property="ifprice" />
   </resultMap>
-  <sql id="Base_Column_List">
-    ct_id, residence_id, par_de_id, ct_name, ct_chargecycle, ct_subtotal, overdue, overduefine, 
+  <sql id="TCostitem">
+    ct_id, residence_id, ct_name, ct_chargecycle, ct_subtotal, overdue, overduefine,
     ct_relation, chco, ifprice
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_costitem
-    where ct_id = #{ctId,jdbcType=INTEGER}
+  <select id="queryAll" resultMap="TCostitemMap">
+    select
+    <include refid="TCostitem"></include>
+    from property.t_costitem
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_costitem
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="ct_id" keyProperty="ctId" parameterType="com.trkj.property.entity.TCostitem" useGeneratedKeys="true">
-    insert into t_costitem (residence_id, par_de_id, ct_name, 
-      ct_chargecycle, ct_subtotal, overdue, 
-      overduefine, ct_relation, chco, 
-      ifprice)
-    values (#{residenceId,jdbcType=INTEGER}, #{parDeId,jdbcType=INTEGER}, #{ctName,jdbcType=VARCHAR}, 
-      #{ctChargecycle,jdbcType=INTEGER}, #{ctSubtotal,jdbcType=DECIMAL}, #{overdue,jdbcType=INTEGER}, 
-      #{overduefine,jdbcType=VARCHAR}, #{ctRelation,jdbcType=VARCHAR}, #{chco,jdbcType=VARCHAR}, 
-      #{ifprice,jdbcType=CHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="ct_id" keyProperty="ctId" parameterType="com.trkj.property.entity.TCostitem" useGeneratedKeys="true">
-    insert into t_costitem
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="residenceId != null">
-        residence_id,
-      </if>
-      <if test="parDeId != null">
-        par_de_id,
-      </if>
-      <if test="ctName != null">
-        ct_name,
-      </if>
-      <if test="ctChargecycle != null">
-        ct_chargecycle,
-      </if>
-      <if test="ctSubtotal != null">
-        ct_subtotal,
-      </if>
-      <if test="overdue != null">
-        overdue,
-      </if>
-      <if test="overduefine != null">
-        overduefine,
-      </if>
-      <if test="ctRelation != null">
-        ct_relation,
-      </if>
-      <if test="chco != null">
-        chco,
-      </if>
-      <if test="ifprice != null">
-        ifprice,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="residenceId != null">
-        #{residenceId,jdbcType=INTEGER},
-      </if>
-      <if test="parDeId != null">
-        #{parDeId,jdbcType=INTEGER},
-      </if>
-      <if test="ctName != null">
-        #{ctName,jdbcType=VARCHAR},
-      </if>
-      <if test="ctChargecycle != null">
-        #{ctChargecycle,jdbcType=INTEGER},
-      </if>
-      <if test="ctSubtotal != null">
-        #{ctSubtotal,jdbcType=DECIMAL},
-      </if>
-      <if test="overdue != null">
-        #{overdue,jdbcType=INTEGER},
-      </if>
-      <if test="overduefine != null">
-        #{overduefine,jdbcType=VARCHAR},
-      </if>
-      <if test="ctRelation != null">
-        #{ctRelation,jdbcType=VARCHAR},
-      </if>
-      <if test="chco != null">
-        #{chco,jdbcType=VARCHAR},
-      </if>
-      <if test="ifprice != null">
-        #{ifprice,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.TCostitem">
-    update t_costitem
-    <set>
-      <if test="residenceId != null">
-        residence_id = #{residenceId,jdbcType=INTEGER},
-      </if>
-      <if test="parDeId != null">
-        par_de_id = #{parDeId,jdbcType=INTEGER},
-      </if>
-      <if test="ctName != null">
-        ct_name = #{ctName,jdbcType=VARCHAR},
-      </if>
-      <if test="ctChargecycle != null">
-        ct_chargecycle = #{ctChargecycle,jdbcType=INTEGER},
-      </if>
-      <if test="ctSubtotal != null">
-        ct_subtotal = #{ctSubtotal,jdbcType=DECIMAL},
-      </if>
-      <if test="overdue != null">
-        overdue = #{overdue,jdbcType=INTEGER},
-      </if>
-      <if test="overduefine != null">
-        overduefine = #{overduefine,jdbcType=VARCHAR},
-      </if>
-      <if test="ctRelation != null">
-        ct_relation = #{ctRelation,jdbcType=VARCHAR},
-      </if>
-      <if test="chco != null">
-        chco = #{chco,jdbcType=VARCHAR},
-      </if>
-      <if test="ifprice != null">
-        ifprice = #{ifprice,jdbcType=CHAR},
-      </if>
-    </set>
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TCostitem">
-    update t_costitem
-    set residence_id = #{residenceId,jdbcType=INTEGER},
-      par_de_id = #{parDeId,jdbcType=INTEGER},
-      ct_name = #{ctName,jdbcType=VARCHAR},
-      ct_chargecycle = #{ctChargecycle,jdbcType=INTEGER},
-      ct_subtotal = #{ctSubtotal,jdbcType=DECIMAL},
-      overdue = #{overdue,jdbcType=INTEGER},
-      overduefine = #{overduefine,jdbcType=VARCHAR},
-      ct_relation = #{ctRelation,jdbcType=VARCHAR},
-      chco = #{chco,jdbcType=VARCHAR},
-      ifprice = #{ifprice,jdbcType=CHAR}
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </update>
 </mapper>

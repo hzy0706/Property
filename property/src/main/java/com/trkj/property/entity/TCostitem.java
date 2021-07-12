@@ -21,13 +21,11 @@ public class TCostitem implements Serializable {
 
     private Integer residenceId;
 
-    private Integer parDeId;
-
     private String ctName;
 
     private Integer ctChargecycle;
 
-    private BigDecimal ctSubtotal;
+    private Double ctSubtotal;
 
     private Integer overdue;
 
