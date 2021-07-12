@@ -1,12 +1,15 @@
-package com.trkj.property.dao;
+package com.trkj.property.service;
 
 import com.trkj.property.entity.TResidence;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface TResidenceDao {
+/**
+ * @author 胡志远
+ * @version 1.0
+ * @date 2021/7/12 19:39
+ */
+public interface TResidenceService {
     void deleteByPrimaryKey(Integer residenceId);
 
     void insert(TResidence record);

@@ -1,6 +1,5 @@
 package com.trkj.property.controller;
 
-import com.trkj.property.entity.TFamily;
 import com.trkj.property.entity.TOwnerHouse;
 import com.trkj.property.service.TOwnerHouseService;
 import com.trkj.property.vo.AjaxResponse;
@@ -68,6 +67,6 @@ public class TOwnerHouseController {
     @GetMapping("/selectAllTOwnerHouseByTid/{ownerId}")
     public AjaxResponse selectAllTOwnerHouseByTid(@PathVariable("ownerId") Integer ownerId){
         List<TOwnerHouse> list = tOwnerHouseService.selectAllTOwnerHouseByTid(ownerId);
-        return AjaxResponse.success();
+        return AjaxResponse.success(list);
     }
 }

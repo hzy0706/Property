@@ -3,6 +3,7 @@ package com.trkj.property.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,6 @@ public class TFamily implements Serializable {
     private Integer sibId;
 
     private Integer ownerId;
-
-    private TOwner tOwner;
 
     private String sibName;
 
@@ -37,6 +36,7 @@ public class TFamily implements Serializable {
 
     private String sibEducation;
 
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date ownerBirth;
 
     private static final long serialVersionUID = 1L;

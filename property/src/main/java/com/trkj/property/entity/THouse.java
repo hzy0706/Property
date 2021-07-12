@@ -2,6 +2,7 @@ package com.trkj.property.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +37,8 @@ public class THouse implements Serializable {
     private Integer useState;
 
     private String houseName;
+
+    private Date stayDate;
 
     private static final long serialVersionUID = 1L;
 }

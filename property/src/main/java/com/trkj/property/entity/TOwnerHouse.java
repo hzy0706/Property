@@ -19,6 +19,8 @@ public class TOwnerHouse implements Serializable {
 
     private Integer houseId;
 
+    private THouse tHouse;
+
     private Integer ownerId;
 
     private String houseNo;

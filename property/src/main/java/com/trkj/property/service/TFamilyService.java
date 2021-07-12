@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2021/7/11 21:52
  */
 public interface TFamilyService {
-    void deleteByTFamilyKey(Integer sibId);
+    void deleteByTFamilyKey(Integer sibId,Integer oid);
 
     void addTFamily(TFamily record);
 

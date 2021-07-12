@@ -13,10 +13,11 @@
     <result column="house_state" jdbcType="INTEGER" property="houseState" />
     <result column="use_state" jdbcType="INTEGER" property="useState" />
     <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+    <result column="stay_date" jdbcType="TIMESTAMP" property="stayDate" />
   </resultMap>
   <sql id="Base_Column_List">
     house_id, unit_id, covered_area, use_area, storey, orientations, house_type, decorate, 
-    house_state, use_state, house_name
+    house_state, use_state, house_name,stay_date
   </sql>
   <select id="selectByTHouseKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -64,6 +65,9 @@
       </if>
       <if test="houseName != null">
         house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="stayDate != null">
+        stay_date = #{stayDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where house_id = #{houseId,jdbcType=INTEGER}
