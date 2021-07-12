@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TInspectionroomDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TInspectionroom">
+    <id column="ir_id" jdbcType="INTEGER" property="irId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="acceptance_date" jdbcType="TIMESTAMP" property="acceptanceDate" />
+    <result column="confirmation_date" jdbcType="TIMESTAMP" property="confirmationDate" />
+    <result column="ir_type" jdbcType="VARCHAR" property="irType" />
+    <result column="is_ok" jdbcType="INTEGER" property="isOk" />
+    <result column="ir_name" jdbcType="VARCHAR" property="irName" />
+    <result column="ir_owner_suggest" jdbcType="VARCHAR" property="irOwnerSuggest" />
+    <result column="ir_property_suggest" jdbcType="VARCHAR" property="irPropertySuggest" />
+    <result column="ir_remark" jdbcType="VARCHAR" property="irRemark" />
+    <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ir_id, house_id, acceptance_date, confirmation_date, ir_type, is_ok, ir_name, ir_owner_suggest, 
+    ir_property_suggest, ir_remark, house_name
+  </sql>
+  <select id="selectByTInspectionroomKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_inspectionroom
+    where ir_id = #{irId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByTInspectionroomKey" parameterType="java.lang.Integer">
+    delete from t_inspectionroom
+    where ir_id = #{irId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addTInspectionroom" keyColumn="ir_id" keyProperty="irId" parameterType="com.trkj.property.entity.TInspectionroom" useGeneratedKeys="true">
+    insert into t_inspectionroom (house_id, acceptance_date, confirmation_date, 
+      ir_type, is_ok, ir_name, 
+      ir_owner_suggest, ir_property_suggest, ir_remark, 
+      house_name)
+    values (#{houseId,jdbcType=INTEGER}, #{acceptanceDate,jdbcType=TIMESTAMP}, #{confirmationDate,jdbcType=TIMESTAMP}, 
+      #{irType,jdbcType=VARCHAR}, #{isOk,jdbcType=INTEGER}, #{irName,jdbcType=VARCHAR}, 
+      #{irOwnerSuggest,jdbcType=VARCHAR}, #{irPropertySuggest,jdbcType=VARCHAR}, #{irRemark,jdbcType=VARCHAR}, 
+      #{houseName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByTInspectionroomKeySelective" parameterType="com.trkj.property.entity.TInspectionroom">
+    update t_inspectionroom
+    <set>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="acceptanceDate != null">
+        acceptance_date = #{acceptanceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmationDate != null">
+        confirmation_date = #{confirmationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="irType != null">
+        ir_type = #{irType,jdbcType=VARCHAR},
+      </if>
+      <if test="isOk != null">
+        is_ok = #{isOk,jdbcType=INTEGER},
+      </if>
+      <if test="irName != null">
+        ir_name = #{irName,jdbcType=VARCHAR},
+      </if>
+      <if test="irOwnerSuggest != null">
+        ir_owner_suggest = #{irOwnerSuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="irPropertySuggest != null">
+        ir_property_suggest = #{irPropertySuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="irRemark != null">
+        ir_remark = #{irRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="houseName != null">
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ir_id = #{irId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByTInspectionroomKey" parameterType="com.trkj.property.entity.TInspectionroom">
+    update t_inspectionroom
+    set house_id = #{houseId,jdbcType=INTEGER},
+      acceptance_date = #{acceptanceDate,jdbcType=TIMESTAMP},
+      confirmation_date = #{confirmationDate,jdbcType=TIMESTAMP},
+      ir_type = #{irType,jdbcType=VARCHAR},
+      is_ok = #{isOk,jdbcType=INTEGER},
+      ir_name = #{irName,jdbcType=VARCHAR},
+      ir_owner_suggest = #{irOwnerSuggest,jdbcType=VARCHAR},
+      ir_property_suggest = #{irPropertySuggest,jdbcType=VARCHAR},
+      ir_remark = #{irRemark,jdbcType=VARCHAR},
+      house_name = #{houseName,jdbcType=VARCHAR}
+    where ir_id = #{irId,jdbcType=INTEGER}
+  </update>
+</mapper>

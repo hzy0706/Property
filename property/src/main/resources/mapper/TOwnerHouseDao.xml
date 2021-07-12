@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TOwnerHouseDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TOwnerHouse">
+    <id column="oh_id" jdbcType="INTEGER" property="ohId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="house_no" jdbcType="VARCHAR" property="houseNo" />
+    <result column="decorate_date" jdbcType="TIMESTAMP" property="decorateDate" />
+    <result column="oh_remark" jdbcType="VARCHAR" property="ohRemark" />
+    <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oh_id, house_id, owner_id, house_no, decorate_date, oh_remark, house_name
+  </sql>
+  <select id="selectByTOwnerHouseKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_owner_house
+    where oh_id = #{ohId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllTOwnerHouseByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_owner_house
+    where owner_id = #{ownerId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByTOwnerHouseKey" parameterType="java.lang.Integer">
+    delete from t_owner_house
+    where oh_id = #{ohId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addTOwnerHouse" keyColumn="oh_id" keyProperty="ohId" parameterType="com.trkj.property.entity.TOwnerHouse" useGeneratedKeys="true">
+    insert into t_owner_house (house_id, owner_id, house_no, 
+      decorate_date, oh_remark, house_name
+      )
+    values (#{houseId,jdbcType=INTEGER}, #{ownerId,jdbcType=INTEGER}, #{houseNo,jdbcType=VARCHAR}, 
+      #{decorateDate,jdbcType=TIMESTAMP}, #{ohRemark,jdbcType=VARCHAR}, #{houseName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByTOwnerHouseKeySelective" parameterType="com.trkj.property.entity.TOwnerHouse">
+    update t_owner_house
+    <set>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="houseNo != null">
+        house_no = #{houseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="decorateDate != null">
+        decorate_date = #{decorateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ohRemark != null">
+        oh_remark = #{ohRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="houseName != null">
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oh_id = #{ohId,jdbcType=INTEGER}
+  </update>
+</mapper>
