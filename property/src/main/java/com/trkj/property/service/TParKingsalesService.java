@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TParKingsalesService {
     List<TParkingsales> selectTParKingsales();//显示
+    TParkingsales updateTParkingSales(TParkingsales tParkingsales);//修改
 }

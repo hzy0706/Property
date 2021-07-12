@@ -1,9 +1,11 @@
 package com.trkj.property.dao;
 
 import com.trkj.property.entity.TParkingsales;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface TParkingsalesDao {
     int deleteByPrimaryKey(Integer parkingsalesId);
 
@@ -15,5 +17,5 @@ public interface TParkingsalesDao {
 
     int updateByPrimaryKeySelective(TParkingsales record);
 
-    int updateByPrimaryKey(TParkingsales record);
+    int updateTParkingSales(TParkingsales record);//修改车位销售信息
 }

@@ -26,6 +26,8 @@ public class TParkingsales implements Serializable {
 
 //    车位信息外键
     private TParking tParking;
+//    业主外键
+    private TOwner tOwner;
 
 
 

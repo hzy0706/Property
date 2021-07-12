@@ -19,4 +19,11 @@ public class TParKingsalesServiceImpl implements TParKingsalesService {
     public List<TParkingsales> selectTParKingsales() {
         return tParkingsalesDao.selectTParKingsales();
     }
+
+    @Override
+    public TParkingsales updateTParkingSales(TParkingsales tParkingsales) {
+        log.debug("修改成功");
+        tParkingsalesDao.updateTParkingSales(tParkingsales);
+        return tParkingsales;
+    }
 }

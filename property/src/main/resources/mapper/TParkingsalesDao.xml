@@ -25,6 +25,21 @@
       <result column="area" jdbcType="DECIMAL" property="area" />
       <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     </association>
+    <association property="tOwner" javaType="com.trkj.property.entity.TOwner">
+      <id column="owner_id" jdbcType="INTEGER" property="ownerId" />
+      <result column="owner_type" jdbcType="VARCHAR" property="ownerType" />
+      <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+      <result column="owner_sex" jdbcType="VARCHAR" property="ownerSex" />
+      <result column="owner_birth" jdbcType="TIMESTAMP" property="ownerBirth" />
+      <result column="owner_nation" jdbcType="VARCHAR" property="ownerNation" />
+      <result column="owner_education" jdbcType="VARCHAR" property="ownerEducation" />
+      <result column="owner_notype" jdbcType="VARCHAR" property="ownerNotype" />
+      <result column="owner_no" jdbcType="VARCHAR" property="ownerNo" />
+      <result column="owner_work" jdbcType="VARCHAR" property="ownerWork" />
+      <result column="owner_phone" jdbcType="VARCHAR" property="ownerPhone" />
+      <result column="urgent_name" jdbcType="VARCHAR" property="urgentName" />
+      <result column="urgent_phone" jdbcType="VARCHAR" property="urgentPhone" />
+    </association>
   </resultMap>
   <sql id="TParKingsales">
     s.parkingSales_id, s.saleContract_id, s.price, s.license, s.Parking, s.parking_id
@@ -32,6 +47,10 @@
   <sql id="TParKing">
     p.parking_id, p.saleContract_id, p.LeaseContract_id, p.residence_id, p.p_number, p.`state`, p.`type`,
     p.types, p.managemen, p.preSale, p.prePrice, p.`position`, p.area, p.remarks
+  </sql>
+  <sql id="Base_Column_List">
+    o.owner_id, o.owner_type, o.owner_name, o.owner_sex, o.owner_birth, o.owner_nation, o.owner_education,
+    o.owner_notype, o.owner_no, o.owner_work, o.owner_phone, o.urgent_name, o.urgent_phone
   </sql>
   <select id="selectTParKingsales" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -107,13 +126,14 @@
     where parkingSales_id = #{parkingsalesId,jdbcType=INTEGER}
   </update>
 <!--  修改车位销售信息-->
-  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TParkingsales">
+  <update id="updateTParkingSales" parameterType="com.trkj.property.entity.TParkingsales">
     update t_parkingSales s
     set saleContract_id = #{salecontractId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       license = #{license,jdbcType=VARCHAR},
       Parking = #{parking,jdbcType=VARCHAR},
       parking_id = #{parkingId,jdbcType=INTEGER}
+      owner_id = #{ownerId,jdbcType=INTEGER}
     where parkingSales_id = #{parkingsalesId,jdbcType=INTEGER}
   </update>
 </mapper>
