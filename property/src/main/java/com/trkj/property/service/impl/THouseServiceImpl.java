@@ -29,6 +29,11 @@ public class THouseServiceImpl implements THouseService {
     }
 
     @Override
+    public List<THouse> selectAllTHouseByUidAndState(Integer unitId) {
+        return tHouseDao.selectAllTHouseByUidAndState(unitId);
+    }
+
+    @Override
     @Transactional
     public void updateByTHouseKeySelective(THouse record) {
         tHouseDao.updateByTHouseKeySelective(record);

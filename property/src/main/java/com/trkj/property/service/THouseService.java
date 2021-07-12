@@ -14,5 +14,7 @@ public interface THouseService {
 
     List<THouse> selectAllTHouseByUid(Integer unitId);
 
+    List<THouse> selectAllTHouseByUidAndState(Integer unitId);
+
     void updateByTHouseKeySelective(THouse record);
 }

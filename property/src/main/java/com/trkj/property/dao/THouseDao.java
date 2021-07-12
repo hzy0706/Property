@@ -10,5 +10,7 @@ public interface THouseDao {
 
     List<THouse> selectAllTHouseByUid(Integer unitId);
 
+    List<THouse> selectAllTHouseByUidAndState(Integer unitId);
+
     void updateByTHouseKeySelective(THouse record);
 }

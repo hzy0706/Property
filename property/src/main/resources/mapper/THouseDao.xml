@@ -33,6 +33,13 @@
     where unit_id = #{unitId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAllTHouseByUidAndState" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_house
+    where unit_id = #{unitId,jdbcType=INTEGER} and house_state=0
+  </select>
+
   <update id="updateByTHouseKeySelective" parameterType="com.trkj.property.entity.THouse">
     update t_house
     <set>

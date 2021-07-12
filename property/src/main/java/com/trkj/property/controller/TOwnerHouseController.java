@@ -25,9 +25,9 @@ public class TOwnerHouseController {
      * @date  2021/7/11
      * @version 1.0
      */
-    @DeleteMapping("/deleteByTOwnerHouseKey")
-    public AjaxResponse deleteByTOwnerHouseKey(){
-        tOwnerHouseService.deleteByTOwnerHouseKey(1);
+    @DeleteMapping("/deleteByTOwnerHouseKey/{odId}")
+    public AjaxResponse deleteByTOwnerHouseKey(@PathVariable("odId") Integer odId){
+        tOwnerHouseService.deleteByTOwnerHouseKey(odId);
         return AjaxResponse.success();
     }
     /**
