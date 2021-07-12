@@ -15,19 +15,16 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class TCostitem implements Serializable {
     private Integer ctId;
 
     private Integer residenceId;
 
-    private Integer parDeId;
-
     private String ctName;
 
     private Integer ctChargecycle;
 
-    private BigDecimal ctSubtotal;
+    private Double ctSubtotal;
 
     private Integer overdue;
 
