@@ -11,34 +11,34 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class TCostitemQueryForm implements Serializable {
-    private static final long serialVersionUID = -61949355174436553L;
+public class TShopstoreQueryForm implements Serializable {
+    private static final long serialVersionUID = 213451356305057301L;
 
-    private Integer ctId;
+    private Integer stoId;
 
-    private Integer residenceId;
+    private Integer sellId;
 
-    private String ctName;
+    private Integer leaseId;
 
-    private Integer ctChargecycle;
+    private Integer merId;
 
-    private Double ctSubtotal;
+    private String stoName;
 
-    private Integer overdue;
+    private Double stoArea;
 
-    private String overduefine;
-    /**
-     * 关联费项
-     */
-    private String ctRelation;
+    private Double stoUsarea;
 
-    private String chco;
+    private String stoFunction;
 
-    private String ifprice;
+    private String stoSpec;
 
-    private String residenceName;
+    private String stoAspect;
 
-    private String found;
+    private String stoFinish;
+
+    private String stoType;
+
+    private Integer stoAudit;
 
     private Integer pageNum;    //当前页
     private Integer pageSize;   //页大小

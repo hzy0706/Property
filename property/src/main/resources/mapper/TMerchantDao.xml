@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TMerchantDao">
+
+    <resultMap type="com.trkj.property.entity.TMerchant" id="TMerchantMap">
+        <result property="merId" column="mer_id" jdbcType="INTEGER"/>
+        <result property="merName" column="mer_name" jdbcType="VARCHAR"/>
+        <result property="merType" column="mer_type" jdbcType="VARCHAR"/>
+        <result property="merRight" column="mer_right" jdbcType="VARCHAR"/>
+        <result property="merContacts" column="mer_contacts" jdbcType="VARCHAR"/>
+        <result property="merPhone" column="mer_phone" jdbcType="VARCHAR"/>
+        <result property="merAddress" column="mer_address" jdbcType="VARCHAR"/>
+        <result property="merCardtype" column="mer_cardtype" jdbcType="VARCHAR"/>
+        <result property="merCard" column="mer_card" jdbcType="VARCHAR"/>
+        <result property="merMain" column="mer_main" jdbcType="VARCHAR"/>
+        <result property="merState" column="mer_state" jdbcType="INTEGER"/>
+        <result property="merMarket" column="mer_market" jdbcType="VARCHAR"/>
+        <result property="merPrictrue" column="mer_prictrue" jdbcType="VARCHAR"/>
+        <result property="merDate" column="mer_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="TMerchantCol">
+        mer_id, mer_name, mer_type, mer_right, mer_contacts, mer_phone, mer_address, mer_cardtype, mer_card, mer_main, mer_state, mer_market, mer_prictrue, mer_date    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TMerchantMap">
+        select
+        <include refid="TMerchantCol"></include>
+        from property.t_merchant
+        where mer_id = #{merId}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="TMerchantMap">
+        select
+        <include refid="TMerchantCol"></include>
+        from property.t_merchant
+    </select>
+
+    <!--通过实体作为或者条件查询-->
+    <select id="queryOrByPojo" resultMap="TMerchantMap">
+        select
+        <include refid="TMerchantCol"></include>
+        from property.t_merchant
+        <where>
+            <if test="merId != null">
+                or mer_id like CONCAT('%',#{merId},'%')
+            </if>
+            <if test="merName != null and merName != ''">
+                or mer_name like CONCAT('%',#{merName},'%')
+            </if>
+            <if test="merType != null and merType != ''">
+                or mer_type like CONCAT('%',#{merType},'%')
+            </if>
+            <if test="merRight != null and merRight != ''">
+                or mer_right like CONCAT('%',#{merRight},'%')
+            </if>
+            <if test="merContacts != null and merContacts != ''">
+                or mer_contacts like CONCAT('%',#{merContacts},'%')
+            </if>
+            <if test="merPhone != null and merPhone != ''">
+                or mer_phone like CONCAT('%',#{merPhone},'%')
+            </if>
+            <if test="merAddress != null and merAddress != ''">
+                or mer_address like CONCAT('%',#{merAddress},'%')
+            </if>
+            <if test="merCardtype != null and merCardtype != ''">
+                or mer_cardtype like CONCAT('%',#{merCardtype},'%')
+            </if>
+            <if test="merCard != null and merCard != ''">
+                or mer_card like CONCAT('%',#{merCard},'%')
+            </if>
+            <if test="merMain != null and merMain != ''">
+                or mer_main like CONCAT('%',#{merMain},'%')
+            </if>
+            <if test="merState != null">
+                or mer_state like CONCAT('%',#{merState},'%')
+            </if>
+            <if test="merMarket != null and merMarket != ''">
+                or mer_market like CONCAT('%',#{merMarket},'%')
+            </if>
+            <if test="merPrictrue != null and merPrictrue != ''">
+                or mer_prictrue like CONCAT('%',#{merPrictrue},'%')
+            </if>
+            <if test="merDate != null">
+                or mer_date like CONCAT('%',#{merDate},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为并且条件查询-->
+    <select id="queryAndByPojo" resultMap="TMerchantMap">
+        select
+        <include refid="TMerchantCol"></include>
+        from property.t_merchant
+        <where>
+            <if test="merId != null">
+                and mer_id = #{merId}
+            </if>
+            <if test="merName != null and merName != ''">
+                and mer_name = #{merName}
+            </if>
+            <if test="merType != null and merType != ''">
+                and mer_type = #{merType}
+            </if>
+            <if test="merRight != null and merRight != ''">
+                and mer_right = #{merRight}
+            </if>
+            <if test="merContacts != null and merContacts != ''">
+                and mer_contacts = #{merContacts}
+            </if>
+            <if test="merPhone != null and merPhone != ''">
+                and mer_phone = #{merPhone}
+            </if>
+            <if test="merAddress != null and merAddress != ''">
+                and mer_address = #{merAddress}
+            </if>
+            <if test="merCardtype != null and merCardtype != ''">
+                and mer_cardtype = #{merCardtype}
+            </if>
+            <if test="merCard != null and merCard != ''">
+                and mer_card = #{merCard}
+            </if>
+            <if test="merMain != null and merMain != ''">
+                and mer_main = #{merMain}
+            </if>
+            <if test="merState != null">
+                and mer_state = #{merState}
+            </if>
+            <if test="merMarket != null and merMarket != ''">
+                and mer_market = #{merMarket}
+            </if>
+            <if test="merPrictrue != null and merPrictrue != ''">
+                and mer_prictrue = #{merPrictrue}
+            </if>
+            <if test="merDate != null">
+                and mer_date = #{merDate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into property.t_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="merName != null">
+                mer_name,
+            </if>
+            <if test="merType != null">
+                mer_type,
+            </if>
+            <if test="merRight != null">
+                mer_right,
+            </if>
+            <if test="merContacts != null">
+                mer_contacts,
+            </if>
+            <if test="merPhone != null">
+                mer_phone,
+            </if>
+            <if test="merAddress != null">
+                mer_address,
+            </if>
+            <if test="merCardtype != null">
+                mer_cardtype,
+            </if>
+            <if test="merCard != null">
+                mer_card,
+            </if>
+            <if test="merMain != null">
+                mer_main,
+            </if>
+            <if test="merState != null">
+                mer_state,
+            </if>
+            <if test="merMarket != null">
+                mer_market,
+            </if>
+            <if test="merPrictrue != null">
+                mer_prictrue,
+            </if>
+            <if test="merDate != null">
+                mer_date,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="merName != null">
+                #{merName},
+            </if>
+            <if test="merType != null">
+                #{merType},
+            </if>
+            <if test="merRight != null">
+                #{merRight},
+            </if>
+            <if test="merContacts != null">
+                #{merContacts},
+            </if>
+            <if test="merPhone != null">
+                #{merPhone},
+            </if>
+            <if test="merAddress != null">
+                #{merAddress},
+            </if>
+            <if test="merCardtype != null">
+                #{merCardtype},
+            </if>
+            <if test="merCard != null">
+                #{merCard},
+            </if>
+            <if test="merMain != null">
+                #{merMain},
+            </if>
+            <if test="merState != null">
+                #{merState},
+            </if>
+            <if test="merMarket != null">
+                #{merMarket},
+            </if>
+            <if test="merPrictrue != null">
+                #{merPrictrue},
+            </if>
+            <if test="merDate != null">
+                #{merDate},
+            </if>
+        </trim>
+
+    </insert>
+
+    <!--批量新增数据 -->
+    <insert id="insertBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            insert into property.t_merchant
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.merName != null">
+                    mer_name,
+                </if>
+                <if test="entity.merType != null">
+                    mer_type,
+                </if>
+                <if test="entity.merRight != null">
+                    mer_right,
+                </if>
+                <if test="entity.merContacts != null">
+                    mer_contacts,
+                </if>
+                <if test="entity.merPhone != null">
+                    mer_phone,
+                </if>
+                <if test="entity.merAddress != null">
+                    mer_address,
+                </if>
+                <if test="entity.merCardtype != null">
+                    mer_cardtype,
+                </if>
+                <if test="entity.merCard != null">
+                    mer_card,
+                </if>
+                <if test="entity.merMain != null">
+                    mer_main,
+                </if>
+                <if test="entity.merState != null">
+                    mer_state,
+                </if>
+                <if test="entity.merMarket != null">
+                    mer_market,
+                </if>
+                <if test="entity.merPrictrue != null">
+                    mer_prictrue,
+                </if>
+                <if test="entity.merDate != null">
+                    mer_date,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.merName != null">
+                    #{entity.merName},
+                </if>
+                <if test="entity.merType != null">
+                    #{entity.merType},
+                </if>
+                <if test="entity.merRight != null">
+                    #{entity.merRight},
+                </if>
+                <if test="entity.merContacts != null">
+                    #{entity.merContacts},
+                </if>
+                <if test="entity.merPhone != null">
+                    #{entity.merPhone},
+                </if>
+                <if test="entity.merAddress != null">
+                    #{entity.merAddress},
+                </if>
+                <if test="entity.merCardtype != null">
+                    #{entity.merCardtype},
+                </if>
+                <if test="entity.merCard != null">
+                    #{entity.merCard},
+                </if>
+                <if test="entity.merMain != null">
+                    #{entity.merMain},
+                </if>
+                <if test="entity.merState != null">
+                    #{entity.merState},
+                </if>
+                <if test="entity.merMarket != null">
+                    #{entity.merMarket},
+                </if>
+                <if test="entity.merPrictrue != null">
+                    #{entity.merPrictrue},
+                </if>
+                <if test="entity.merDate != null">
+                    #{entity.merDate},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update property.t_merchant
+        <set>
+            <if test="merName != null">
+                mer_name = #{merName},
+            </if>
+            <if test="merType != null">
+                mer_type = #{merType},
+            </if>
+            <if test="merRight != null">
+                mer_right = #{merRight},
+            </if>
+            <if test="merContacts != null">
+                mer_contacts = #{merContacts},
+            </if>
+            <if test="merPhone != null">
+                mer_phone = #{merPhone},
+            </if>
+            <if test="merAddress != null">
+                mer_address = #{merAddress},
+            </if>
+            <if test="merCardtype != null">
+                mer_cardtype = #{merCardtype},
+            </if>
+            <if test="merCard != null">
+                mer_card = #{merCard},
+            </if>
+            <if test="merMain != null">
+                mer_main = #{merMain},
+            </if>
+            <if test="merState != null">
+                mer_state = #{merState},
+            </if>
+            <if test="merMarket != null">
+                mer_market = #{merMarket},
+            </if>
+            <if test="merPrictrue != null">
+                mer_prictrue = #{merPrictrue},
+            </if>
+            <if test="merDate != null">
+                mer_date = #{merDate},
+            </if>
+        </set>
+        where mer_id = #{merId}
+    </update>
+
+    <!--批量修改数据-->
+    <update id="updateBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            update property.t_merchant
+            <set>
+                <if test="entity.merName != null">
+                    mer_name = #{entity.merName},
+                </if>
+                <if test="entity.merType != null">
+                    mer_type = #{entity.merType},
+                </if>
+                <if test="entity.merRight != null">
+                    mer_right = #{entity.merRight},
+                </if>
+                <if test="entity.merContacts != null">
+                    mer_contacts = #{entity.merContacts},
+                </if>
+                <if test="entity.merPhone != null">
+                    mer_phone = #{entity.merPhone},
+                </if>
+                <if test="entity.merAddress != null">
+                    mer_address = #{entity.merAddress},
+                </if>
+                <if test="entity.merCardtype != null">
+                    mer_cardtype = #{entity.merCardtype},
+                </if>
+                <if test="entity.merCard != null">
+                    mer_card = #{entity.merCard},
+                </if>
+                <if test="entity.merMain != null">
+                    mer_main = #{entity.merMain},
+                </if>
+                <if test="entity.merState != null">
+                    mer_state = #{entity.merState},
+                </if>
+                <if test="entity.merMarket != null">
+                    mer_market = #{entity.merMarket},
+                </if>
+                <if test="entity.merPrictrue != null">
+                    mer_prictrue = #{entity.merPrictrue},
+                </if>
+                <if test="entity.merDate != null">
+                    mer_date = #{entity.merDate},
+                </if>
+            </set>
+            where mer_id = #{entity.merId}
+        </foreach>
+    </update>
+
+    <!--通过主键删除数据-->
+    <delete id="deleteById">
+        delete from property.t_merchant where mer_id = #{merId}
+    </delete>
+
+    <!--通过主键列表批量删除数据-->
+    <delete id="deleteBatch">
+        delete from property.t_merchant where mer_id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--通过实体列表批量删除数据-->
+    <delete id="deleteBatchByEntities">
+        delete from property.t_merchant where mer_id in
+        <foreach collection="list" item="entity" open="(" separator="," close=")">
+            #{entity.merId}
+        </foreach>
+    </delete>
+</mapper>
+

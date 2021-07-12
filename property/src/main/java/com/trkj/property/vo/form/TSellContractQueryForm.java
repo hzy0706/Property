@@ -1,5 +1,6 @@
 package com.trkj.property.vo.form;
 
+import java.util.Date;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -11,34 +12,32 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class TCostitemQueryForm implements Serializable {
-    private static final long serialVersionUID = -61949355174436553L;
+public class TSellContractQueryForm implements Serializable {
+    private static final long serialVersionUID = 911869748070586515L;
 
-    private Integer ctId;
+    private Integer sellId;
 
-    private Integer residenceId;
+    private Integer stoId;
 
-    private String ctName;
+    private Integer merId;
 
-    private Integer ctChargecycle;
+    private Date sellTime;
 
-    private Double ctSubtotal;
+    private String sellContact;
 
-    private Integer overdue;
+    private Double sellAcre;
 
-    private String overduefine;
-    /**
-     * 关联费项
-     */
-    private String ctRelation;
+    private Double sellUnitprice;
 
-    private String chco;
+    private Double sellPrice;
 
-    private String ifprice;
+    private String sellPhone;
 
-    private String residenceName;
+    private Integer sellAudit;
 
-    private String found;
+    private Integer sellPraudit;
+
+    private Double leaseProfee;
 
     private Integer pageNum;    //当前页
     private Integer pageSize;   //页大小

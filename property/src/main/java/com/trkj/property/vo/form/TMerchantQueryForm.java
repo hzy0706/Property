@@ -1,5 +1,6 @@
 package com.trkj.property.vo.form;
 
+import java.util.Date;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -11,34 +12,36 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class TCostitemQueryForm implements Serializable {
-    private static final long serialVersionUID = -61949355174436553L;
+public class TMerchantQueryForm implements Serializable {
+    private static final long serialVersionUID = -17034901203322436L;
 
-    private Integer ctId;
+    private Integer merId;
 
-    private Integer residenceId;
+    private String merName;
 
-    private String ctName;
+    private String merType;
 
-    private Integer ctChargecycle;
+    private String merRight;
 
-    private Double ctSubtotal;
+    private String merContacts;
 
-    private Integer overdue;
+    private String merPhone;
 
-    private String overduefine;
-    /**
-     * 关联费项
-     */
-    private String ctRelation;
+    private String merAddress;
 
-    private String chco;
+    private String merCardtype;
 
-    private String ifprice;
+    private String merCard;
 
-    private String residenceName;
+    private String merMain;
 
-    private String found;
+    private Integer merState;
+
+    private String merMarket;
+
+    private String merPrictrue;
+
+    private Date merDate;
 
     private Integer pageNum;    //当前页
     private Integer pageSize;   //页大小
