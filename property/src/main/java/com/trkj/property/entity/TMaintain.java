@@ -9,32 +9,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * t_decorate
+ * t_maintain
  * @author 
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TDecorate implements Serializable {
-    private Integer decorateId;
+public class TMaintain implements Serializable {
+    private Integer maintainId;
 
     private Integer houseId;
 
-    private String decorateType;
+    private String houseName;
 
     private String applyName;
 
-    private String decoratePhone;
+    private String maintainPhone;
 
     private String createName;
 
     private Date createDate;
 
-    private Integer decorateState;
+    private Integer maintainState;
 
-    private String decorateContent;
+    private String maintainContent;
 
-    private BigDecimal decorateBail;
+    private BigDecimal maintainBail;
 
     private String approvalSuggest;
 
@@ -58,15 +58,7 @@ public class TDecorate implements Serializable {
 
     private String checkSuggest;
 
-    private BigDecimal penaltyMoney;
-
-    private String cancelName;
-
-    private Date cancelDate;
-
-    private String decorateRemark;
-
-    private String houseName;
+    private String maintainRemark;
 
     private Date applyDate;
 

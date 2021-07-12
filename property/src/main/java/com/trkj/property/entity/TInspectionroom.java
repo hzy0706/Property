@@ -2,13 +2,18 @@ package com.trkj.property.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * t_inspectionroom
  * @author 
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TInspectionroom implements Serializable {
     private Integer irId;
 
