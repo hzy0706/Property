@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TParameterDao">
+
+
+
+
+
+    <select id="getCostItemById" resultType="com.trkj.property.entity.TCostitem" parameterType="int">
+        select
+            residence_id as residenceId,
+            ct_name as ctName,
+            ct_chargecycle as ctChargecycle,
+            ct_subtotal as ctSubtotal,
+            overdue,
+            overduefine,
+            ct_relation as ctRelation
+        from t_costitem where ct_id=#{ctId}
+    </select>
+
+    <!--台账-->
+    <insert id="addParameter" parameterType="TParameter">
+        insert into t_parameter values(null,#{parName},#{parCostname},#{parCreatedate},#{parCreateName},#{parMark},#{houseId},#{parDeBegin},#{parDeEnd})
+    </insert>
+
+    <!--详情台账-->
+    <insert id="addParameterDetail" parameterType="TParameterDetail">
+        insert into t_parameter_detail values(null,#{parId},#{ctId},#{parDeAssessment},#{parDeBegin},#{parDeEnd},#{parDeDeadline},#{parDeState})
+    </insert>
+
+
+
+    <select id="findAllParByResId" parameterType="int"  resultType="com.trkj.property.vo.ParAndHouse" >
+        select tr.residence_name,pr.par_name,pr.par_costname,pr.par_createdate,pr.par_mark
+            from t_parameter pr
+                left join t_house th
+                          on pr.house_id = th.house_id
+                left join t_unit tu
+                          on tu.building_id=th.unit_id
+                left join t_building tb
+                          on tb.building_id=tu.building_id
+                left outer join t_residence tr
+                                on tr.residence_id=tb.residence_id
+                where th.house_id=#{resId}
+    </select>
+</mapper>
