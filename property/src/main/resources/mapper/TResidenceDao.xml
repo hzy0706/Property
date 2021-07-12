@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TResidenceDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TResidence">
+    <id column="residence_id" jdbcType="INTEGER" property="residenceId" />
+    <result column="residence_name" jdbcType="VARCHAR" property="residenceName" />
+    <result column="green_area" jdbcType="DECIMAL" property="greenArea" />
+    <result column="floor_area" jdbcType="DECIMAL" property="floorArea" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="covered_area" jdbcType="DECIMAL" property="coveredArea" />
+    <result column="road_area" jdbcType="DECIMAL" property="roadArea" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="developer" jdbcType="VARCHAR" property="developer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    residence_id, residence_name, green_area, floor_area, address, covered_area, road_area, 
+    task_name, developer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_residence
+    where residence_id = #{residenceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_residence
+    where residence_id = #{residenceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="residence_id" keyProperty="residenceId" parameterType="com.trkj.property.entity.TResidence" useGeneratedKeys="true">
+    insert into t_residence (residence_name, green_area, floor_area, 
+      address, covered_area, road_area, 
+      task_name, developer)
+    values (#{residenceName,jdbcType=VARCHAR}, #{greenArea,jdbcType=DECIMAL}, #{floorArea,jdbcType=DECIMAL}, 
+      #{address,jdbcType=VARCHAR}, #{coveredArea,jdbcType=DECIMAL}, #{roadArea,jdbcType=DECIMAL}, 
+      #{taskName,jdbcType=VARCHAR}, #{developer,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="residence_id" keyProperty="residenceId" parameterType="com.trkj.property.entity.TResidence" useGeneratedKeys="true">
+    insert into t_residence
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="residenceName != null">
+        residence_name,
+      </if>
+      <if test="greenArea != null">
+        green_area,
+      </if>
+      <if test="floorArea != null">
+        floor_area,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="coveredArea != null">
+        covered_area,
+      </if>
+      <if test="roadArea != null">
+        road_area,
+      </if>
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="developer != null">
+        developer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="residenceName != null">
+        #{residenceName,jdbcType=VARCHAR},
+      </if>
+      <if test="greenArea != null">
+        #{greenArea,jdbcType=DECIMAL},
+      </if>
+      <if test="floorArea != null">
+        #{floorArea,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="coveredArea != null">
+        #{coveredArea,jdbcType=DECIMAL},
+      </if>
+      <if test="roadArea != null">
+        #{roadArea,jdbcType=DECIMAL},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null">
+        #{developer,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.TResidence">
+    update t_residence
+    <set>
+      <if test="residenceName != null">
+        residence_name = #{residenceName,jdbcType=VARCHAR},
+      </if>
+      <if test="greenArea != null">
+        green_area = #{greenArea,jdbcType=DECIMAL},
+      </if>
+      <if test="floorArea != null">
+        floor_area = #{floorArea,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="coveredArea != null">
+        covered_area = #{coveredArea,jdbcType=DECIMAL},
+      </if>
+      <if test="roadArea != null">
+        road_area = #{roadArea,jdbcType=DECIMAL},
+      </if>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null">
+        developer = #{developer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where residence_id = #{residenceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TResidence">
+    update t_residence
+    set residence_name = #{residenceName,jdbcType=VARCHAR},
+      green_area = #{greenArea,jdbcType=DECIMAL},
+      floor_area = #{floorArea,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      covered_area = #{coveredArea,jdbcType=DECIMAL},
+      road_area = #{roadArea,jdbcType=DECIMAL},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR}
+    where residence_id = #{residenceId,jdbcType=INTEGER}
+  </update>
+</mapper>
