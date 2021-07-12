@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.THouseDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.THouse">
+    <id column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="unit_id" jdbcType="INTEGER" property="unitId" />
+    <result column="covered_area" jdbcType="DECIMAL" property="coveredArea" />
+    <result column="use_area" jdbcType="DECIMAL" property="useArea" />
+    <result column="storey" jdbcType="INTEGER" property="storey" />
+    <result column="orientations" jdbcType="VARCHAR" property="orientations" />
+    <result column="house_type" jdbcType="VARCHAR" property="houseType" />
+    <result column="decorate" jdbcType="VARCHAR" property="decorate" />
+    <result column="house_state" jdbcType="INTEGER" property="houseState" />
+    <result column="use_state" jdbcType="INTEGER" property="useState" />
+    <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    house_id, unit_id, covered_area, use_area, storey, orientations, house_type, decorate, 
+    house_state, use_state, house_name
+  </sql>
+  <select id="selectByTHouseKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_house
+    where house_id = #{houseId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllTHouseByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_house
+    where unit_id = #{unitId,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateByTHouseKeySelective" parameterType="com.trkj.property.entity.THouse">
+    update t_house
+    <set>
+      <if test="unitId != null">
+        unit_id = #{unitId,jdbcType=INTEGER},
+      </if>
+      <if test="coveredArea != null">
+        covered_area = #{coveredArea,jdbcType=DECIMAL},
+      </if>
+      <if test="useArea != null">
+        use_area = #{useArea,jdbcType=DECIMAL},
+      </if>
+      <if test="storey != null">
+        storey = #{storey,jdbcType=INTEGER},
+      </if>
+      <if test="orientations != null">
+        orientations = #{orientations,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="decorate != null">
+        decorate = #{decorate,jdbcType=VARCHAR},
+      </if>
+      <if test="houseState != null">
+        house_state = #{houseState,jdbcType=INTEGER},
+      </if>
+      <if test="useState != null">
+        use_state = #{useState,jdbcType=INTEGER},
+      </if>
+      <if test="houseName != null">
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where house_id = #{houseId,jdbcType=INTEGER}
+  </update>
+</mapper>
