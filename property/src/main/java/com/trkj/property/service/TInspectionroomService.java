@@ -1,13 +1,15 @@
-package com.trkj.property.dao;
+package com.trkj.property.service;
 
 import com.trkj.property.entity.TInspectionroom;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface TInspectionroomDao {
-
+/**
+ * @author 胡志远
+ * @version 1.0
+ * @date 2021/7/12 11:10
+ */
+public interface TInspectionroomService {
     void addTInspectionroom(TInspectionroom record);
 
     TInspectionroom selectByTInspectionroomKey(Integer irId);
@@ -17,5 +19,4 @@ public interface TInspectionroomDao {
     TInspectionroom selectTInspectionroomByHourseid(Integer hourseid);
 
     void updateByTInspectionroomKeySelective(TInspectionroom record);
-
 }

@@ -1,7 +1,6 @@
 package com.trkj.property.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,25 +16,13 @@ import lombok.NoArgsConstructor;
 public class TInspectionroom implements Serializable {
     private Integer irId;
 
+    private String houseName;
+
     private Integer houseId;
 
-    private Date acceptanceDate;
+    private Integer okcount;
 
-    private Date confirmationDate;
-
-    private String irType;
-
-    private Integer isOk;
-
-    private String irName;
-
-    private String irOwnerSuggest;
-
-    private String irPropertySuggest;
-
-    private String irRemark;
-
-    private String houseName;
+    private Integer nocount;
 
     private static final long serialVersionUID = 1L;
 }
