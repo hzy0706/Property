@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TInspectionroominfoDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TInspectionroominfo">
+    <id column="irInfo_id" jdbcType="INTEGER" property="irinfoId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="acceptance_date" jdbcType="TIMESTAMP" property="acceptanceDate" />
+    <result column="confirmation_date" jdbcType="TIMESTAMP" property="confirmationDate" />
+    <result column="ir_type" jdbcType="VARCHAR" property="irType" />
+    <result column="is_ok" jdbcType="INTEGER" property="isOk" />
+    <result column="ir_name" jdbcType="VARCHAR" property="irName" />
+    <result column="ir_owner_suggest" jdbcType="VARCHAR" property="irOwnerSuggest" />
+    <result column="ir_property_suggest" jdbcType="VARCHAR" property="irPropertySuggest" />
+    <result column="ir_remark" jdbcType="VARCHAR" property="irRemark" />
+    <result column="ir_id" jdbcType="INTEGER" property="irId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    irInfo_id, house_id, acceptance_date, confirmation_date, ir_type, is_ok, ir_name, 
+    ir_owner_suggest, ir_property_suggest, ir_remark, ir_id
+  </sql>
+  <select id="selectByTInspectionroominfoKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_inspectionroominfo
+    where irInfo_id = #{irinfoId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllTInspectionroominfoByIrid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_inspectionroominfo
+    where ir_id = #{irId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByTInspectionroominfoKey" parameterType="java.lang.Integer">
+    delete from t_inspectionroominfo
+    where irInfo_id = #{irinfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addTInspectionroominfo" keyColumn="irInfo_id" keyProperty="irinfoId" parameterType="com.trkj.property.entity.TInspectionroominfo" useGeneratedKeys="true">
+    insert into t_inspectionroominfo (house_id, acceptance_date, confirmation_date, 
+      ir_type, is_ok, ir_name, 
+      ir_owner_suggest, ir_property_suggest, ir_remark, 
+      ir_id)
+    values (#{houseId,jdbcType=INTEGER}, #{acceptanceDate,jdbcType=TIMESTAMP}, #{confirmationDate,jdbcType=TIMESTAMP}, 
+      #{irType,jdbcType=VARCHAR}, #{isOk,jdbcType=INTEGER}, #{irName,jdbcType=VARCHAR}, 
+      #{irOwnerSuggest,jdbcType=VARCHAR}, #{irPropertySuggest,jdbcType=VARCHAR}, #{irRemark,jdbcType=VARCHAR}, 
+      #{irId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByTInspectionroominfoKeySelective" parameterType="com.trkj.property.entity.TInspectionroominfo">
+    update t_inspectionroominfo
+    <set>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="acceptanceDate != null">
+        acceptance_date = #{acceptanceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmationDate != null">
+        confirmation_date = #{confirmationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="irType != null">
+        ir_type = #{irType,jdbcType=VARCHAR},
+      </if>
+      <if test="isOk != null">
+        is_ok = #{isOk,jdbcType=INTEGER},
+      </if>
+      <if test="irName != null">
+        ir_name = #{irName,jdbcType=VARCHAR},
+      </if>
+      <if test="irOwnerSuggest != null">
+        ir_owner_suggest = #{irOwnerSuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="irPropertySuggest != null">
+        ir_property_suggest = #{irPropertySuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="irRemark != null">
+        ir_remark = #{irRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="irId != null">
+        ir_id = #{irId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where irInfo_id = #{irinfoId,jdbcType=INTEGER}
+  </update>
+</mapper>
