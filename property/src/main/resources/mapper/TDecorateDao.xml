@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TDecorateDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TDecorate">
+    <id column="decorate_id" jdbcType="INTEGER" property="decorateId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="decorate_type" jdbcType="VARCHAR" property="decorateType" />
+    <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+    <result column="decorate_phone" jdbcType="VARCHAR" property="decoratePhone" />
+    <result column="create_name" jdbcType="VARCHAR" property="createName" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="decorate_state" jdbcType="INTEGER" property="decorateState" />
+    <result column="decorate_content" jdbcType="VARCHAR" property="decorateContent" />
+    <result column="decorate_bail" jdbcType="DECIMAL" property="decorateBail" />
+    <result column="approval_suggest" jdbcType="VARCHAR" property="approvalSuggest" />
+    <result column="approval_name" jdbcType="VARCHAR" property="approvalName" />
+    <result column="approval_date" jdbcType="TIMESTAMP" property="approvalDate" />
+    <result column="build_unit" jdbcType="VARCHAR" property="buildUnit" />
+    <result column="build_name" jdbcType="VARCHAR" property="buildName" />
+    <result column="build_phone" jdbcType="VARCHAR" property="buildPhone" />
+    <result column="build_start_date" jdbcType="TIMESTAMP" property="buildStartDate" />
+    <result column="build_end_date" jdbcType="TIMESTAMP" property="buildEndDate" />
+    <result column="check_name" jdbcType="VARCHAR" property="checkName" />
+    <result column="check_date" jdbcType="TIMESTAMP" property="checkDate" />
+    <result column="check_suggest" jdbcType="VARCHAR" property="checkSuggest" />
+    <result column="penalty_money" jdbcType="DECIMAL" property="penaltyMoney" />
+    <result column="cancel_name" jdbcType="VARCHAR" property="cancelName" />
+    <result column="cancel_date" jdbcType="TIMESTAMP" property="cancelDate" />
+    <result column="decorate_remark" jdbcType="VARCHAR" property="decorateRemark" />
+    <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    decorate_id, house_id, decorate_type, apply_name, decorate_phone, create_name, create_date, 
+    decorate_state, decorate_content, decorate_bail, approval_suggest, approval_name, 
+    approval_date, build_unit, build_name, build_phone, build_start_date, build_end_date, 
+    check_name, check_date, check_suggest, penalty_money, cancel_name, cancel_date, decorate_remark, 
+    house_name, apply_date
+  </sql>
+  <select id="selectByTDecorateKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_decorate
+    where decorate_id = #{decorateId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllTDecorateByState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_decorate
+    where decorate_state = #{param1} and (apply_name like #{param2} or decorate_content like #{param2})
+  </select>
+
+  <delete id="deleteByTDecorateKey" parameterType="java.lang.Integer">
+    delete from t_decorate
+    where decorate_id = #{decorateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addTDecorate" keyColumn="decorate_id" keyProperty="decorateId" parameterType="com.trkj.property.entity.TDecorate" useGeneratedKeys="true">
+    insert into t_decorate (house_id, decorate_type, apply_name, 
+      decorate_phone, create_name, create_date, 
+      decorate_state, decorate_content, decorate_bail, 
+      approval_suggest, approval_name, approval_date, 
+      build_unit, build_name, build_phone, 
+      build_start_date, build_end_date, check_name, 
+      check_date, check_suggest, penalty_money, 
+      cancel_name, cancel_date, decorate_remark, 
+      house_name, apply_date)
+    values (#{houseId,jdbcType=INTEGER}, #{decorateType,jdbcType=VARCHAR}, #{applyName,jdbcType=VARCHAR}, 
+      #{decoratePhone,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{decorateState,jdbcType=INTEGER}, #{decorateContent,jdbcType=VARCHAR}, #{decorateBail,jdbcType=DECIMAL}, 
+      #{approvalSuggest,jdbcType=VARCHAR}, #{approvalName,jdbcType=VARCHAR}, #{approvalDate,jdbcType=TIMESTAMP}, 
+      #{buildUnit,jdbcType=VARCHAR}, #{buildName,jdbcType=VARCHAR}, #{buildPhone,jdbcType=VARCHAR}, 
+      #{buildStartDate,jdbcType=TIMESTAMP}, #{buildEndDate,jdbcType=TIMESTAMP}, #{checkName,jdbcType=VARCHAR}, 
+      #{checkDate,jdbcType=TIMESTAMP}, #{checkSuggest,jdbcType=VARCHAR}, #{penaltyMoney,jdbcType=DECIMAL}, 
+      #{cancelName,jdbcType=VARCHAR}, #{cancelDate,jdbcType=TIMESTAMP}, #{decorateRemark,jdbcType=VARCHAR}, 
+      #{houseName,jdbcType=VARCHAR}, #{applyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByTDecorateKeySelective" parameterType="com.trkj.property.entity.TDecorate">
+    update t_decorate
+    <set>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="decorateType != null">
+        decorate_type = #{decorateType,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        apply_name = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="decoratePhone != null">
+        decorate_phone = #{decoratePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="decorateState != null">
+        decorate_state = #{decorateState,jdbcType=INTEGER},
+      </if>
+      <if test="decorateContent != null">
+        decorate_content = #{decorateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="decorateBail != null">
+        decorate_bail = #{decorateBail,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalSuggest != null">
+        approval_suggest = #{approvalSuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalName != null">
+        approval_name = #{approvalName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null">
+        approval_date = #{approvalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buildUnit != null">
+        build_unit = #{buildUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="buildName != null">
+        build_name = #{buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildPhone != null">
+        build_phone = #{buildPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="buildStartDate != null">
+        build_start_date = #{buildStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buildEndDate != null">
+        build_end_date = #{buildEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkName != null">
+        check_name = #{checkName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null">
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkSuggest != null">
+        check_suggest = #{checkSuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="penaltyMoney != null">
+        penalty_money = #{penaltyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelName != null">
+        cancel_name = #{cancelName,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelDate != null">
+        cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="decorateRemark != null">
+        decorate_remark = #{decorateRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="houseName != null">
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where decorate_id = #{decorateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByTDecorateKey" parameterType="com.trkj.property.entity.TDecorate">
+    update t_decorate
+    set house_id = #{houseId,jdbcType=INTEGER},
+      decorate_type = #{decorateType,jdbcType=VARCHAR},
+      apply_name = #{applyName,jdbcType=VARCHAR},
+      decorate_phone = #{decoratePhone,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      decorate_state = #{decorateState,jdbcType=INTEGER},
+      decorate_content = #{decorateContent,jdbcType=VARCHAR},
+      decorate_bail = #{decorateBail,jdbcType=DECIMAL},
+      approval_suggest = #{approvalSuggest,jdbcType=VARCHAR},
+      approval_name = #{approvalName,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=TIMESTAMP},
+      build_unit = #{buildUnit,jdbcType=VARCHAR},
+      build_name = #{buildName,jdbcType=VARCHAR},
+      build_phone = #{buildPhone,jdbcType=VARCHAR},
+      build_start_date = #{buildStartDate,jdbcType=TIMESTAMP},
+      build_end_date = #{buildEndDate,jdbcType=TIMESTAMP},
+      check_name = #{checkName,jdbcType=VARCHAR},
+      check_date = #{checkDate,jdbcType=TIMESTAMP},
+      check_suggest = #{checkSuggest,jdbcType=VARCHAR},
+      penalty_money = #{penaltyMoney,jdbcType=DECIMAL},
+      cancel_name = #{cancelName,jdbcType=VARCHAR},
+      cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      decorate_remark = #{decorateRemark,jdbcType=VARCHAR},
+      house_name = #{houseName,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP}
+    where decorate_id = #{decorateId,jdbcType=INTEGER}
+  </update>
+</mapper>

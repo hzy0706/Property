@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TFamilyDao">
+  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TFamily">
+    <id column="sib_id" jdbcType="INTEGER" property="sibId" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="sib_name" jdbcType="VARCHAR" property="sibName" />
+    <result column="sib_relation" jdbcType="VARCHAR" property="sibRelation" />
+    <result column="sib_phone" jdbcType="VARCHAR" property="sibPhone" />
+    <result column="sib_sex" jdbcType="VARCHAR" property="sibSex" />
+    <result column="sib_notype" jdbcType="VARCHAR" property="sibNotype" />
+    <result column="sib_no" jdbcType="VARCHAR" property="sibNo" />
+    <result column="sib_work" jdbcType="VARCHAR" property="sibWork" />
+    <result column="sib_education" jdbcType="VARCHAR" property="sibEducation" />
+    <result column="owner_birth" jdbcType="TIMESTAMP" property="ownerBirth" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sib_id, owner_id, sib_name, sib_relation, sib_phone, sib_sex, sib_notype, sib_no, 
+    sib_work, sib_education, owner_birth
+  </sql>
+  <select id="selectByTFamilyKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_family
+    where sib_id = #{sibId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllTFamilyByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_family
+    where owner_id = #{ownerId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByTFamilyKey" parameterType="java.lang.Integer">
+    delete from t_family
+    where sib_id = #{sibId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addTFamily" keyColumn="sib_id" keyProperty="sibId" parameterType="com.trkj.property.entity.TFamily" useGeneratedKeys="true">
+    insert into t_family (owner_id, sib_name, sib_relation, 
+      sib_phone, sib_sex, sib_notype, 
+      sib_no, sib_work, sib_education, 
+      owner_birth)
+    values (#{ownerId,jdbcType=INTEGER}, #{sibName,jdbcType=VARCHAR}, #{sibRelation,jdbcType=VARCHAR}, 
+      #{sibPhone,jdbcType=VARCHAR}, #{sibSex,jdbcType=VARCHAR}, #{sibNotype,jdbcType=VARCHAR}, 
+      #{sibNo,jdbcType=VARCHAR}, #{sibWork,jdbcType=VARCHAR}, #{sibEducation,jdbcType=VARCHAR}, 
+      #{ownerBirth,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByTFamilyKeySelective" parameterType="com.trkj.property.entity.TFamily">
+    update t_family
+    <set>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="sibName != null">
+        sib_name = #{sibName,jdbcType=VARCHAR},
+      </if>
+      <if test="sibRelation != null">
+        sib_relation = #{sibRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="sibPhone != null">
+        sib_phone = #{sibPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sibSex != null">
+        sib_sex = #{sibSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sibNotype != null">
+        sib_notype = #{sibNotype,jdbcType=VARCHAR},
+      </if>
+      <if test="sibNo != null">
+        sib_no = #{sibNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sibWork != null">
+        sib_work = #{sibWork,jdbcType=VARCHAR},
+      </if>
+      <if test="sibEducation != null">
+        sib_education = #{sibEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerBirth != null">
+        owner_birth = #{ownerBirth,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sib_id = #{sibId,jdbcType=INTEGER}
+  </update>
+</mapper>
