@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TShopstoreDao">
+
+    <resultMap type="com.trkj.property.entity.TShopstore" id="TShopstoreMap">
+        <result property="stoId" column="sto_id" jdbcType="INTEGER"/>
+        <result property="sellId" column="sell_id" jdbcType="INTEGER"/>
+        <result property="leaseId" column="lease_id" jdbcType="INTEGER"/>
+        <result property="merId" column="mer_id" jdbcType="INTEGER"/>
+        <result property="stoName" column="sto_name" jdbcType="VARCHAR"/>
+        <result property="stoArea" column="sto_area" jdbcType="NUMERIC"/>
+        <result property="stoUsarea" column="sto_usarea" jdbcType="NUMERIC"/>
+        <result property="stoFunction" column="sto_function" jdbcType="VARCHAR"/>
+        <result property="stoSpec" column="sto_spec" jdbcType="VARCHAR"/>
+        <result property="stoAspect" column="sto_aspect" jdbcType="VARCHAR"/>
+        <result property="stoFinish" column="sto_finish" jdbcType="VARCHAR"/>
+        <result property="stoType" column="sto_type" jdbcType="VARCHAR"/>
+        <result property="stoAudit" column="sto_audit" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="TShopstoreCol">
+        sto_id, sell_id, lease_id, mer_id, sto_name, sto_area, sto_usarea, sto_function, sto_spec, sto_aspect, sto_finish, sto_type, sto_audit    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TShopstoreMap">
+        select
+        <include refid="TShopstoreCol"></include>
+        from property.t_shopstore
+        where sto_id = #{stoId}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="TShopstoreMap">
+        select
+        <include refid="TShopstoreCol"></include>
+        from property.t_shopstore
+    </select>
+
+    <!--通过实体作为或者条件查询-->
+    <select id="queryOrByPojo" resultMap="TShopstoreMap">
+        select
+        <include refid="TShopstoreCol"></include>
+        from property.t_shopstore
+        <where>
+            <if test="stoId != null">
+                or sto_id like CONCAT('%',#{stoId},'%')
+            </if>
+            <if test="sellId != null">
+                or sell_id like CONCAT('%',#{sellId},'%')
+            </if>
+            <if test="leaseId != null">
+                or lease_id like CONCAT('%',#{leaseId},'%')
+            </if>
+            <if test="merId != null">
+                or mer_id like CONCAT('%',#{merId},'%')
+            </if>
+            <if test="stoName != null and stoName != ''">
+                or sto_name like CONCAT('%',#{stoName},'%')
+            </if>
+            <if test="stoArea != null">
+                or sto_area like CONCAT('%',#{stoArea},'%')
+            </if>
+            <if test="stoUsarea != null">
+                or sto_usarea like CONCAT('%',#{stoUsarea},'%')
+            </if>
+            <if test="stoFunction != null and stoFunction != ''">
+                or sto_function like CONCAT('%',#{stoFunction},'%')
+            </if>
+            <if test="stoSpec != null and stoSpec != ''">
+                or sto_spec like CONCAT('%',#{stoSpec},'%')
+            </if>
+            <if test="stoAspect != null and stoAspect != ''">
+                or sto_aspect like CONCAT('%',#{stoAspect},'%')
+            </if>
+            <if test="stoFinish != null and stoFinish != ''">
+                or sto_finish like CONCAT('%',#{stoFinish},'%')
+            </if>
+            <if test="stoType != null and stoType != ''">
+                or sto_type like CONCAT('%',#{stoType},'%')
+            </if>
+            <if test="stoAudit != null">
+                or sto_audit like CONCAT('%',#{stoAudit},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为并且条件查询-->
+    <select id="queryAndByPojo" resultMap="TShopstoreMap">
+        select
+        <include refid="TShopstoreCol"></include>
+        from property.t_shopstore
+        <where>
+            <if test="stoId != null">
+                and sto_id = #{stoId}
+            </if>
+            <if test="sellId != null">
+                and sell_id = #{sellId}
+            </if>
+            <if test="leaseId != null">
+                and lease_id = #{leaseId}
+            </if>
+            <if test="merId != null">
+                and mer_id = #{merId}
+            </if>
+            <if test="stoName != null and stoName != ''">
+                and sto_name = #{stoName}
+            </if>
+            <if test="stoArea != null">
+                and sto_area = #{stoArea}
+            </if>
+            <if test="stoUsarea != null">
+                and sto_usarea = #{stoUsarea}
+            </if>
+            <if test="stoFunction != null and stoFunction != ''">
+                and sto_function = #{stoFunction}
+            </if>
+            <if test="stoSpec != null and stoSpec != ''">
+                and sto_spec = #{stoSpec}
+            </if>
+            <if test="stoAspect != null and stoAspect != ''">
+                and sto_aspect = #{stoAspect}
+            </if>
+            <if test="stoFinish != null and stoFinish != ''">
+                and sto_finish = #{stoFinish}
+            </if>
+            <if test="stoType != null and stoType != ''">
+                and sto_type = #{stoType}
+            </if>
+            <if test="stoAudit != null">
+                and sto_audit = #{stoAudit}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into property.t_shopstore
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="sellId != null">
+                sell_id,
+            </if>
+            <if test="leaseId != null">
+                lease_id,
+            </if>
+            <if test="merId != null">
+                mer_id,
+            </if>
+            <if test="stoName != null">
+                sto_name,
+            </if>
+            <if test="stoArea != null">
+                sto_area,
+            </if>
+            <if test="stoUsarea != null">
+                sto_usarea,
+            </if>
+            <if test="stoFunction != null">
+                sto_function,
+            </if>
+            <if test="stoSpec != null">
+                sto_spec,
+            </if>
+            <if test="stoAspect != null">
+                sto_aspect,
+            </if>
+            <if test="stoFinish != null">
+                sto_finish,
+            </if>
+            <if test="stoType != null">
+                sto_type,
+            </if>
+            <if test="stoAudit != null">
+                sto_audit,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="sellId != null">
+                #{sellId},
+            </if>
+            <if test="leaseId != null">
+                #{leaseId},
+            </if>
+            <if test="merId != null">
+                #{merId},
+            </if>
+            <if test="stoName != null">
+                #{stoName},
+            </if>
+            <if test="stoArea != null">
+                #{stoArea},
+            </if>
+            <if test="stoUsarea != null">
+                #{stoUsarea},
+            </if>
+            <if test="stoFunction != null">
+                #{stoFunction},
+            </if>
+            <if test="stoSpec != null">
+                #{stoSpec},
+            </if>
+            <if test="stoAspect != null">
+                #{stoAspect},
+            </if>
+            <if test="stoFinish != null">
+                #{stoFinish},
+            </if>
+            <if test="stoType != null">
+                #{stoType},
+            </if>
+            <if test="stoAudit != null">
+                #{stoAudit},
+            </if>
+        </trim>
+
+    </insert>
+
+    <!--批量新增数据 -->
+    <insert id="insertBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            insert into property.t_shopstore
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.sellId != null">
+                    sell_id,
+                </if>
+                <if test="entity.leaseId != null">
+                    lease_id,
+                </if>
+                <if test="entity.merId != null">
+                    mer_id,
+                </if>
+                <if test="entity.stoName != null">
+                    sto_name,
+                </if>
+                <if test="entity.stoArea != null">
+                    sto_area,
+                </if>
+                <if test="entity.stoUsarea != null">
+                    sto_usarea,
+                </if>
+                <if test="entity.stoFunction != null">
+                    sto_function,
+                </if>
+                <if test="entity.stoSpec != null">
+                    sto_spec,
+                </if>
+                <if test="entity.stoAspect != null">
+                    sto_aspect,
+                </if>
+                <if test="entity.stoFinish != null">
+                    sto_finish,
+                </if>
+                <if test="entity.stoType != null">
+                    sto_type,
+                </if>
+                <if test="entity.stoAudit != null">
+                    sto_audit,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.sellId != null">
+                    #{entity.sellId},
+                </if>
+                <if test="entity.leaseId != null">
+                    #{entity.leaseId},
+                </if>
+                <if test="entity.merId != null">
+                    #{entity.merId},
+                </if>
+                <if test="entity.stoName != null">
+                    #{entity.stoName},
+                </if>
+                <if test="entity.stoArea != null">
+                    #{entity.stoArea},
+                </if>
+                <if test="entity.stoUsarea != null">
+                    #{entity.stoUsarea},
+                </if>
+                <if test="entity.stoFunction != null">
+                    #{entity.stoFunction},
+                </if>
+                <if test="entity.stoSpec != null">
+                    #{entity.stoSpec},
+                </if>
+                <if test="entity.stoAspect != null">
+                    #{entity.stoAspect},
+                </if>
+                <if test="entity.stoFinish != null">
+                    #{entity.stoFinish},
+                </if>
+                <if test="entity.stoType != null">
+                    #{entity.stoType},
+                </if>
+                <if test="entity.stoAudit != null">
+                    #{entity.stoAudit},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update property.t_shopstore
+        <set>
+            <if test="sellId != null">
+                sell_id = #{sellId},
+            </if>
+            <if test="leaseId != null">
+                lease_id = #{leaseId},
+            </if>
+            <if test="merId != null">
+                mer_id = #{merId},
+            </if>
+            <if test="stoName != null">
+                sto_name = #{stoName},
+            </if>
+            <if test="stoArea != null">
+                sto_area = #{stoArea},
+            </if>
+            <if test="stoUsarea != null">
+                sto_usarea = #{stoUsarea},
+            </if>
+            <if test="stoFunction != null">
+                sto_function = #{stoFunction},
+            </if>
+            <if test="stoSpec != null">
+                sto_spec = #{stoSpec},
+            </if>
+            <if test="stoAspect != null">
+                sto_aspect = #{stoAspect},
+            </if>
+            <if test="stoFinish != null">
+                sto_finish = #{stoFinish},
+            </if>
+            <if test="stoType != null">
+                sto_type = #{stoType},
+            </if>
+            <if test="stoAudit != null">
+                sto_audit = #{stoAudit},
+            </if>
+        </set>
+        where sto_id = #{stoId}
+    </update>
+
+    <!--批量修改数据-->
+    <update id="updateBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            update property.t_shopstore
+            <set>
+                <if test="entity.sellId != null">
+                    sell_id = #{entity.sellId},
+                </if>
+                <if test="entity.leaseId != null">
+                    lease_id = #{entity.leaseId},
+                </if>
+                <if test="entity.merId != null">
+                    mer_id = #{entity.merId},
+                </if>
+                <if test="entity.stoName != null">
+                    sto_name = #{entity.stoName},
+                </if>
+                <if test="entity.stoArea != null">
+                    sto_area = #{entity.stoArea},
+                </if>
+                <if test="entity.stoUsarea != null">
+                    sto_usarea = #{entity.stoUsarea},
+                </if>
+                <if test="entity.stoFunction != null">
+                    sto_function = #{entity.stoFunction},
+                </if>
+                <if test="entity.stoSpec != null">
+                    sto_spec = #{entity.stoSpec},
+                </if>
+                <if test="entity.stoAspect != null">
+                    sto_aspect = #{entity.stoAspect},
+                </if>
+                <if test="entity.stoFinish != null">
+                    sto_finish = #{entity.stoFinish},
+                </if>
+                <if test="entity.stoType != null">
+                    sto_type = #{entity.stoType},
+                </if>
+                <if test="entity.stoAudit != null">
+                    sto_audit = #{entity.stoAudit},
+                </if>
+            </set>
+            where sto_id = #{entity.stoId}
+        </foreach>
+    </update>
+
+    <!--通过主键删除数据-->
+    <delete id="deleteById">
+        delete from property.t_shopstore where sto_id = #{stoId}
+    </delete>
+
+    <!--通过主键列表批量删除数据-->
+    <delete id="deleteBatch">
+        delete from property.t_shopstore where sto_id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--通过实体列表批量删除数据-->
+    <delete id="deleteBatchByEntities">
+        delete from property.t_shopstore where sto_id in
+        <foreach collection="list" item="entity" open="(" separator="," close=")">
+            #{entity.stoId}
+        </foreach>
+    </delete>
+</mapper>
+
