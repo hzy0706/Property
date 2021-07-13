@@ -35,7 +35,7 @@ public class TResidenceController {
         }
         return AjaxResponse.error(new CustomError(CustomErrorType.PAGE_NOT_FOUND_ERROR,"查不到啊"));
     }
-=======
+
     /**
      * 通过主键查询单条数据
      *通过住宅id查询楼盘
@@ -47,5 +47,5 @@ public class TResidenceController {
         return this.tResidenceService.queryById(id);
     }
 
->>>>>>> 1b6b42145ba5a490a81b5802b5df7de304ffc1ea
+
 }
