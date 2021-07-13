@@ -49,6 +49,7 @@
     <include refid="Base_Column_List" />
     from t_decorate
     where decorate_state = #{param1} and (apply_name like #{param2} or decorate_content like #{param2})
+    order by create_date desc
   </select>
 
   <select id="selectAllTDecorates" resultMap="BaseResultMap">
@@ -56,6 +57,7 @@
     <include refid="Base_Column_List" />
     from t_decorate
     where apply_name like #{value} or decorate_content like #{value}
+    order by create_date desc
   </select>
 
   <delete id="deleteByTDecorateKey" parameterType="java.lang.Integer">
@@ -99,9 +101,6 @@
       </if>
       <if test="createName != null">
         create_name = #{createName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="decorateState != null">
         decorate_state = #{decorateState,jdbcType=INTEGER},

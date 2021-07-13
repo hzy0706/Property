@@ -44,6 +44,7 @@
     <include refid="Base_Column_List" />
     from t_maintain
     where maintain_state = #{param1} and (apply_name like #{param2} or maintain_content like #{param2})
+    order by create_date desc
   </select>
 
   <select id="selectAllTMaintains" resultMap="BaseResultMap">
@@ -51,6 +52,7 @@
     <include refid="Base_Column_List" />
     from t_maintain
     where apply_name like #{value} or maintain_content like #{value}
+    order by create_date desc
   </select>
 
   <delete id="deleteByTMaintainKey" parameterType="java.lang.Integer">
@@ -90,9 +92,6 @@
       </if>
       <if test="createName != null">
         create_name = #{createName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="maintainState != null">
         maintain_state = #{maintainState,jdbcType=INTEGER},
