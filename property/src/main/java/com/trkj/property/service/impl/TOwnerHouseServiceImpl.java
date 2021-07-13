@@ -79,6 +79,11 @@ public class TOwnerHouseServiceImpl implements TOwnerHouseService {
     }
 
     @Override
+    public TOwnerHouse selectTOwnerHouseByHouseId(Integer houseId) {
+        return tOwnerHouseDao.selectTOwnerHouseByHouseId(houseId);
+    }
+
+    @Override
     @Transactional
     public void updateByTOwnerHouseKeySelective(TOwnerHouse record) {
         tOwnerHouseDao.updateByTOwnerHouseKeySelective(record);

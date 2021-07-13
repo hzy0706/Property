@@ -13,10 +13,15 @@
       <result column="stay_date" jdbcType="TIMESTAMP" property="stayDate" />
       <result column="use_state" jdbcType="INTEGER" property="useState" />
     </association>
+    <association property="tOwner" javaType="com.trkj.property.entity.TOwner">
+      <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+      <result column="owner_phone" jdbcType="VARCHAR" property="ownerPhone" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    oh_id, t_owner_house.house_id, owner_id, house_no, decorate_date, oh_remark, t_owner_house.house_name
+    oh_id, t_owner_house.house_id, t_owner_house.owner_id, house_no, decorate_date, oh_remark, t_owner_house.house_name
   </sql>
+
   <select id="selectByTOwnerHouseKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -30,6 +35,14 @@
     from t_owner_house
     inner join t_house on t_house.house_id=t_owner_house.house_id
     where owner_id = #{ownerId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTOwnerHouseByHouseId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,t_owner.owner_name,t_owner.owner_phone
+    from t_owner_house
+    inner join t_owner on t_owner.owner_id = t_owner_house.owner_id
+    where house_id = #{houseId,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByTOwnerHouseKey" parameterType="java.lang.Integer">

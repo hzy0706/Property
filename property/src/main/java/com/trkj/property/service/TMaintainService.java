@@ -18,6 +18,8 @@ public interface TMaintainService {
 
     List<TMaintain> selectAllTMaintainByState(Integer state, String value);
 
+    List<TMaintain> selectAllTMaintains(String value);
+
     void updateByTMaintainKeySelective(TMaintain record);
 
     void updateByTMaintainKey(TMaintain record);

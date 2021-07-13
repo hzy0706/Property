@@ -9,6 +9,7 @@ import com.trkj.property.vo.AjaxResponse;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,9 +29,9 @@ public class TMaintainController {
      * @date  2021/7/12
      * @version 1.0
      */
-    @DeleteMapping("/deleteByTMaintainKey")
-    public AjaxResponse deleteByTMaintainKey(){
-        tMaintainService.deleteByTMaintainKey(1);
+    @DeleteMapping("/deleteByTMaintainKey/{id}")
+    public AjaxResponse deleteByTMaintainKey(@PathVariable("id") Integer id){
+        tMaintainService.deleteByTMaintainKey(id);
         return AjaxResponse.success();
     }
     /**
@@ -85,8 +86,14 @@ public class TMaintainController {
     public AjaxResponse selectAllTMaintainByState(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize
             ,@RequestParam("state")Integer state, @RequestParam("value")String value){
         PageHelper.startPage(currentPage,pageSize);
-        List<TMaintain> list = tMaintainService.selectAllTMaintainByState(state,"%"+value+"%");
+        List<TMaintain> list = new ArrayList<>();
+        if(state==4){
+            list = tMaintainService.selectAllTMaintains("%"+value+"%");
+        }else{
+            list = tMaintainService.selectAllTMaintainByState(state,"%"+value+"%");
+        }
         PageInfo<TMaintain> pageInfo = new PageInfo<>(list);
         return AjaxResponse.success(pageInfo);
     }
+
 }

@@ -69,4 +69,18 @@ public class TOwnerHouseController {
         List<TOwnerHouse> list = tOwnerHouseService.selectAllTOwnerHouseByTid(ownerId);
         return AjaxResponse.success(list);
     }
+
+    /**
+     * 根据房产id查询业主信息
+     * @author  胡志远
+     * @param: 业主主键id
+     * @return:
+     * @date  2021/7/11
+     * @version 1.0
+     */
+    @GetMapping("/selectTOwnerHouseByHouseId/{houseId}")
+    public AjaxResponse selectTOwnerHouseByHouseId(@PathVariable("houseId") Integer houseId){
+        TOwnerHouse tOwnerHouse = tOwnerHouseService.selectTOwnerHouseByHouseId(houseId);
+        return AjaxResponse.success(tOwnerHouse);
+    }
 }
