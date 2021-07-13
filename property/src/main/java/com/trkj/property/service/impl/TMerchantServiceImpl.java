@@ -117,7 +117,11 @@ public class TMerchantServiceImpl implements TMerchantService {
      */
     @Override
     public boolean updateBatch(List<TMerchant> tMerchantList) {
-        return this.tMerchantDao.updateBatch(tMerchantList) == -1;
+        for(TMerchant aa:tMerchantList){
+            this.tMerchantDao.update(aa);
+        }
+
+        return Boolean.parseBoolean(null);
     }
 
     /**

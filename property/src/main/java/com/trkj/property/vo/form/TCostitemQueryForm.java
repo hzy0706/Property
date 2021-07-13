@@ -12,7 +12,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class TCostitemQueryForm implements Serializable {
-    private static final long serialVersionUID = -61949355174436553L;
+    private static final long serialVersionUID = -26760129130627460L;
 
     private Integer ctId;
 
@@ -26,7 +26,7 @@ public class TCostitemQueryForm implements Serializable {
 
     private Integer overdue;
 
-    private String overduefine;
+    private Double overduefine;
     /**
      * 关联费项
      */

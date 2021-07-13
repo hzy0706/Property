@@ -57,4 +57,9 @@ public class TResidenceServiceImpl implements TResidenceService {
     public void updateByPrimaryKey(TResidence record) {
         tResidenceDao.updateByPrimaryKey(record);
     }
+
+    @Override
+    public TResidence queryById(Integer residenceId) {
+        return this.tResidenceDao.queryById(residenceId);
+    }
 }

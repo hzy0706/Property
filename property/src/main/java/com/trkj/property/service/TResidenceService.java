@@ -23,4 +23,6 @@ public interface TResidenceService {
     void updateByPrimaryKeySelective(TResidence record);
 
     void updateByPrimaryKey(TResidence record);
+
+    TResidence queryById(Integer residenceId);
 }
