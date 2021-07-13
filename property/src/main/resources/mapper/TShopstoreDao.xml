@@ -105,7 +105,7 @@
             <if test="stoAudit != null">
                 or sto_audit like CONCAT('%',#{stoAudit},'%')
             </if>
-            and S.mer_id=M.mer_id
+
         </where>
     </select>
 
