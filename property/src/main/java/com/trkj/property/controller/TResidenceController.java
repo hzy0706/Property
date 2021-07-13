@@ -23,4 +23,15 @@ public class TResidenceController {
         List<TResidence> list = tResidenceService.selectAllTResidence();
         return AjaxResponse.success(list);
     }
+    /**
+     * 通过主键查询单条数据
+     *通过住宅id查询楼盘
+     * @param id 主键
+     * @return 单条数据
+     */
+    @GetMapping("/tResidence/one")
+    public TResidence selectOne(Integer id) {
+        return this.tResidenceService.queryById(id);
+    }
+
 }

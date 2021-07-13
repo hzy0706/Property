@@ -1,21 +1,26 @@
 package com.trkj.property.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Data;
 import lombok.ToString;
 
 /**
- * t_costitem
- * @author 
+ * (TCostitem)实体类
+ *
+ * @author makejava
+ * @since 2021-07-13 12:04:56
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@ToString
 public class TCostitem implements Serializable {
+    private static final long serialVersionUID = 763227442640812742L;
+
     private Integer ctId;
 
     private Integer residenceId;
@@ -29,12 +34,16 @@ public class TCostitem implements Serializable {
     private Integer overdue;
 
     private Double overduefine;
-
+    /**
+     * 关联费项
+     */
     private String ctRelation;
 
     private String chco;
 
     private String ifprice;
 
-    private static final long serialVersionUID = 1L;
+    private String residenceName;
+
+    private String found;
 }

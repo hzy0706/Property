@@ -12,10 +12,52 @@
     <result column="task_name" jdbcType="VARCHAR" property="taskName" />
     <result column="developer" jdbcType="VARCHAR" property="developer" />
   </resultMap>
+  <resultMap id="BaseResultAddTCostitemMap" type="com.trkj.property.entity.TResidence">
+    <id column="residence_id" jdbcType="INTEGER" property="residenceId" />
+    <result column="residence_name" jdbcType="VARCHAR" property="residenceName" />
+    <result column="green_area" jdbcType="DECIMAL" property="greenArea" />
+    <result column="floor_area" jdbcType="DECIMAL" property="floorArea" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="covered_area" jdbcType="DECIMAL" property="coveredArea" />
+    <result column="road_area" jdbcType="DECIMAL" property="roadArea" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="developer" jdbcType="VARCHAR" property="developer" />
+  <collection property="tCostitemList" javaType="list" ofType="com.trkj.property.entity.TCostitem">
+    <result property="ctId" column="ct_id" jdbcType="INTEGER"/>
+    <result property="residenceId" column="residence_id" jdbcType="INTEGER"/>
+    <result property="ctName" column="ct_name" jdbcType="VARCHAR"/>
+    <result property="ctChargecycle" column="ct_chargecycle" jdbcType="INTEGER"/>
+    <result property="ctSubtotal" column="ct_subtotal" jdbcType="NUMERIC"/>
+    <result property="overdue" column="overdue" jdbcType="INTEGER"/>
+    <result property="overduefine" column="overduefine" jdbcType="VARCHAR"/>
+    <result property="ctRelation" column="ct_relation" jdbcType="VARCHAR"/>
+    <result property="chco" column="chco" jdbcType="VARCHAR"/>
+    <result property="ifprice" column="ifprice" jdbcType="VARCHAR"/>
+    <result property="residenceName" column="residence_name" jdbcType="VARCHAR"/>
+    <result property="found" column="found" jdbcType="VARCHAR"/>
+  </collection>
+  </resultMap>
+
   <sql id="Base_Column_List">
     residence_id, residence_name, green_area, floor_area, address, covered_area, road_area, 
     task_name, developer
   </sql>
+  <sql id="TResidenceJoinCol">
+    P.residence_id, P.residence_name, P.green_area, P.floor_area, P.address, P.covered_area, P.road_area,
+    P.task_name, P.developer
+  </sql>
+  <sql id="TCostitemJoinCol">
+    D.ct_id
+    , D.residence_id, D.ct_name, D.ct_chargecycle, D.ct_subtotal, D.overdue, D.overduefine, D.ct_relation, D.chco, D.ifprice, D.residence_name, D.found    </sql>
+  
+  <!--通过住宅-->
+  <select id="queryById" resultMap="BaseResultAddTCostitemMap">
+    select
+    <include refid="TResidenceJoinCol"></include>,
+    <include refid="TCostitemJoinCol"></include>
+    from property.t_residence P left join property.t_costitem D on P.residence_id = D.residence_id
+    where P.residence_id = #{residenceId}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

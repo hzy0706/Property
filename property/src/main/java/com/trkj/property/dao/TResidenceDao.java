@@ -20,4 +20,7 @@ public interface TResidenceDao {
     void updateByPrimaryKeySelective(TResidence record);
 
     void updateByPrimaryKey(TResidence record);
+
+    //根据住宅id查询楼盘
+    TResidence queryById(Integer residenceId);
 }
