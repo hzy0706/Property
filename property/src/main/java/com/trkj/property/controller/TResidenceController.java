@@ -1,9 +1,12 @@
 package com.trkj.property.controller;
 
 import com.trkj.property.entity.TResidence;
+import com.trkj.property.exception.CustomError;
+import com.trkj.property.exception.CustomErrorType;
 import com.trkj.property.service.TResidenceService;
 import com.trkj.property.vo.AjaxResponse;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -22,5 +25,14 @@ public class TResidenceController {
     public AjaxResponse selectAllTResidence(){
         List<TResidence> list = tResidenceService.selectAllTResidence();
         return AjaxResponse.success(list);
+    }
+
+    @GetMapping("/findByIdRes/{resId}")
+    public AjaxResponse selectByPrimaryKey(@PathVariable("resId") Integer resId){
+        TResidence tResidence = tResidenceService.selectByPrimaryKey(resId);
+        if (tResidence!= null){
+            return AjaxResponse.success(tResidence);
+        }
+        return AjaxResponse.error(new CustomError(CustomErrorType.PAGE_NOT_FOUND_ERROR,"查不到啊"));
     }
 }

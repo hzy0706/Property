@@ -61,12 +61,16 @@ public class AddChargeTask {
             //滞纳金率
             tChargeCosts.setOverduefineMoney(costItemById.getOverduefine());
 
+
             tChargeCosts.setBreakMoney(0.00);
 
             tChargeCosts.setChargeTime(null);
 
             //限期时间
             tChargeCosts.setOverdueTime(tParameterDetail.getParDeDeadline());
+
+            //处理时间
+            tChargeCosts.setChargeTime(new Date());
 
             //是否处理
             tChargeCosts.setHasCharge(0);

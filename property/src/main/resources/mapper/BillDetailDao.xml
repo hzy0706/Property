@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.trkj.property.dao.BillDetailDao">
+
+    <resultMap id="billDetailMap" type="com.trkj.property.entity.TBillDetail">
+        <id property="billDetailId" column="bill_detail_id"/>
+        <result property="billReceiptnumber" javaType="String" column="bill_receiptnumber"/>
+        <result property="billInvoicenumber" column="bill_invoicenumber"/>
+        <result property="billType" column="bill_type"/>
+        <result property="billDetailReceivable" column="bill_detail_receivable"/>
+        <result property="billRealmoney" column="bill_realmoney"/>
+        <result property="billDetailPayee" column="bill_detail_payee"/>
+        <result property="billDetailMark" column="bill_detail_mark"/>
+        <result property="billArrearage" column="bill_Arrearage"/>
+        <result property="billSelectornum" column="bill_selectornum"/>
+        <association property="house" javaType="com.trkj.property.entity.THouse">
+            <id property="houseId" column="house_id"/>
+            <result property="houseName" column="house_name"/>
+        </association>
+        <association property="tOwner" javaType="com.trkj.property.entity.TOwner">
+            <id property="ownerId" column="owner_id"/>
+            <result property="ownerName" column="owner_name"/>
+        </association>
+    </resultMap>
+
+    <insert id="addBillDeatil" parameterType="com.trkj.property.entity.TBillDetail">
+        insert into t_bill_detail values(
+                                  #{billDetailId},
+                                  #{houseId},
+                                  #{billId},
+                                  #{ownerId},
+                                  #{billReceiptnumber},
+                                  #{billInvoicenumber},
+                                  #{billType},
+                                  #{billDetailReceivable},
+                                  #{billRealmoney},
+                                  #{billDetailPayee},
+                                  #{billDetailMark},
+                                  #{billArrearage},
+                                  #{billSelectornum}
+    </insert>
+
+
+    <select id="findAllBillDetails" resultMap="billDetailMap">
+        select
+            *
+        from t_bill_detail tbd
+                 join t_house th on tbd.house_id = th.house_id
+                 join t_owner t on tbd.owner_id = t.owner_id
+    </select>
+
+
+    <select id="findBillDetailByHouseId" resultMap="billDetailMap" parameterType="int">
+        select
+            *
+        from t_bill_detail tbd
+                 join t_house th on tbd.house_id = th.house_id
+                 join t_owner t on tbd.owner_id = t.owner_id
+        where th.house_id = 1
+    </select>
+
+
+</mapper>

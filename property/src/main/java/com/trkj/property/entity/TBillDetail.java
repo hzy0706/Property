@@ -19,12 +19,12 @@ public class TBillDetail implements Serializable {
     private static final long serialVersionUID = -28420228462652880L;
 
     private Integer billDetailId;
-
-    private Integer houseId;
+    //多对一 房间
+    private THouse house;
 
     private Integer billId;
-
-    private Integer ownerId;
+    //多对一 业主
+    private TOwner tOwner;
 
     private String billReceiptnumber;
 
