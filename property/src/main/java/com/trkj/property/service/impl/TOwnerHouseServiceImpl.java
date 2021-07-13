@@ -54,7 +54,7 @@ public class TOwnerHouseServiceImpl implements TOwnerHouseService {
         TBuilding tBuilding = tBuildingDao.selectByTBuildingKey(record.getBid());
         TUnit tUnit = tUnitDao.selectByTUnitKey(record.getUid());
         THouse tHouse = tHouseDao.selectByTHouseKey(record.getHouseId());
-        record.setHouseName(tResidence.getResidenceName()+tBuilding.getBuildingName()+tUnit.getUnitName()+tHouse.getHouseName());
+        record.setHouseName(tResidence.getResidenceName()+"#"+tBuilding.getBuildingName()+"#"+tUnit.getUnitName()+"#"+tHouse.getHouseName());
         //添加业主房产
         tOwnerHouseDao.addTOwnerHouse(record);
 
