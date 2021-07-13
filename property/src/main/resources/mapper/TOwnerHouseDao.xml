@@ -9,9 +9,13 @@
     <result column="decorate_date" jdbcType="TIMESTAMP" property="decorateDate" />
     <result column="oh_remark" jdbcType="VARCHAR" property="ohRemark" />
     <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+    <association property="tHouse" javaType="com.trkj.property.entity.THouse">
+      <result column="stay_date" jdbcType="TIMESTAMP" property="stayDate" />
+      <result column="use_state" jdbcType="INTEGER" property="useState" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    oh_id, house_id, owner_id, house_no, decorate_date, oh_remark, house_name
+    oh_id, t_owner_house.house_id, owner_id, house_no, decorate_date, oh_remark, t_owner_house.house_name
   </sql>
   <select id="selectByTOwnerHouseKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,8 +26,9 @@
 
   <select id="selectAllTOwnerHouseByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />,t_house.stay_date,t_house.use_state
     from t_owner_house
+    inner join t_house on t_house.house_id=t_owner_house.house_id
     where owner_id = #{ownerId,jdbcType=INTEGER}
   </select>
 

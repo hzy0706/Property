@@ -44,6 +44,19 @@ public class THouseController {
         return AjaxResponse.success(list);
     }
     /**
+     * 根据单元编号和空闲状态查询所有房间
+     * @author  胡志远
+     * @param: 单元编号
+     * @return:
+     * @date  2021/7/12
+     * @version 1.0
+     */
+    @GetMapping("/selectAllTHouseByUidAndState/{uid}")
+    public AjaxResponse selectAllTHouseByUidAndState(@PathVariable("uid") Integer uid){
+        List<THouse> list = tHouseService.selectAllTHouseByUidAndState(uid);
+        return AjaxResponse.success(list);
+    }
+    /**
      * 根据主键修改房间信息
      * @author  胡志远
      * @param: 房间信息实体

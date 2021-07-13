@@ -37,5 +37,11 @@ public class TParKingServiceImpl implements TParKingService {
         return tParking;
     }
 
+//    根据车位状态查询11
+    @Override
+    public List<TParking> selectstate(String value3) {
+        return tParkingDao.selectstate(value3);
+    }
+
 
 }

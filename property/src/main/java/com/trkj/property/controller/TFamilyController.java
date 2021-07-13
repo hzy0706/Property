@@ -25,9 +25,9 @@ public class TFamilyController {
      * @date  2021/7/11
      * @version 1.0
      */
-    @DeleteMapping("/deleteByTFamilyKey")
-    public AjaxResponse deleteByTFamilyKey(){
-        tFamilyService.deleteByTFamilyKey(1);
+    @DeleteMapping("/deleteByTFamilyKey/{id}/{oid}")
+    public AjaxResponse deleteByTFamilyKey(@PathVariable("id") Integer id,@PathVariable("oid") Integer oid){
+        tFamilyService.deleteByTFamilyKey(id,oid);
         return AjaxResponse.success();
     }
     /**
@@ -67,7 +67,7 @@ public class TFamilyController {
     @GetMapping("/selectAllTFamilyByTid/{ownerId}")
     public AjaxResponse selectAllTFamilyByTid(@PathVariable("ownerId") Integer ownerId){
         List<TFamily> list = tFamilyService.selectAllTFamilyByTid(ownerId);
-        return AjaxResponse.success();
+        return AjaxResponse.success(list);
     }
     
 }

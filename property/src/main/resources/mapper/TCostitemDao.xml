@@ -1,158 +1,395 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.property.dao.TCostitemDao">
-  <resultMap id="BaseResultMap" type="com.trkj.property.entity.TCostitem">
-    <id column="ct_id" jdbcType="INTEGER" property="ctId" />
-    <result column="residence_id" jdbcType="INTEGER" property="residenceId" />
-    <result column="par_de_id" jdbcType="INTEGER" property="parDeId" />
-    <result column="ct_name" jdbcType="VARCHAR" property="ctName" />
-    <result column="ct_chargecycle" jdbcType="INTEGER" property="ctChargecycle" />
-    <result column="ct_subtotal" jdbcType="DECIMAL" property="ctSubtotal" />
-    <result column="overdue" jdbcType="INTEGER" property="overdue" />
-    <result column="overduefine" jdbcType="VARCHAR" property="overduefine" />
-    <result column="ct_relation" jdbcType="VARCHAR" property="ctRelation" />
-    <result column="chco" jdbcType="VARCHAR" property="chco" />
-    <result column="ifprice" jdbcType="CHAR" property="ifprice" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ct_id, residence_id, par_de_id, ct_name, ct_chargecycle, ct_subtotal, overdue, overduefine, 
-    ct_relation, chco, ifprice
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_costitem
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_costitem
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="ct_id" keyProperty="ctId" parameterType="com.trkj.property.entity.TCostitem" useGeneratedKeys="true">
-    insert into t_costitem (residence_id, par_de_id, ct_name, 
-      ct_chargecycle, ct_subtotal, overdue, 
-      overduefine, ct_relation, chco, 
-      ifprice)
-    values (#{residenceId,jdbcType=INTEGER}, #{parDeId,jdbcType=INTEGER}, #{ctName,jdbcType=VARCHAR}, 
-      #{ctChargecycle,jdbcType=INTEGER}, #{ctSubtotal,jdbcType=DECIMAL}, #{overdue,jdbcType=INTEGER}, 
-      #{overduefine,jdbcType=VARCHAR}, #{ctRelation,jdbcType=VARCHAR}, #{chco,jdbcType=VARCHAR}, 
-      #{ifprice,jdbcType=CHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="ct_id" keyProperty="ctId" parameterType="com.trkj.property.entity.TCostitem" useGeneratedKeys="true">
-    insert into t_costitem
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="residenceId != null">
-        residence_id,
-      </if>
-      <if test="parDeId != null">
-        par_de_id,
-      </if>
-      <if test="ctName != null">
-        ct_name,
-      </if>
-      <if test="ctChargecycle != null">
-        ct_chargecycle,
-      </if>
-      <if test="ctSubtotal != null">
-        ct_subtotal,
-      </if>
-      <if test="overdue != null">
-        overdue,
-      </if>
-      <if test="overduefine != null">
-        overduefine,
-      </if>
-      <if test="ctRelation != null">
-        ct_relation,
-      </if>
-      <if test="chco != null">
-        chco,
-      </if>
-      <if test="ifprice != null">
-        ifprice,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="residenceId != null">
-        #{residenceId,jdbcType=INTEGER},
-      </if>
-      <if test="parDeId != null">
-        #{parDeId,jdbcType=INTEGER},
-      </if>
-      <if test="ctName != null">
-        #{ctName,jdbcType=VARCHAR},
-      </if>
-      <if test="ctChargecycle != null">
-        #{ctChargecycle,jdbcType=INTEGER},
-      </if>
-      <if test="ctSubtotal != null">
-        #{ctSubtotal,jdbcType=DECIMAL},
-      </if>
-      <if test="overdue != null">
-        #{overdue,jdbcType=INTEGER},
-      </if>
-      <if test="overduefine != null">
-        #{overduefine,jdbcType=VARCHAR},
-      </if>
-      <if test="ctRelation != null">
-        #{ctRelation,jdbcType=VARCHAR},
-      </if>
-      <if test="chco != null">
-        #{chco,jdbcType=VARCHAR},
-      </if>
-      <if test="ifprice != null">
-        #{ifprice,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.property.entity.TCostitem">
-    update t_costitem
-    <set>
-      <if test="residenceId != null">
-        residence_id = #{residenceId,jdbcType=INTEGER},
-      </if>
-      <if test="parDeId != null">
-        par_de_id = #{parDeId,jdbcType=INTEGER},
-      </if>
-      <if test="ctName != null">
-        ct_name = #{ctName,jdbcType=VARCHAR},
-      </if>
-      <if test="ctChargecycle != null">
-        ct_chargecycle = #{ctChargecycle,jdbcType=INTEGER},
-      </if>
-      <if test="ctSubtotal != null">
-        ct_subtotal = #{ctSubtotal,jdbcType=DECIMAL},
-      </if>
-      <if test="overdue != null">
-        overdue = #{overdue,jdbcType=INTEGER},
-      </if>
-      <if test="overduefine != null">
-        overduefine = #{overduefine,jdbcType=VARCHAR},
-      </if>
-      <if test="ctRelation != null">
-        ct_relation = #{ctRelation,jdbcType=VARCHAR},
-      </if>
-      <if test="chco != null">
-        chco = #{chco,jdbcType=VARCHAR},
-      </if>
-      <if test="ifprice != null">
-        ifprice = #{ifprice,jdbcType=CHAR},
-      </if>
-    </set>
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.trkj.property.entity.TCostitem">
-    update t_costitem
-    set residence_id = #{residenceId,jdbcType=INTEGER},
-      par_de_id = #{parDeId,jdbcType=INTEGER},
-      ct_name = #{ctName,jdbcType=VARCHAR},
-      ct_chargecycle = #{ctChargecycle,jdbcType=INTEGER},
-      ct_subtotal = #{ctSubtotal,jdbcType=DECIMAL},
-      overdue = #{overdue,jdbcType=INTEGER},
-      overduefine = #{overduefine,jdbcType=VARCHAR},
-      ct_relation = #{ctRelation,jdbcType=VARCHAR},
-      chco = #{chco,jdbcType=VARCHAR},
-      ifprice = #{ifprice,jdbcType=CHAR}
-    where ct_id = #{ctId,jdbcType=INTEGER}
-  </update>
+
+    <resultMap type="com.trkj.property.entity.TCostitem" id="TCostitemMap">
+        <result property="ctId" column="ct_id" jdbcType="INTEGER"/>
+        <result property="residenceId" column="residence_id" jdbcType="INTEGER"/>
+        <result property="ctName" column="ct_name" jdbcType="VARCHAR"/>
+        <result property="ctChargecycle" column="ct_chargecycle" jdbcType="INTEGER"/>
+        <result property="ctSubtotal" column="ct_subtotal" jdbcType="NUMERIC"/>
+        <result property="overdue" column="overdue" jdbcType="INTEGER"/>
+        <result property="overduefine" column="overduefine" jdbcType="VARCHAR"/>
+        <result property="ctRelation" column="ct_relation" jdbcType="VARCHAR"/>
+        <result property="chco" column="chco" jdbcType="VARCHAR"/>
+        <result property="ifprice" column="ifprice" jdbcType="VARCHAR"/>
+        <result property="residenceName" column="residence_name" jdbcType="VARCHAR"/>
+        <result property="found" column="found" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="TCostitemCol">
+        ct_id
+        , residence_id, ct_name, ct_chargecycle, ct_subtotal, overdue, overduefine, ct_relation, chco, ifprice, residence_name, found    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TCostitemMap">
+        select
+        <include refid="TCostitemCol"></include>
+        from property.t_costitem
+        where ct_id = #{ctId}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="TCostitemMap">
+        select
+        <include refid="TCostitemCol"></include>
+        from property.t_costitem
+    </select>
+
+    <!--通过实体作为或者条件查询-->
+    <select id="queryOrByPojo" resultMap="TCostitemMap">
+        select
+        <include refid="TCostitemCol"></include>
+        from property.t_costitem
+        <where>
+            <if test="ctId != null">
+                or ct_id like CONCAT('%',#{ctId},'%')
+            </if>
+            <if test="residenceId != null">
+                or residence_id like CONCAT('%',#{residenceId},'%')
+            </if>
+            <if test="ctName != null and ctName != ''">
+                or ct_name like CONCAT('%',#{ctName},'%')
+            </if>
+            <if test="ctChargecycle != null">
+                or ct_chargecycle like CONCAT('%',#{ctChargecycle},'%')
+            </if>
+            <if test="ctSubtotal != null">
+                or ct_subtotal like CONCAT('%',#{ctSubtotal},'%')
+            </if>
+            <if test="overdue != null">
+                or overdue like CONCAT('%',#{overdue},'%')
+            </if>
+            <if test="overduefine != null and overduefine != ''">
+                or overduefine like CONCAT('%',#{overduefine},'%')
+            </if>
+            <if test="ctRelation != null and ctRelation != ''">
+                or ct_relation like CONCAT('%',#{ctRelation},'%')
+            </if>
+            <if test="chco != null and chco != ''">
+                or chco like CONCAT('%',#{chco},'%')
+            </if>
+            <if test="ifprice != null and ifprice != ''">
+                or ifprice like CONCAT('%',#{ifprice},'%')
+            </if>
+            <if test="residenceName != null and residenceName != ''">
+                or residence_name like CONCAT('%',#{residenceName},'%')
+            </if>
+            <if test="found != null and found != ''">
+                or found like CONCAT('%',#{found},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为并且条件查询-->
+    <select id="queryAndByPojo" resultMap="TCostitemMap">
+        select
+        <include refid="TCostitemCol"></include>
+        from property.t_costitem
+        <where>
+            <if test="ctId != null">
+                and ct_id = #{ctId}
+            </if>
+            <if test="residenceId != null">
+                and residence_id = #{residenceId}
+            </if>
+            <if test="ctName != null and ctName != ''">
+                and ct_name = #{ctName}
+            </if>
+            <if test="ctChargecycle != null">
+                and ct_chargecycle = #{ctChargecycle}
+            </if>
+            <if test="ctSubtotal != null">
+                and ct_subtotal = #{ctSubtotal}
+            </if>
+            <if test="overdue != null">
+                and overdue = #{overdue}
+            </if>
+            <if test="overduefine != null and overduefine != ''">
+                and overduefine = #{overduefine}
+            </if>
+            <if test="ctRelation != null and ctRelation != ''">
+                and ct_relation = #{ctRelation}
+            </if>
+            <if test="chco != null and chco != ''">
+                and chco = #{chco}
+            </if>
+            <if test="ifprice != null and ifprice != ''">
+                and ifprice = #{ifprice}
+            </if>
+            <if test="residenceName != null and residenceName != ''">
+                and residence_name = #{residenceName}
+            </if>
+            <if test="found != null and found != ''">
+                and found = #{found}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into property.t_costitem
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="residenceId != null">
+                residence_id,
+            </if>
+            <if test="ctName != null">
+                ct_name,
+            </if>
+            <if test="ctChargecycle != null">
+                ct_chargecycle,
+            </if>
+            <if test="ctSubtotal != null">
+                ct_subtotal,
+            </if>
+            <if test="overdue != null">
+                overdue,
+            </if>
+            <if test="overduefine != null">
+                overduefine,
+            </if>
+            <if test="ctRelation != null">
+                ct_relation,
+            </if>
+            <if test="chco != null">
+                chco,
+            </if>
+            <if test="ifprice != null">
+                ifprice,
+            </if>
+            <if test="residenceName != null">
+                residence_name,
+            </if>
+            <if test="found != null">
+                found,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="residenceId != null">
+                #{residenceId},
+            </if>
+            <if test="ctName != null">
+                #{ctName},
+            </if>
+            <if test="ctChargecycle != null">
+                #{ctChargecycle},
+            </if>
+            <if test="ctSubtotal != null">
+                #{ctSubtotal},
+            </if>
+            <if test="overdue != null">
+                #{overdue},
+            </if>
+            <if test="overduefine != null">
+                #{overduefine},
+            </if>
+            <if test="ctRelation != null">
+                #{ctRelation},
+            </if>
+            <if test="chco != null">
+                #{chco},
+            </if>
+            <if test="ifprice != null">
+                #{ifprice},
+            </if>
+            <if test="residenceName != null">
+                #{residenceName},
+            </if>
+            <if test="found != null">
+                #{found},
+            </if>
+        </trim>
+
+    </insert>
+
+    <!--批量新增数据 -->
+    <insert id="insertBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            insert into property.t_costitem
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.residenceId != null">
+                    residence_id,
+                </if>
+                <if test="entity.ctName != null">
+                    ct_name,
+                </if>
+                <if test="entity.ctChargecycle != null">
+                    ct_chargecycle,
+                </if>
+                <if test="entity.ctSubtotal != null">
+                    ct_subtotal,
+                </if>
+                <if test="entity.overdue != null">
+                    overdue,
+                </if>
+                <if test="entity.overduefine != null">
+                    overduefine,
+                </if>
+                <if test="entity.ctRelation != null">
+                    ct_relation,
+                </if>
+                <if test="entity.chco != null">
+                    chco,
+                </if>
+                <if test="entity.ifprice != null">
+                    ifprice,
+                </if>
+                <if test="entity.residenceName != null">
+                    residence_name,
+                </if>
+                <if test="entity.found != null">
+                    found,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.residenceId != null">
+                    #{entity.residenceId},
+                </if>
+                <if test="entity.ctName != null">
+                    #{entity.ctName},
+                </if>
+                <if test="entity.ctChargecycle != null">
+                    #{entity.ctChargecycle},
+                </if>
+                <if test="entity.ctSubtotal != null">
+                    #{entity.ctSubtotal},
+                </if>
+                <if test="entity.overdue != null">
+                    #{entity.overdue},
+                </if>
+                <if test="entity.overduefine != null">
+                    #{entity.overduefine},
+                </if>
+                <if test="entity.ctRelation != null">
+                    #{entity.ctRelation},
+                </if>
+                <if test="entity.chco != null">
+                    #{entity.chco},
+                </if>
+                <if test="entity.ifprice != null">
+                    #{entity.ifprice},
+                </if>
+                <if test="entity.residenceName != null">
+                    #{entity.residenceName},
+                </if>
+                <if test="entity.found != null">
+                    #{entity.found},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update property.t_costitem
+        <set>
+            <if test="residenceId != null">
+                residence_id = #{residenceId},
+            </if>
+            <if test="ctName != null">
+                ct_name = #{ctName},
+            </if>
+            <if test="ctChargecycle != null">
+                ct_chargecycle = #{ctChargecycle},
+            </if>
+            <if test="ctSubtotal != null">
+                ct_subtotal = #{ctSubtotal},
+            </if>
+            <if test="overdue != null">
+                overdue = #{overdue},
+            </if>
+            <if test="overduefine != null">
+                overduefine = #{overduefine},
+            </if>
+            <if test="ctRelation != null">
+                ct_relation = #{ctRelation},
+            </if>
+            <if test="chco != null">
+                chco = #{chco},
+            </if>
+            <if test="ifprice != null">
+                ifprice = #{ifprice},
+            </if>
+            <if test="residenceName != null">
+                residence_name = #{residenceName},
+            </if>
+            <if test="found != null">
+                found = #{found},
+            </if>
+        </set>
+        where ct_id = #{ctId}
+    </update>
+
+    <!--批量修改数据-->
+    <update id="updateBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            update property.t_costitem
+            <set>
+                <if test="entity.residenceId != null">
+                    residence_id = #{entity.residenceId},
+                </if>
+                <if test="entity.ctName != null">
+                    ct_name = #{entity.ctName},
+                </if>
+                <if test="entity.ctChargecycle != null">
+                    ct_chargecycle = #{entity.ctChargecycle},
+                </if>
+                <if test="entity.ctSubtotal != null">
+                    ct_subtotal = #{entity.ctSubtotal},
+                </if>
+                <if test="entity.overdue != null">
+                    overdue = #{entity.overdue},
+                </if>
+                <if test="entity.overduefine != null">
+                    overduefine = #{entity.overduefine},
+                </if>
+                <if test="entity.ctRelation != null">
+                    ct_relation = #{entity.ctRelation},
+                </if>
+                <if test="entity.chco != null">
+                    chco = #{entity.chco},
+                </if>
+                <if test="entity.ifprice != null">
+                    ifprice = #{entity.ifprice},
+                </if>
+                <if test="entity.residenceName != null">
+                    residence_name = #{entity.residenceName},
+                </if>
+                <if test="entity.found != null">
+                    found = #{entity.found},
+                </if>
+            </set>
+            where ct_id = #{entity.ctId}
+        </foreach>
+    </update>
+
+    <!--通过主键删除数据-->
+    <delete id="deleteById">
+        delete
+        from property.t_costitem
+        where ct_id = #{ctId}
+    </delete>
+
+    <!--通过主键列表批量删除数据-->
+    <delete id="deleteBatch">
+        delete from property.t_costitem where ct_id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--通过实体列表批量删除数据-->
+    <delete id="deleteBatchByEntities">
+        delete from property.t_costitem where ct_id in
+        <foreach collection="list" item="entity" open="(" separator="," close=")">
+            #{entity.ctId}
+        </foreach>
+    </delete>
 </mapper>
+

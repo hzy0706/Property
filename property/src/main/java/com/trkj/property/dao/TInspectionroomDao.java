@@ -3,15 +3,19 @@ package com.trkj.property.dao;
 import com.trkj.property.entity.TInspectionroom;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TInspectionroomDao {
-    int deleteByTInspectionroomKey(Integer irId);
 
-    int addTInspectionroom(TInspectionroom record);
+    void addTInspectionroom(TInspectionroom record);
 
     TInspectionroom selectByTInspectionroomKey(Integer irId);
 
-    int updateByTInspectionroomKeySelective(TInspectionroom record);
+    List<TInspectionroom> selectAllTInspectionroomByRoomName(String value);
 
-    int updateByTInspectionroomKey(TInspectionroom record);
+    TInspectionroom selectTInspectionroomByHourseid(Integer hourseid);
+
+    void updateByTInspectionroomKeySelective(TInspectionroom record);
+
 }

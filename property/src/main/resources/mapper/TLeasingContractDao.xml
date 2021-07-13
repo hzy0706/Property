@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TLeasingContractDao">
+
+    <resultMap type="com.trkj.property.entity.TLeasingContract" id="TLeasingContractMap">
+        <result property="leaseId" column="lease_id" jdbcType="INTEGER"/>
+        <result property="merId" column="mer_id" jdbcType="INTEGER"/>
+        <result property="stoId" column="sto_id" jdbcType="INTEGER"/>
+        <result property="leaseBegtime" column="lease_begtime" jdbcType="TIMESTAMP"/>
+        <result property="leaseEndtime" column="lease_endtime" jdbcType="TIMESTAMP"/>
+        <result property="leaseDate" column="lease_date" jdbcType="TIMESTAMP"/>
+        <result property="leaseContacts" column="lease_contacts" jdbcType="VARCHAR"/>
+        <result property="leasePhone" column="lease_phone" jdbcType="VARCHAR"/>
+        <result property="leaseChangemode" column="lease_changemode" jdbcType="INTEGER"/>
+        <result property="leaseTenterm" column="lease_tenterm" jdbcType="INTEGER"/>
+        <result property="leaseAcre" column="lease_acre" jdbcType="NUMERIC"/>
+        <result property="leaseUnitprice" column="lease_unitprice" jdbcType="NUMERIC"/>
+        <result property="leasePrice" column="lease_price" jdbcType="NUMERIC"/>
+        <result property="leaseAudit" column="lease_audit" jdbcType="INTEGER"/>
+        <result property="leasePraudit" column="lease_praudit" jdbcType="INTEGER"/>
+        <result property="leaseProfee" column="lease_profee" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <sql id="TLeasingContractCol">
+        lease_id, mer_id, sto_id, lease_begtime, lease_endtime, lease_date, lease_contacts, lease_phone, lease_changemode, lease_tenterm, lease_acre, lease_unitprice, lease_price, lease_audit, lease_praudit, lease_profee    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TLeasingContractMap">
+        select
+        <include refid="TLeasingContractCol"></include>
+        from property.t_leasing_contract
+        where lease_id = #{leaseId}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="TLeasingContractMap">
+        select
+        <include refid="TLeasingContractCol"></include>
+        from property.t_leasing_contract
+    </select>
+
+    <!--通过实体作为或者条件查询-->
+    <select id="queryOrByPojo" resultMap="TLeasingContractMap">
+        select
+        <include refid="TLeasingContractCol"></include>
+        from property.t_leasing_contract
+        <where>
+            <if test="leaseId != null">
+                or lease_id like CONCAT('%',#{leaseId},'%')
+            </if>
+            <if test="merId != null">
+                or mer_id like CONCAT('%',#{merId},'%')
+            </if>
+            <if test="stoId != null">
+                or sto_id like CONCAT('%',#{stoId},'%')
+            </if>
+            <if test="leaseBegtime != null">
+                or lease_begtime like CONCAT('%',#{leaseBegtime},'%')
+            </if>
+            <if test="leaseEndtime != null">
+                or lease_endtime like CONCAT('%',#{leaseEndtime},'%')
+            </if>
+            <if test="leaseDate != null">
+                or lease_date like CONCAT('%',#{leaseDate},'%')
+            </if>
+            <if test="leaseContacts != null and leaseContacts != ''">
+                or lease_contacts like CONCAT('%',#{leaseContacts},'%')
+            </if>
+            <if test="leasePhone != null and leasePhone != ''">
+                or lease_phone like CONCAT('%',#{leasePhone},'%')
+            </if>
+            <if test="leaseChangemode != null">
+                or lease_changemode like CONCAT('%',#{leaseChangemode},'%')
+            </if>
+            <if test="leaseTenterm != null">
+                or lease_tenterm like CONCAT('%',#{leaseTenterm},'%')
+            </if>
+            <if test="leaseAcre != null">
+                or lease_acre like CONCAT('%',#{leaseAcre},'%')
+            </if>
+            <if test="leaseUnitprice != null">
+                or lease_unitprice like CONCAT('%',#{leaseUnitprice},'%')
+            </if>
+            <if test="leasePrice != null">
+                or lease_price like CONCAT('%',#{leasePrice},'%')
+            </if>
+            <if test="leaseAudit != null">
+                or lease_audit like CONCAT('%',#{leaseAudit},'%')
+            </if>
+            <if test="leasePraudit != null">
+                or lease_praudit like CONCAT('%',#{leasePraudit},'%')
+            </if>
+            <if test="leaseProfee != null">
+                or lease_profee like CONCAT('%',#{leaseProfee},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为并且条件查询-->
+    <select id="queryAndByPojo" resultMap="TLeasingContractMap">
+        select
+        <include refid="TLeasingContractCol"></include>
+        from property.t_leasing_contract
+        <where>
+            <if test="leaseId != null">
+                and lease_id = #{leaseId}
+            </if>
+            <if test="merId != null">
+                and mer_id = #{merId}
+            </if>
+            <if test="stoId != null">
+                and sto_id = #{stoId}
+            </if>
+            <if test="leaseBegtime != null">
+                and lease_begtime = #{leaseBegtime}
+            </if>
+            <if test="leaseEndtime != null">
+                and lease_endtime = #{leaseEndtime}
+            </if>
+            <if test="leaseDate != null">
+                and lease_date = #{leaseDate}
+            </if>
+            <if test="leaseContacts != null and leaseContacts != ''">
+                and lease_contacts = #{leaseContacts}
+            </if>
+            <if test="leasePhone != null and leasePhone != ''">
+                and lease_phone = #{leasePhone}
+            </if>
+            <if test="leaseChangemode != null">
+                and lease_changemode = #{leaseChangemode}
+            </if>
+            <if test="leaseTenterm != null">
+                and lease_tenterm = #{leaseTenterm}
+            </if>
+            <if test="leaseAcre != null">
+                and lease_acre = #{leaseAcre}
+            </if>
+            <if test="leaseUnitprice != null">
+                and lease_unitprice = #{leaseUnitprice}
+            </if>
+            <if test="leasePrice != null">
+                and lease_price = #{leasePrice}
+            </if>
+            <if test="leaseAudit != null">
+                and lease_audit = #{leaseAudit}
+            </if>
+            <if test="leasePraudit != null">
+                and lease_praudit = #{leasePraudit}
+            </if>
+            <if test="leaseProfee != null">
+                and lease_profee = #{leaseProfee}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into property.t_leasing_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="merId != null">
+                mer_id,
+            </if>
+            <if test="stoId != null">
+                sto_id,
+            </if>
+            <if test="leaseBegtime != null">
+                lease_begtime,
+            </if>
+            <if test="leaseEndtime != null">
+                lease_endtime,
+            </if>
+            <if test="leaseDate != null">
+                lease_date,
+            </if>
+            <if test="leaseContacts != null">
+                lease_contacts,
+            </if>
+            <if test="leasePhone != null">
+                lease_phone,
+            </if>
+            <if test="leaseChangemode != null">
+                lease_changemode,
+            </if>
+            <if test="leaseTenterm != null">
+                lease_tenterm,
+            </if>
+            <if test="leaseAcre != null">
+                lease_acre,
+            </if>
+            <if test="leaseUnitprice != null">
+                lease_unitprice,
+            </if>
+            <if test="leasePrice != null">
+                lease_price,
+            </if>
+            <if test="leaseAudit != null">
+                lease_audit,
+            </if>
+            <if test="leasePraudit != null">
+                lease_praudit,
+            </if>
+            <if test="leaseProfee != null">
+                lease_profee,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="merId != null">
+                #{merId},
+            </if>
+            <if test="stoId != null">
+                #{stoId},
+            </if>
+            <if test="leaseBegtime != null">
+                #{leaseBegtime},
+            </if>
+            <if test="leaseEndtime != null">
+                #{leaseEndtime},
+            </if>
+            <if test="leaseDate != null">
+                #{leaseDate},
+            </if>
+            <if test="leaseContacts != null">
+                #{leaseContacts},
+            </if>
+            <if test="leasePhone != null">
+                #{leasePhone},
+            </if>
+            <if test="leaseChangemode != null">
+                #{leaseChangemode},
+            </if>
+            <if test="leaseTenterm != null">
+                #{leaseTenterm},
+            </if>
+            <if test="leaseAcre != null">
+                #{leaseAcre},
+            </if>
+            <if test="leaseUnitprice != null">
+                #{leaseUnitprice},
+            </if>
+            <if test="leasePrice != null">
+                #{leasePrice},
+            </if>
+            <if test="leaseAudit != null">
+                #{leaseAudit},
+            </if>
+            <if test="leasePraudit != null">
+                #{leasePraudit},
+            </if>
+            <if test="leaseProfee != null">
+                #{leaseProfee},
+            </if>
+        </trim>
+
+    </insert>
+
+    <!--批量新增数据 -->
+    <insert id="insertBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            insert into property.t_leasing_contract
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.merId != null">
+                    mer_id,
+                </if>
+                <if test="entity.stoId != null">
+                    sto_id,
+                </if>
+                <if test="entity.leaseBegtime != null">
+                    lease_begtime,
+                </if>
+                <if test="entity.leaseEndtime != null">
+                    lease_endtime,
+                </if>
+                <if test="entity.leaseDate != null">
+                    lease_date,
+                </if>
+                <if test="entity.leaseContacts != null">
+                    lease_contacts,
+                </if>
+                <if test="entity.leasePhone != null">
+                    lease_phone,
+                </if>
+                <if test="entity.leaseChangemode != null">
+                    lease_changemode,
+                </if>
+                <if test="entity.leaseTenterm != null">
+                    lease_tenterm,
+                </if>
+                <if test="entity.leaseAcre != null">
+                    lease_acre,
+                </if>
+                <if test="entity.leaseUnitprice != null">
+                    lease_unitprice,
+                </if>
+                <if test="entity.leasePrice != null">
+                    lease_price,
+                </if>
+                <if test="entity.leaseAudit != null">
+                    lease_audit,
+                </if>
+                <if test="entity.leasePraudit != null">
+                    lease_praudit,
+                </if>
+                <if test="entity.leaseProfee != null">
+                    lease_profee,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.merId != null">
+                    #{entity.merId},
+                </if>
+                <if test="entity.stoId != null">
+                    #{entity.stoId},
+                </if>
+                <if test="entity.leaseBegtime != null">
+                    #{entity.leaseBegtime},
+                </if>
+                <if test="entity.leaseEndtime != null">
+                    #{entity.leaseEndtime},
+                </if>
+                <if test="entity.leaseDate != null">
+                    #{entity.leaseDate},
+                </if>
+                <if test="entity.leaseContacts != null">
+                    #{entity.leaseContacts},
+                </if>
+                <if test="entity.leasePhone != null">
+                    #{entity.leasePhone},
+                </if>
+                <if test="entity.leaseChangemode != null">
+                    #{entity.leaseChangemode},
+                </if>
+                <if test="entity.leaseTenterm != null">
+                    #{entity.leaseTenterm},
+                </if>
+                <if test="entity.leaseAcre != null">
+                    #{entity.leaseAcre},
+                </if>
+                <if test="entity.leaseUnitprice != null">
+                    #{entity.leaseUnitprice},
+                </if>
+                <if test="entity.leasePrice != null">
+                    #{entity.leasePrice},
+                </if>
+                <if test="entity.leaseAudit != null">
+                    #{entity.leaseAudit},
+                </if>
+                <if test="entity.leasePraudit != null">
+                    #{entity.leasePraudit},
+                </if>
+                <if test="entity.leaseProfee != null">
+                    #{entity.leaseProfee},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update property.t_leasing_contract
+        <set>
+            <if test="merId != null">
+                mer_id = #{merId},
+            </if>
+            <if test="stoId != null">
+                sto_id = #{stoId},
+            </if>
+            <if test="leaseBegtime != null">
+                lease_begtime = #{leaseBegtime},
+            </if>
+            <if test="leaseEndtime != null">
+                lease_endtime = #{leaseEndtime},
+            </if>
+            <if test="leaseDate != null">
+                lease_date = #{leaseDate},
+            </if>
+            <if test="leaseContacts != null">
+                lease_contacts = #{leaseContacts},
+            </if>
+            <if test="leasePhone != null">
+                lease_phone = #{leasePhone},
+            </if>
+            <if test="leaseChangemode != null">
+                lease_changemode = #{leaseChangemode},
+            </if>
+            <if test="leaseTenterm != null">
+                lease_tenterm = #{leaseTenterm},
+            </if>
+            <if test="leaseAcre != null">
+                lease_acre = #{leaseAcre},
+            </if>
+            <if test="leaseUnitprice != null">
+                lease_unitprice = #{leaseUnitprice},
+            </if>
+            <if test="leasePrice != null">
+                lease_price = #{leasePrice},
+            </if>
+            <if test="leaseAudit != null">
+                lease_audit = #{leaseAudit},
+            </if>
+            <if test="leasePraudit != null">
+                lease_praudit = #{leasePraudit},
+            </if>
+            <if test="leaseProfee != null">
+                lease_profee = #{leaseProfee},
+            </if>
+        </set>
+        where lease_id = #{leaseId}
+    </update>
+
+    <!--批量修改数据-->
+    <update id="updateBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            update property.t_leasing_contract
+            <set>
+                <if test="entity.merId != null">
+                    mer_id = #{entity.merId},
+                </if>
+                <if test="entity.stoId != null">
+                    sto_id = #{entity.stoId},
+                </if>
+                <if test="entity.leaseBegtime != null">
+                    lease_begtime = #{entity.leaseBegtime},
+                </if>
+                <if test="entity.leaseEndtime != null">
+                    lease_endtime = #{entity.leaseEndtime},
+                </if>
+                <if test="entity.leaseDate != null">
+                    lease_date = #{entity.leaseDate},
+                </if>
+                <if test="entity.leaseContacts != null">
+                    lease_contacts = #{entity.leaseContacts},
+                </if>
+                <if test="entity.leasePhone != null">
+                    lease_phone = #{entity.leasePhone},
+                </if>
+                <if test="entity.leaseChangemode != null">
+                    lease_changemode = #{entity.leaseChangemode},
+                </if>
+                <if test="entity.leaseTenterm != null">
+                    lease_tenterm = #{entity.leaseTenterm},
+                </if>
+                <if test="entity.leaseAcre != null">
+                    lease_acre = #{entity.leaseAcre},
+                </if>
+                <if test="entity.leaseUnitprice != null">
+                    lease_unitprice = #{entity.leaseUnitprice},
+                </if>
+                <if test="entity.leasePrice != null">
+                    lease_price = #{entity.leasePrice},
+                </if>
+                <if test="entity.leaseAudit != null">
+                    lease_audit = #{entity.leaseAudit},
+                </if>
+                <if test="entity.leasePraudit != null">
+                    lease_praudit = #{entity.leasePraudit},
+                </if>
+                <if test="entity.leaseProfee != null">
+                    lease_profee = #{entity.leaseProfee},
+                </if>
+            </set>
+            where lease_id = #{entity.leaseId}
+        </foreach>
+    </update>
+
+    <!--通过主键删除数据-->
+    <delete id="deleteById">
+        delete from property.t_leasing_contract where lease_id = #{leaseId}
+    </delete>
+
+    <!--通过主键列表批量删除数据-->
+    <delete id="deleteBatch">
+        delete from property.t_leasing_contract where lease_id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--通过实体列表批量删除数据-->
+    <delete id="deleteBatchByEntities">
+        delete from property.t_leasing_contract where lease_id in
+        <foreach collection="list" item="entity" open="(" separator="," close=")">
+            #{entity.leaseId}
+        </foreach>
+    </delete>
+</mapper>
+

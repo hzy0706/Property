@@ -3,6 +3,8 @@
 <mapper namespace="com.trkj.property.dao.TOwnerDao">
   <resultMap id="BaseResultMap" type="com.trkj.property.entity.TOwner">
     <id column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <id column="family_count" jdbcType="INTEGER" property="familyCount" />
+    <id column="house_count" jdbcType="INTEGER" property="houseCount" />
     <result column="owner_type" jdbcType="VARCHAR" property="ownerType" />
     <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
     <result column="owner_sex" jdbcType="VARCHAR" property="ownerSex" />
@@ -18,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     owner_id, owner_type, owner_name, owner_sex, owner_birth, owner_nation, owner_education, 
-    owner_notype, owner_no, owner_work, owner_phone, urgent_name, urgent_phone
+    owner_notype, owner_no, owner_work, owner_phone, urgent_name, urgent_phone,family_count,house_count
   </sql>
   <select id="selectByTOwnerKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,6 +33,7 @@
     <include refid="Base_Column_List" />
     from t_owner
     where owner_name like #{value} or urgent_name like #{value}
+    order by owner_id desc
   </select>
   <delete id="deleteByTOwnerKey" parameterType="java.lang.Integer">
     delete from t_owner
@@ -87,23 +90,13 @@
       <if test="urgentPhone != null">
         urgent_phone = #{urgentPhone,jdbcType=VARCHAR},
       </if>
+      <if test="familyCount != null">
+        family_count = #{familyCount,jdbcType=INTEGER},
+      </if>
+      <if test="houseCount != null">
+        house_count = #{houseCount,jdbcType=INTEGER},
+      </if>
     </set>
-    where owner_id = #{ownerId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByTOwnerKey" parameterType="com.trkj.property.entity.TOwner">
-    update t_owner
-    set owner_type = #{ownerType,jdbcType=VARCHAR},
-      owner_name = #{ownerName,jdbcType=VARCHAR},
-      owner_sex = #{ownerSex,jdbcType=VARCHAR},
-      owner_birth = #{ownerBirth,jdbcType=TIMESTAMP},
-      owner_nation = #{ownerNation,jdbcType=VARCHAR},
-      owner_education = #{ownerEducation,jdbcType=VARCHAR},
-      owner_notype = #{ownerNotype,jdbcType=VARCHAR},
-      owner_no = #{ownerNo,jdbcType=VARCHAR},
-      owner_work = #{ownerWork,jdbcType=VARCHAR},
-      owner_phone = #{ownerPhone,jdbcType=VARCHAR},
-      urgent_name = #{urgentName,jdbcType=VARCHAR},
-      urgent_phone = #{urgentPhone,jdbcType=VARCHAR}
     where owner_id = #{ownerId,jdbcType=INTEGER}
   </update>
 </mapper>

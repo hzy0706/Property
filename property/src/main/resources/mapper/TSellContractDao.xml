@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.TSellContractDao">
+
+    <resultMap type="com.trkj.property.entity.TSellContract" id="TSellContractMap">
+        <result property="sellId" column="sell_id" jdbcType="INTEGER"/>
+        <result property="stoId" column="sto_id" jdbcType="INTEGER"/>
+        <result property="merId" column="mer_id" jdbcType="INTEGER"/>
+        <result property="sellTime" column="sell_time" jdbcType="TIMESTAMP"/>
+        <result property="sellContact" column="sell_contact" jdbcType="VARCHAR"/>
+        <result property="sellAcre" column="sell_acre" jdbcType="NUMERIC"/>
+        <result property="sellUnitprice" column="sell_unitprice" jdbcType="NUMERIC"/>
+        <result property="sellPrice" column="sell_price" jdbcType="NUMERIC"/>
+        <result property="sellPhone" column="sell_phone" jdbcType="VARCHAR"/>
+        <result property="sellAudit" column="sell_audit" jdbcType="INTEGER"/>
+        <result property="sellPraudit" column="sell_praudit" jdbcType="INTEGER"/>
+        <result property="leaseProfee" column="lease_profee" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <sql id="TSellContractCol">
+        sell_id, sto_id, mer_id, sell_time, sell_contact, sell_acre, sell_unitprice, sell_price, sell_phone, sell_audit, sell_praudit, lease_profee    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TSellContractMap">
+        select
+        <include refid="TSellContractCol"></include>
+        from property.t_sell_contract
+        where sell_id = #{sellId}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="TSellContractMap">
+        select
+        <include refid="TSellContractCol"></include>
+        from property.t_sell_contract
+    </select>
+
+    <!--通过实体作为或者条件查询-->
+    <select id="queryOrByPojo" resultMap="TSellContractMap">
+        select
+        <include refid="TSellContractCol"></include>
+        from property.t_sell_contract
+        <where>
+            <if test="sellId != null">
+                or sell_id like CONCAT('%',#{sellId},'%')
+            </if>
+            <if test="stoId != null">
+                or sto_id like CONCAT('%',#{stoId},'%')
+            </if>
+            <if test="merId != null">
+                or mer_id like CONCAT('%',#{merId},'%')
+            </if>
+            <if test="sellTime != null">
+                or sell_time like CONCAT('%',#{sellTime},'%')
+            </if>
+            <if test="sellContact != null and sellContact != ''">
+                or sell_contact like CONCAT('%',#{sellContact},'%')
+            </if>
+            <if test="sellAcre != null">
+                or sell_acre like CONCAT('%',#{sellAcre},'%')
+            </if>
+            <if test="sellUnitprice != null">
+                or sell_unitprice like CONCAT('%',#{sellUnitprice},'%')
+            </if>
+            <if test="sellPrice != null">
+                or sell_price like CONCAT('%',#{sellPrice},'%')
+            </if>
+            <if test="sellPhone != null and sellPhone != ''">
+                or sell_phone like CONCAT('%',#{sellPhone},'%')
+            </if>
+            <if test="sellAudit != null">
+                or sell_audit like CONCAT('%',#{sellAudit},'%')
+            </if>
+            <if test="sellPraudit != null">
+                or sell_praudit like CONCAT('%',#{sellPraudit},'%')
+            </if>
+            <if test="leaseProfee != null">
+                or lease_profee like CONCAT('%',#{leaseProfee},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为并且条件查询-->
+    <select id="queryAndByPojo" resultMap="TSellContractMap">
+        select
+        <include refid="TSellContractCol"></include>
+        from property.t_sell_contract
+        <where>
+            <if test="sellId != null">
+                and sell_id = #{sellId}
+            </if>
+            <if test="stoId != null">
+                and sto_id = #{stoId}
+            </if>
+            <if test="merId != null">
+                and mer_id = #{merId}
+            </if>
+            <if test="sellTime != null">
+                and sell_time = #{sellTime}
+            </if>
+            <if test="sellContact != null and sellContact != ''">
+                and sell_contact = #{sellContact}
+            </if>
+            <if test="sellAcre != null">
+                and sell_acre = #{sellAcre}
+            </if>
+            <if test="sellUnitprice != null">
+                and sell_unitprice = #{sellUnitprice}
+            </if>
+            <if test="sellPrice != null">
+                and sell_price = #{sellPrice}
+            </if>
+            <if test="sellPhone != null and sellPhone != ''">
+                and sell_phone = #{sellPhone}
+            </if>
+            <if test="sellAudit != null">
+                and sell_audit = #{sellAudit}
+            </if>
+            <if test="sellPraudit != null">
+                and sell_praudit = #{sellPraudit}
+            </if>
+            <if test="leaseProfee != null">
+                and lease_profee = #{leaseProfee}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into property.t_sell_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="stoId != null">
+                sto_id,
+            </if>
+            <if test="merId != null">
+                mer_id,
+            </if>
+            <if test="sellTime != null">
+                sell_time,
+            </if>
+            <if test="sellContact != null">
+                sell_contact,
+            </if>
+            <if test="sellAcre != null">
+                sell_acre,
+            </if>
+            <if test="sellUnitprice != null">
+                sell_unitprice,
+            </if>
+            <if test="sellPrice != null">
+                sell_price,
+            </if>
+            <if test="sellPhone != null">
+                sell_phone,
+            </if>
+            <if test="sellAudit != null">
+                sell_audit,
+            </if>
+            <if test="sellPraudit != null">
+                sell_praudit,
+            </if>
+            <if test="leaseProfee != null">
+                lease_profee,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="stoId != null">
+                #{stoId},
+            </if>
+            <if test="merId != null">
+                #{merId},
+            </if>
+            <if test="sellTime != null">
+                #{sellTime},
+            </if>
+            <if test="sellContact != null">
+                #{sellContact},
+            </if>
+            <if test="sellAcre != null">
+                #{sellAcre},
+            </if>
+            <if test="sellUnitprice != null">
+                #{sellUnitprice},
+            </if>
+            <if test="sellPrice != null">
+                #{sellPrice},
+            </if>
+            <if test="sellPhone != null">
+                #{sellPhone},
+            </if>
+            <if test="sellAudit != null">
+                #{sellAudit},
+            </if>
+            <if test="sellPraudit != null">
+                #{sellPraudit},
+            </if>
+            <if test="leaseProfee != null">
+                #{leaseProfee},
+            </if>
+        </trim>
+
+    </insert>
+
+    <!--批量新增数据 -->
+    <insert id="insertBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            insert into property.t_sell_contract
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.stoId != null">
+                    sto_id,
+                </if>
+                <if test="entity.merId != null">
+                    mer_id,
+                </if>
+                <if test="entity.sellTime != null">
+                    sell_time,
+                </if>
+                <if test="entity.sellContact != null">
+                    sell_contact,
+                </if>
+                <if test="entity.sellAcre != null">
+                    sell_acre,
+                </if>
+                <if test="entity.sellUnitprice != null">
+                    sell_unitprice,
+                </if>
+                <if test="entity.sellPrice != null">
+                    sell_price,
+                </if>
+                <if test="entity.sellPhone != null">
+                    sell_phone,
+                </if>
+                <if test="entity.sellAudit != null">
+                    sell_audit,
+                </if>
+                <if test="entity.sellPraudit != null">
+                    sell_praudit,
+                </if>
+                <if test="entity.leaseProfee != null">
+                    lease_profee,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+
+                <if test="entity.stoId != null">
+                    #{entity.stoId},
+                </if>
+                <if test="entity.merId != null">
+                    #{entity.merId},
+                </if>
+                <if test="entity.sellTime != null">
+                    #{entity.sellTime},
+                </if>
+                <if test="entity.sellContact != null">
+                    #{entity.sellContact},
+                </if>
+                <if test="entity.sellAcre != null">
+                    #{entity.sellAcre},
+                </if>
+                <if test="entity.sellUnitprice != null">
+                    #{entity.sellUnitprice},
+                </if>
+                <if test="entity.sellPrice != null">
+                    #{entity.sellPrice},
+                </if>
+                <if test="entity.sellPhone != null">
+                    #{entity.sellPhone},
+                </if>
+                <if test="entity.sellAudit != null">
+                    #{entity.sellAudit},
+                </if>
+                <if test="entity.sellPraudit != null">
+                    #{entity.sellPraudit},
+                </if>
+                <if test="entity.leaseProfee != null">
+                    #{entity.leaseProfee},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update property.t_sell_contract
+        <set>
+            <if test="stoId != null">
+                sto_id = #{stoId},
+            </if>
+            <if test="merId != null">
+                mer_id = #{merId},
+            </if>
+            <if test="sellTime != null">
+                sell_time = #{sellTime},
+            </if>
+            <if test="sellContact != null">
+                sell_contact = #{sellContact},
+            </if>
+            <if test="sellAcre != null">
+                sell_acre = #{sellAcre},
+            </if>
+            <if test="sellUnitprice != null">
+                sell_unitprice = #{sellUnitprice},
+            </if>
+            <if test="sellPrice != null">
+                sell_price = #{sellPrice},
+            </if>
+            <if test="sellPhone != null">
+                sell_phone = #{sellPhone},
+            </if>
+            <if test="sellAudit != null">
+                sell_audit = #{sellAudit},
+            </if>
+            <if test="sellPraudit != null">
+                sell_praudit = #{sellPraudit},
+            </if>
+            <if test="leaseProfee != null">
+                lease_profee = #{leaseProfee},
+            </if>
+        </set>
+        where sell_id = #{sellId}
+    </update>
+
+    <!--批量修改数据-->
+    <update id="updateBatch">
+        <foreach collection="list" item="entity" open="begin" separator=";" close=";end;">
+            update property.t_sell_contract
+            <set>
+                <if test="entity.stoId != null">
+                    sto_id = #{entity.stoId},
+                </if>
+                <if test="entity.merId != null">
+                    mer_id = #{entity.merId},
+                </if>
+                <if test="entity.sellTime != null">
+                    sell_time = #{entity.sellTime},
+                </if>
+                <if test="entity.sellContact != null">
+                    sell_contact = #{entity.sellContact},
+                </if>
+                <if test="entity.sellAcre != null">
+                    sell_acre = #{entity.sellAcre},
+                </if>
+                <if test="entity.sellUnitprice != null">
+                    sell_unitprice = #{entity.sellUnitprice},
+                </if>
+                <if test="entity.sellPrice != null">
+                    sell_price = #{entity.sellPrice},
+                </if>
+                <if test="entity.sellPhone != null">
+                    sell_phone = #{entity.sellPhone},
+                </if>
+                <if test="entity.sellAudit != null">
+                    sell_audit = #{entity.sellAudit},
+                </if>
+                <if test="entity.sellPraudit != null">
+                    sell_praudit = #{entity.sellPraudit},
+                </if>
+                <if test="entity.leaseProfee != null">
+                    lease_profee = #{entity.leaseProfee},
+                </if>
+            </set>
+            where sell_id = #{entity.sellId}
+        </foreach>
+    </update>
+
+    <!--通过主键删除数据-->
+    <delete id="deleteById">
+        delete from property.t_sell_contract where sell_id = #{sellId}
+    </delete>
+
+    <!--通过主键列表批量删除数据-->
+    <delete id="deleteBatch">
+        delete from property.t_sell_contract where sell_id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--通过实体列表批量删除数据-->
+    <delete id="deleteBatchByEntities">
+        delete from property.t_sell_contract where sell_id in
+        <foreach collection="list" item="entity" open="(" separator="," close=")">
+            #{entity.sellId}
+        </foreach>
+    </delete>
+</mapper>
+

@@ -1,6 +1,5 @@
 package com.trkj.property.controller;
 
-import com.trkj.property.entity.TFamily;
 import com.trkj.property.entity.TOwnerHouse;
 import com.trkj.property.service.TOwnerHouseService;
 import com.trkj.property.vo.AjaxResponse;
@@ -26,9 +25,9 @@ public class TOwnerHouseController {
      * @date  2021/7/11
      * @version 1.0
      */
-    @DeleteMapping("/deleteByTOwnerHouseKey")
-    public AjaxResponse deleteByTOwnerHouseKey(){
-        tOwnerHouseService.deleteByTOwnerHouseKey(1);
+    @DeleteMapping("/deleteByTOwnerHouseKey/{odId}")
+    public AjaxResponse deleteByTOwnerHouseKey(@PathVariable("odId") Integer odId){
+        tOwnerHouseService.deleteByTOwnerHouseKey(odId);
         return AjaxResponse.success();
     }
     /**
@@ -68,6 +67,6 @@ public class TOwnerHouseController {
     @GetMapping("/selectAllTOwnerHouseByTid/{ownerId}")
     public AjaxResponse selectAllTOwnerHouseByTid(@PathVariable("ownerId") Integer ownerId){
         List<TOwnerHouse> list = tOwnerHouseService.selectAllTOwnerHouseByTid(ownerId);
-        return AjaxResponse.success();
+        return AjaxResponse.success(list);
     }
 }

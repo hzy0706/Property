@@ -3,17 +3,21 @@ package com.trkj.property.dao;
 import com.trkj.property.entity.TResidence;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TResidenceDao {
-    int deleteByPrimaryKey(Integer residenceId);
+    void deleteByPrimaryKey(Integer residenceId);
 
-    int insert(TResidence record);
+    void insert(TResidence record);
 
-    int insertSelective(TResidence record);
+    void insertSelective(TResidence record);
 
     TResidence selectByPrimaryKey(Integer residenceId);
 
-    int updateByPrimaryKeySelective(TResidence record);
+    List<TResidence> selectAllTResidence();
 
-    int updateByPrimaryKey(TResidence record);
+    void updateByPrimaryKeySelective(TResidence record);
+
+    void updateByPrimaryKey(TResidence record);
 }
