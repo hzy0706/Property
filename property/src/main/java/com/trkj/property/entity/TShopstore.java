@@ -46,4 +46,6 @@ public class TShopstore implements Serializable {
     private String stoType;
 
     private Integer stoAudit;
+
+    private TMerchant tMerchant;
 }

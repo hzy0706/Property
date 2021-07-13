@@ -16,10 +16,33 @@
         <result property="stoFinish" column="sto_finish" jdbcType="VARCHAR"/>
         <result property="stoType" column="sto_type" jdbcType="VARCHAR"/>
         <result property="stoAudit" column="sto_audit" jdbcType="INTEGER"/>
+        <collection property="tMerchant" ofType="com.trkj.property.entity.TMerchant"  column="merId">
+
+            <result property="merName" column="mer_name" jdbcType="VARCHAR"/>
+            <result property="merType" column="mer_type" jdbcType="VARCHAR"/>
+            <result property="merRight" column="mer_right" jdbcType="VARCHAR"/>
+            <result property="merContacts" column="mer_contacts" jdbcType="VARCHAR"/>
+            <result property="merPhone" column="mer_phone" jdbcType="VARCHAR"/>
+            <result property="merAddress" column="mer_address" jdbcType="VARCHAR"/>
+            <result property="merCardtype" column="mer_cardtype" jdbcType="VARCHAR"/>
+            <result property="merCard" column="mer_card" jdbcType="VARCHAR"/>
+            <result property="merMain" column="mer_main" jdbcType="VARCHAR"/>
+            <result property="merState" column="mer_state" jdbcType="INTEGER"/>
+            <result property="merMarket" column="mer_market" jdbcType="VARCHAR"/>
+            <result property="merPrictrue" column="mer_prictrue" jdbcType="VARCHAR"/>
+            <result property="merDate" column="mer_date" jdbcType="TIMESTAMP"/>
+        </collection>
     </resultMap>
 
     <sql id="TShopstoreCol">
         sto_id, sell_id, lease_id, mer_id, sto_name, sto_area, sto_usarea, sto_function, sto_spec, sto_aspect, sto_finish, sto_type, sto_audit    </sql>
+    <sql id="TShopstoreCol1">
+        S.sto_id, S.sell_id, S.lease_id, S.mer_id, S.sto_name, S.sto_area, S.sto_usarea, S.sto_function, S.sto_spec, S.sto_aspect, S.sto_finish, S.sto_type, S.sto_audit,   </sql>
+
+    <sql id="TMerchantCol">
+        M.mer_name, M.mer_type, M.mer_right, M.mer_contacts, M.mer_phone, M.mer_address, M.mer_cardtype, M.mer_card, M.mer_main, M.mer_state, M.mer_market, M.mer_prictrue, M.mer_date    </sql>
+
+
 
     <!--查询单个-->
     <select id="queryById" resultMap="TShopstoreMap">
@@ -39,8 +62,9 @@
     <!--通过实体作为或者条件查询-->
     <select id="queryOrByPojo" resultMap="TShopstoreMap">
         select
-        <include refid="TShopstoreCol"></include>
-        from property.t_shopstore
+        <include refid="TShopstoreCol1"></include>
+        <include refid="TMerchantCol"></include>
+        from property.t_shopstore S,property.t_merchant M
         <where>
             <if test="stoId != null">
                 or sto_id like CONCAT('%',#{stoId},'%')
@@ -81,6 +105,7 @@
             <if test="stoAudit != null">
                 or sto_audit like CONCAT('%',#{stoAudit},'%')
             </if>
+            and S.mer_id=M.mer_id
         </where>
     </select>
 
