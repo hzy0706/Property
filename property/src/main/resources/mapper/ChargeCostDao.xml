@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.property.dao.ChargeCostDao">
+
+
+
+    <select id="findAllParDetail" resultType="com.trkj.property.entity.TParameterDetail">
+        select
+            par_de_id as parDeId,
+            par_id as parId,
+            ct_id as  ctId,
+            par_de_assessment as  parDeAssessment,
+            par_de_begin as parDeBegin,
+            par_de_end as parDeEnd,
+            par_de_deadline as parDeDeadline,
+            par_de_state as parDeState
+        from t_parameter_detail where datediff(curdate(),par_de_begin)>30
+    </select>
+
+    <!--<sql id="clos">
+        (charge_costs_id,
+        cost_money,
+        charge_cost_assessment,
+        overduefine_money,
+        break_money,
+        charge_time,
+        overdue_time,
+        ischarge,
+        charge_costs_begintime,
+        charge_costs_endtime)
+    </sql>-->
+
+    <insert id="addCharge" parameterType="TChargeCosts" keyProperty="chargeCostsId" useGeneratedKeys="true">
+        insert into t_charge_costs(charge_costs_id,
+                                   cost_money,
+                                   charge_cost_assessment,
+                                   overduefine_money,
+                                   break_money,
+                                   charge_time,
+                                   overdue_time,
+                                   ischarge,
+                                   charge_costs_begintime,
+                                   charge_costs_endtime,
+                                   ct_name)
+        values(null,
+               #{costMoney},
+               #{chargeCostAssessment},
+               #{overduefineMoney},
+               #{breakMoney},
+               #{chargeTime},
+               #{overdueTime},
+               #{hasCharge},
+               #{chargeCostsBegintime},
+               #{chargeCostsEndtime},
+               #{ctName}
+               )
+    </insert>
+
+    <update id="updateParDetailByDate" parameterType="com.trkj.property.entity.TParameterDetail">
+        update t_parameter_detail set par_de_begin=#{parDeBegin} where par_de_id=#{parDeId}
+    </update>
+
+    <select id="findAllByHouseId" parameterType="int" resultType="com.trkj.property.entity.TChargeCosts">
+        select
+            charge_costs_id as chargeCostsId,
+            cost_money as costMoney,
+            charge_cost_assessment as chargeCostAssessment,
+            overduefine_money as overduefineMoney,
+            break_money as breakMoney,
+            charge_time as chargeTime,
+            overdue_time as overdueTime,
+            ischarge as hasCharge,
+            charge_costs_begintime as chargeCostsBegintime,
+            charge_costs_endtime as chargeCostsEndtime,
+            ct_name as ctName,
+            house_id as houseId
+        from t_charge_costs where house_id=#{houseId}
+    </select>
+
+
+
+</mapper>

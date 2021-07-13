@@ -1,4 +1,5 @@
-package com.trkj.property;
+package com.trkj.property.task;
+
 
 import com.trkj.property.dao.BillDao;
 import com.trkj.property.dao.ChargeCostDao;
@@ -6,27 +7,43 @@ import com.trkj.property.dao.TParameterDao;
 import com.trkj.property.entity.TChargeCosts;
 import com.trkj.property.entity.TCostitem;
 import com.trkj.property.entity.TParameterDetail;
-import org.junit.jupiter.api.Test;
+import com.trkj.property.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-@SpringBootTest
-class PropertyApplicationTests {
 
+/**
+ * author:wjh
+ * 定时任务，每天执行一次，将台账中的截止日期截取计算，然后符合条件的保存到bill  billdetail表中
+ */
+@Configuration
+public class AddChargeTask {
 
+    //注入dao
     @Autowired
     TParameterDao tParameterDao;
 
     @Autowired
     ChargeCostDao chargeCostDao;
 
-    @Test
-    void contextLoads() {
-        //定时任务测试
+//    @Scheduled(cron = "")
+//    public void test(){
+//    }
+    /**
+     * 0 0 0 * * ? *
+     * 每天凌晨扫描一遍台账记录表，然后将表拆了
+     * 0/3 * * * * ? *  --->测试
+     */
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void getPars(){
+
         List<TParameterDetail> allParDetails = chargeCostDao.findAllParDetail();
         System.out.println(allParDetails);
 
@@ -83,5 +100,6 @@ class PropertyApplicationTests {
 
 
     }
+
 
 }
