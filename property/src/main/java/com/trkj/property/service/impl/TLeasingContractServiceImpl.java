@@ -17,7 +17,7 @@ import com.github.pagehelper.PageInfo;
  * (TLeasingContract)表服务实现类
  *
  * @author makejava
- * @since 2021-07-12 15:14:45
+ * @since 2021-07-12 10:58:19
  */
 @Service("tLeasingContractService")
 public class TLeasingContractServiceImpl implements TLeasingContractService {
@@ -82,6 +82,8 @@ public class TLeasingContractServiceImpl implements TLeasingContractService {
      */
     @Override
     public TLeasingContract insert(TLeasingContract tLeasingContract) {
+        Integer month=tLeasingContract.getLeaseEndtime().getMonth()-tLeasingContract.getLeaseEndtime().getMonth();
+        tLeasingContract.setLeaseTenterm(month);
         this.tLeasingContractDao.insert(tLeasingContract);
         return this.queryById(tLeasingContract.getLeaseId());
     }

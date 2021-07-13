@@ -4,6 +4,7 @@ import java.util.Date;
 import java.math.BigDecimal;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -27,11 +28,11 @@ public class TLeasingContract implements Serializable {
     private Integer merId;
 
     private Integer stoId;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date leaseBegtime;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date leaseEndtime;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date leaseDate;
 
     private String leaseContacts;

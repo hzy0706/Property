@@ -4,6 +4,7 @@ import java.util.Date;
 import java.math.BigDecimal;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class TSellContract implements Serializable {
     private Integer stoId;
 
     private Integer merId;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date sellTime;
 
     private String sellContact;
@@ -45,4 +46,6 @@ public class TSellContract implements Serializable {
     private Integer sellPraudit;
 
     private Double leaseProfee;
+
+    private TMerchant tMerchant;
 }
