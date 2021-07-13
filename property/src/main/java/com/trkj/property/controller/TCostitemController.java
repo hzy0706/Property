@@ -84,16 +84,7 @@ public class TCostitemController {
         return this.tCostitemService.insert(tCostitem);
     }
 
-    /**
-     * 批量新增数据
-     *
-     * @param TCostitemList 实例对象列表
-     * @return 影响行数
-     */
-    @PostMapping("/tCostitem/batch")
-    public boolean insertBatch(@RequestBody List<TCostitem> TCostitemList) {
-        return this.tCostitemService.insertBatch(TCostitemList);
-    }
+
 
     /**
      * 修改数据
@@ -106,16 +97,7 @@ public class TCostitemController {
         return this.tCostitemService.update(tCostitem);
     }
 
-    /**
-     * 批量修改数据
-     *
-     * @param tCostitemList 实例对象列表
-     * @return 影响行数
-     */
-    @PutMapping("/tCostitem/batch")
-    public boolean updateBatch(@RequestBody List<TCostitem> tCostitemList) {
-        return this.tCostitemService.updateBatch(tCostitemList);
-    }
+
 
     /**
      * 通过主键删除数据
