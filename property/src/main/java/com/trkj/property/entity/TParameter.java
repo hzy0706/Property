@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (TParameter)实体类
@@ -37,8 +38,7 @@ public class TParameter implements Serializable {
 
     private Date parDeEnd;
 
-    private TParameterDetail tParameterDetail;
-
+    private List<TParameterDetail> tParameterDetail;
 
 
 }

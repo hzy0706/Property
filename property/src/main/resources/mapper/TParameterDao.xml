@@ -8,6 +8,7 @@
 
     <select id="getCostItemById" resultType="com.trkj.property.entity.TCostitem" parameterType="int">
         select
+            ct_id as ctId,
             residence_id as residenceId,
             ct_name as ctName,
             ct_chargecycle as ctChargecycle,
@@ -19,8 +20,8 @@
     </select>
 
     <!--台账-->
-    <insert id="addParameter" parameterType="TParameter">
-        insert into t_parameter values(null,#{parName},#{parCostname},#{parCreatedate},#{parCreateName},#{parMark},#{houseId},#{parDeBegin},#{parDeEnd})
+    <insert id="addParameter" parameterType="TParameter"  keyProperty="parId" useGeneratedKeys="true">
+        insert into t_parameter values(#{parId},#{parName},#{parCostname},#{parCreatedate},#{parCreateName},#{parMark},#{houseId},#{parDeBegin},#{parDeEnd})
     </insert>
 
     <!--详情台账-->
@@ -41,6 +42,45 @@
                           on tb.building_id=tu.building_id
                 left outer join t_residence tr
                                 on tr.residence_id=tb.residence_id
-                where th.house_id=#{resId}
+                where tr.residence_id=#{resId}
     </select>
+
+
+    <select id="findParIdByName" parameterType="String" resultType="int">
+        select par_id as parId from t_parameter where par_name=#{parName}
+    </select>
+
+    <select id="findDetailsByParId" resultType="com.trkj.property.vo.GetParsVO" parameterType="int">
+        select
+            tr.residence_name as resName,
+            tbu.building_name as buildName,
+            tu.unit_name as unitName,
+            th.house_name as  houseName,
+            o.owner_name as  ownerName,
+            t.par_de_begin as beginDate,
+            t.par_de_end as endDate,
+            t.par_mark as parMark,
+            t.par_create_name as parCreateName,
+            t.par_createdate as createTime,
+            t.par_costname as parCostName,
+            tpd.par_de_assessment parDeAssessment,
+            tpd.par_de_state as par_de_state
+        from t_parameter_detail tpd
+             left join t_parameter t
+                       on tpd.par_id = t.par_id
+             left join t_house th
+                       on t.house_id = th.house_id
+             left join t_unit tu
+                       on th.unit_id = tu.unit_id
+             left join t_building tbu
+                       on tbu.building_id=tu.building_id
+             left join t_residence tr
+                       on tbu.residence_id = tr.residence_id
+             left join t_owner_house toh
+                       on t.house_id = toh.house_id
+             left join t_owner o
+                       on toh.owner_id = o.owner_id
+        where t.par_id=#{parId}
+    </select>
+
 </mapper>

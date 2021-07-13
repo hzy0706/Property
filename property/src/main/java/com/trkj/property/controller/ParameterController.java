@@ -5,6 +5,7 @@ import com.trkj.property.exception.CustomError;
 import com.trkj.property.exception.CustomErrorType;
 import com.trkj.property.service.ParameterService;
 import com.trkj.property.vo.AjaxResponse;
+import com.trkj.property.vo.GetParsVO;
 import com.trkj.property.vo.ParAndHouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,18 @@ public class ParameterController {
             return AjaxResponse.success(allParByResId);
         }
         return AjaxResponse.error(new CustomError(CustomErrorType.PAGE_NOT_FOUND_ERROR,"无法找到对应的资源"));
+    }
+
+    /**
+     * 根据台账名称查询 该台账的所有台账详情列表
+     */
+    @GetMapping("getDetails/{parName}")
+    public AjaxResponse findDetailsByParName(@PathVariable("parName") String parName){
+        List<GetParsVO> detailsByParName = parameterService.findDetailsByParName(parName);
+        if (detailsByParName != null){
+            return AjaxResponse.success(detailsByParName);
+        }
+        return AjaxResponse.error(new CustomError(CustomErrorType.PAGE_NOT_FOUND_ERROR,"台账详情列表打开失败"));
     }
 
 

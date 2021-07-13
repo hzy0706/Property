@@ -28,7 +28,7 @@ public class TCostitem implements Serializable {
 
     private Integer overdue;
 
-    private String overduefine;
+    private Double overduefine;
 
     private String ctRelation;
 
