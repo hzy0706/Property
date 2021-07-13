@@ -53,4 +53,6 @@ public class TLeasingContract implements Serializable {
     private Integer leasePraudit;
 
     private Double leaseProfee;
+
+    private TMerchant tMerchant;
 }

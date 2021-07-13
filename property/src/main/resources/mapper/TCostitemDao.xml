@@ -9,7 +9,7 @@
         <result property="ctChargecycle" column="ct_chargecycle" jdbcType="INTEGER"/>
         <result property="ctSubtotal" column="ct_subtotal" jdbcType="NUMERIC"/>
         <result property="overdue" column="overdue" jdbcType="INTEGER"/>
-        <result property="overduefine" column="overduefine" jdbcType="VARCHAR"/>
+        <result property="overduefine" column="overduefine" jdbcType="NUMERIC"/>
         <result property="ctRelation" column="ct_relation" jdbcType="VARCHAR"/>
         <result property="chco" column="chco" jdbcType="VARCHAR"/>
         <result property="ifprice" column="ifprice" jdbcType="VARCHAR"/>
@@ -60,7 +60,7 @@
             <if test="overdue != null">
                 or overdue like CONCAT('%',#{overdue},'%')
             </if>
-            <if test="overduefine != null and overduefine != ''">
+            <if test="overduefine != null">
                 or overduefine like CONCAT('%',#{overduefine},'%')
             </if>
             <if test="ctRelation != null and ctRelation != ''">
@@ -105,7 +105,7 @@
             <if test="overdue != null">
                 and overdue = #{overdue}
             </if>
-            <if test="overduefine != null and overduefine != ''">
+            <if test="overduefine != null">
                 and overduefine = #{overduefine}
             </if>
             <if test="ctRelation != null and ctRelation != ''">
