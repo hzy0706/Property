@@ -18,6 +18,8 @@ public interface TDecorateService {
 
     List<TDecorate> selectAllTDecorateByState(Integer state, String value);
 
+    List<TDecorate> selectAllTDecorates(String value);
+
     void updateByTDecorateKeySelective(TDecorate record);
 
     void updateByTDecorateKey(TDecorate record);

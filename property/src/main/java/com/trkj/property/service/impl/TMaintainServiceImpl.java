@@ -1,7 +1,7 @@
 package com.trkj.property.service.impl;
 
-import com.trkj.property.dao.TMaintainDao;
-import com.trkj.property.entity.TMaintain;
+import com.trkj.property.dao.*;
+import com.trkj.property.entity.*;
 import com.trkj.property.service.TMaintainService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +18,14 @@ import java.util.List;
 public class TMaintainServiceImpl implements TMaintainService {
     @Resource
     private TMaintainDao tMaintainDao;
+    @Resource
+    private TResidenceDao tResidenceDao;
+    @Resource
+    private TBuildingDao tBuildingDao;
+    @Resource
+    private TUnitDao tUnitDao;
+    @Resource
+    private THouseDao tHouseDao;
     @Override
     @Transactional
     public void deleteByTMaintainKey(Integer maintainId) {
@@ -27,6 +35,12 @@ public class TMaintainServiceImpl implements TMaintainService {
     @Override
     @Transactional
     public void addTMaintain(TMaintain record) {
+        //获得房产名
+        TResidence tResidence = tResidenceDao.selectByPrimaryKey(record.getRid());
+        TBuilding tBuilding = tBuildingDao.selectByTBuildingKey(record.getBid());
+        TUnit tUnit = tUnitDao.selectByTUnitKey(record.getUid());
+        THouse tHouse = tHouseDao.selectByTHouseKey(record.getHouseId());
+        record.setHouseName(tResidence.getResidenceName()+"#"+tBuilding.getBuildingName()+"#"+tUnit.getUnitName()+"#"+tHouse.getHouseName());
         tMaintainDao.addTMaintain(record);
     }
 
@@ -38,6 +52,11 @@ public class TMaintainServiceImpl implements TMaintainService {
     @Override
     public List<TMaintain> selectAllTMaintainByState(Integer state, String value) {
         return tMaintainDao.selectAllTMaintainByState(state,value);
+    }
+
+    @Override
+    public List<TMaintain> selectAllTMaintains(String value) {
+        return tMaintainDao.selectAllTMaintains(value);
     }
 
     @Override

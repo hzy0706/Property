@@ -15,10 +15,34 @@
         <result property="sellAudit" column="sell_audit" jdbcType="INTEGER"/>
         <result property="sellPraudit" column="sell_praudit" jdbcType="INTEGER"/>
         <result property="leaseProfee" column="lease_profee" jdbcType="NUMERIC"/>
+        <collection property="tMerchant" ofType="com.trkj.property.entity.TMerchant"  column="merId">
+
+            <result property="merName" column="mer_name" jdbcType="VARCHAR"/>
+            <result property="merType" column="mer_type" jdbcType="VARCHAR"/>
+            <result property="merRight" column="mer_right" jdbcType="VARCHAR"/>
+            <result property="merContacts" column="mer_contacts" jdbcType="VARCHAR"/>
+            <result property="merPhone" column="mer_phone" jdbcType="VARCHAR"/>
+            <result property="merAddress" column="mer_address" jdbcType="VARCHAR"/>
+            <result property="merCardtype" column="mer_cardtype" jdbcType="VARCHAR"/>
+            <result property="merCard" column="mer_card" jdbcType="VARCHAR"/>
+            <result property="merMain" column="mer_main" jdbcType="VARCHAR"/>
+            <result property="merState" column="mer_state" jdbcType="INTEGER"/>
+            <result property="merMarket" column="mer_market" jdbcType="VARCHAR"/>
+            <result property="merPrictrue" column="mer_prictrue" jdbcType="VARCHAR"/>
+            <result property="merDate" column="mer_date" jdbcType="TIMESTAMP"/>
+        </collection>
     </resultMap>
 
     <sql id="TSellContractCol">
         sell_id, sto_id, mer_id, sell_time, sell_contact, sell_acre, sell_unitprice, sell_price, sell_phone, sell_audit, sell_praudit, lease_profee    </sql>
+
+    <sql id="TSellContractCol1">
+        S.sell_id, S.sto_id, S.mer_id, S.sell_time, S.sell_contact, S.sell_acre, S.sell_unitprice, S.sell_price, S.sell_phone, S.sell_audit, S.sell_praudit, S.lease_profee,    </sql>
+
+
+    <sql id="TMerchantCol">
+        M.mer_name, M.mer_type, M.mer_right, M.mer_contacts, M.mer_phone, M.mer_address, M.mer_cardtype, M.mer_card, M.mer_main, M.mer_state, M.mer_market, M.mer_prictrue, M.mer_date    </sql>
+
 
     <!--查询单个-->
     <select id="queryById" resultMap="TSellContractMap">
@@ -38,8 +62,9 @@
     <!--通过实体作为或者条件查询-->
     <select id="queryOrByPojo" resultMap="TSellContractMap">
         select
-        <include refid="TSellContractCol"></include>
-        from property.t_sell_contract
+        <include refid="TSellContractCol1"></include>
+        <include refid="TMerchantCol"></include>
+        from property.t_sell_contract S,property.t_merchant M
         <where>
             <if test="sellId != null">
                 or sell_id like CONCAT('%',#{sellId},'%')
@@ -77,6 +102,7 @@
             <if test="leaseProfee != null">
                 or lease_profee like CONCAT('%',#{leaseProfee},'%')
             </if>
+            and S.mer_id=M.mer_id
         </where>
     </select>
 

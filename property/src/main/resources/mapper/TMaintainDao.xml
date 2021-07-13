@@ -27,8 +27,8 @@
     <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    maintain_id, house_id, house_name, apply_name, maintain_phone, create_name, create_date, 
-    maintain_state, maintain_content, maintain_bail, approval_suggest, approval_name, 
+    maintain_id, house_id, house_name, apply_name, maintain_phone, create_name, create_date,
+    maintain_state, maintain_content, maintain_bail, approval_suggest, approval_name,
     approval_date, build_unit, build_name, build_phone, build_start_date, build_end_date, 
     check_name, check_date, check_suggest, maintain_remark, apply_date
   </sql>
@@ -44,6 +44,15 @@
     <include refid="Base_Column_List" />
     from t_maintain
     where maintain_state = #{param1} and (apply_name like #{param2} or maintain_content like #{param2})
+    order by create_date desc
+  </select>
+
+  <select id="selectAllTMaintains" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_maintain
+    where apply_name like #{value} or maintain_content like #{value}
+    order by create_date desc
   </select>
 
   <delete id="deleteByTMaintainKey" parameterType="java.lang.Integer">
@@ -52,16 +61,14 @@
   </delete>
   <insert id="addTMaintain" keyColumn="maintain_id" keyProperty="maintainId" parameterType="com.trkj.property.entity.TMaintain" useGeneratedKeys="true">
     insert into t_maintain (house_id, house_name, apply_name, 
-      maintain_phone, create_name, create_date, 
-      maintain_state, maintain_content, maintain_bail, 
+      maintain_phone, create_name, maintain_content, maintain_bail,
       approval_suggest, approval_name, approval_date, 
       build_unit, build_name, build_phone, 
       build_start_date, build_end_date, check_name, 
       check_date, check_suggest, maintain_remark, 
       apply_date)
     values (#{houseId,jdbcType=INTEGER}, #{houseName,jdbcType=VARCHAR}, #{applyName,jdbcType=VARCHAR}, 
-      #{maintainPhone,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{maintainState,jdbcType=INTEGER}, #{maintainContent,jdbcType=VARCHAR}, #{maintainBail,jdbcType=DECIMAL}, 
+      #{maintainPhone,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR},#{maintainContent,jdbcType=VARCHAR}, #{maintainBail,jdbcType=DECIMAL},
       #{approvalSuggest,jdbcType=VARCHAR}, #{approvalName,jdbcType=VARCHAR}, #{approvalDate,jdbcType=TIMESTAMP}, 
       #{buildUnit,jdbcType=VARCHAR}, #{buildName,jdbcType=VARCHAR}, #{buildPhone,jdbcType=VARCHAR}, 
       #{buildStartDate,jdbcType=TIMESTAMP}, #{buildEndDate,jdbcType=TIMESTAMP}, #{checkName,jdbcType=VARCHAR}, 
@@ -85,9 +92,6 @@
       </if>
       <if test="createName != null">
         create_name = #{createName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="maintainState != null">
         maintain_state = #{maintainState,jdbcType=INTEGER},

@@ -28,6 +28,8 @@ public class TOwnerHouse implements Serializable {
 
     private Integer ownerId;
 
+    private TOwner tOwner;
+
     private String houseNo;
     @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date decorateDate;

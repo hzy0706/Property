@@ -12,14 +12,16 @@ import java.util.List;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * (TLeasingContract)表服务实现类
  *
  * @author makejava
- * @since 2021-07-12 15:14:45
+ * @since 2021-07-12 10:58:19
  */
 @Service("tLeasingContractService")
+@Transactional(rollbackFor=Exception.class)
 public class TLeasingContractServiceImpl implements TLeasingContractService {
     @Resource
     private TLeasingContractDao tLeasingContractDao;
@@ -82,6 +84,8 @@ public class TLeasingContractServiceImpl implements TLeasingContractService {
      */
     @Override
     public TLeasingContract insert(TLeasingContract tLeasingContract) {
+        Integer month=tLeasingContract.getLeaseEndtime().getMonth()-tLeasingContract.getLeaseBegtime().getMonth();
+        tLeasingContract.setLeaseTenterm(month);
         this.tLeasingContractDao.insert(tLeasingContract);
         return this.queryById(tLeasingContract.getLeaseId());
     }
@@ -105,6 +109,9 @@ public class TLeasingContractServiceImpl implements TLeasingContractService {
      */
     @Override
     public TLeasingContract update(TLeasingContract tLeasingContract) {
+        Integer month=tLeasingContract.getLeaseEndtime().getMonth()-tLeasingContract.getLeaseBegtime().getMonth();
+        System.out.println(month);
+        tLeasingContract.setLeaseTenterm(month);
         this.tLeasingContractDao.update(tLeasingContract);
         return this.queryById(tLeasingContract.getLeaseId());
     }

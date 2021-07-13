@@ -49,6 +49,15 @@
     <include refid="Base_Column_List" />
     from t_decorate
     where decorate_state = #{param1} and (apply_name like #{param2} or decorate_content like #{param2})
+    order by create_date desc
+  </select>
+
+  <select id="selectAllTDecorates" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_decorate
+    where apply_name like #{value} or decorate_content like #{value}
+    order by create_date desc
   </select>
 
   <delete id="deleteByTDecorateKey" parameterType="java.lang.Integer">
@@ -57,8 +66,8 @@
   </delete>
   <insert id="addTDecorate" keyColumn="decorate_id" keyProperty="decorateId" parameterType="com.trkj.property.entity.TDecorate" useGeneratedKeys="true">
     insert into t_decorate (house_id, decorate_type, apply_name, 
-      decorate_phone, create_name, create_date, 
-      decorate_state, decorate_content, decorate_bail, 
+      decorate_phone, create_name,
+      decorate_content, decorate_bail,
       approval_suggest, approval_name, approval_date, 
       build_unit, build_name, build_phone, 
       build_start_date, build_end_date, check_name, 
@@ -66,8 +75,8 @@
       cancel_name, cancel_date, decorate_remark, 
       house_name, apply_date)
     values (#{houseId,jdbcType=INTEGER}, #{decorateType,jdbcType=VARCHAR}, #{applyName,jdbcType=VARCHAR}, 
-      #{decoratePhone,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{decorateState,jdbcType=INTEGER}, #{decorateContent,jdbcType=VARCHAR}, #{decorateBail,jdbcType=DECIMAL}, 
+      #{decoratePhone,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR},
+      #{decorateContent,jdbcType=VARCHAR}, #{decorateBail,jdbcType=DECIMAL},
       #{approvalSuggest,jdbcType=VARCHAR}, #{approvalName,jdbcType=VARCHAR}, #{approvalDate,jdbcType=TIMESTAMP}, 
       #{buildUnit,jdbcType=VARCHAR}, #{buildName,jdbcType=VARCHAR}, #{buildPhone,jdbcType=VARCHAR}, 
       #{buildStartDate,jdbcType=TIMESTAMP}, #{buildEndDate,jdbcType=TIMESTAMP}, #{checkName,jdbcType=VARCHAR}, 
@@ -92,9 +101,6 @@
       </if>
       <if test="createName != null">
         create_name = #{createName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="decorateState != null">
         decorate_state = #{decorateState,jdbcType=INTEGER},

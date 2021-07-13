@@ -8,6 +8,7 @@ import com.trkj.property.vo.AjaxResponse;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,9 +28,9 @@ public class TDecorateController {
      * @date  2021/7/12
      * @version 1.0
      */
-    @DeleteMapping("/deleteByTDecorateKey")
-    public AjaxResponse deleteByTDecorateKey(){
-        tDecorateService.deleteByTDecorateKey(1);
+    @DeleteMapping("/deleteByTDecorateKey/{id}")
+    public AjaxResponse deleteByTDecorateKey(@PathVariable("id") Integer id){
+        tDecorateService.deleteByTDecorateKey(id);
         return AjaxResponse.success();
     }
     /**
@@ -83,7 +84,12 @@ public class TDecorateController {
     public AjaxResponse selectAllTDecorateByState(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize
                                                     ,@RequestParam("state")Integer state, @RequestParam("value")String value){
         PageHelper.startPage(currentPage,pageSize);
-        List<TDecorate> list = tDecorateService.selectAllTDecorateByState(state,"%"+value+"%");
+        List<TDecorate> list =new ArrayList<>();
+        if(state==4){
+            list = tDecorateService.selectAllTDecorates("%"+value+"%");
+        }else{
+            list = tDecorateService.selectAllTDecorateByState(state,"%"+value+"%");
+        }
         PageInfo<TDecorate> pageInfo = new PageInfo<>(list);
         return AjaxResponse.success(pageInfo);
     }

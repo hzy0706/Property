@@ -2,6 +2,7 @@ package com.trkj.property.vo.form;
 
 import java.io.Serializable;
 
+import com.trkj.property.entity.TMerchant;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class TShopstoreQueryForm implements Serializable {
     private String stoType;
 
     private Integer stoAudit;
-
+    private TMerchant tMerchant;
     private Integer pageNum;    //当前页
     private Integer pageSize;   //页大小
 

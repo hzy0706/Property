@@ -17,6 +17,11 @@ public class BIllController {
     private BillService billService;
 
 
+    /**
+     * 新增账单
+     * @param tBill
+     * @return
+     */
     @PostMapping("addBill")
     public AjaxResponse addBill(@RequestBody TBill tBill){
         Integer result = billService.addBill(tBill);
@@ -24,6 +29,8 @@ public class BIllController {
             return AjaxResponse.success();
         }
         return AjaxResponse.error(new CustomError(CustomErrorType.SYSTEM_ERROR,"系统异常，等开发人员抢救过来再说"));
-
     }
+
+
+
 }

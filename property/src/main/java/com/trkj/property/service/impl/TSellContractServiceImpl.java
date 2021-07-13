@@ -12,6 +12,7 @@ import java.util.List;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * (TSellContract)表服务实现类
@@ -20,6 +21,7 @@ import com.github.pagehelper.PageInfo;
  * @since 2021-07-12 15:15:46
  */
 @Service("tSellContractService")
+@Transactional(rollbackFor=Exception.class)
 public class TSellContractServiceImpl implements TSellContractService {
     @Resource
     private TSellContractDao tSellContractDao;

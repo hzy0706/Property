@@ -48,7 +48,7 @@ public class TInspectionroominfoServiceImpl implements TInspectionroominfoServic
             TUnit tUnit = tUnitDao.selectByTUnitKey(record.getUid());
             THouse tHouse = tHouseDao.selectByTHouseKey(record.getHouseId());
             TInspectionroom tInspectionroom1 = new TInspectionroom();
-            tInspectionroom1.setHouseName(tResidence.getResidenceName()+tBuilding.getBuildingName()+tUnit.getUnitName()+tHouse.getHouseName());
+            tInspectionroom1.setHouseName(tResidence.getResidenceName()+"#"+tBuilding.getBuildingName()+"#"+tUnit.getUnitName()+"#"+tHouse.getHouseName());
             tInspectionroom1.setHouseId(record.getHouseId());
             if(record.getIsOk()==0){
                 tInspectionroom1.setOkcount(1);

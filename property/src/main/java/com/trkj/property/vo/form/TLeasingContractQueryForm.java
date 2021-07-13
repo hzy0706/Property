@@ -3,6 +3,8 @@ package com.trkj.property.vo.form;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.trkj.property.entity.TMerchant;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -20,11 +22,11 @@ public class TLeasingContractQueryForm implements Serializable {
     private Integer merId;
 
     private Integer stoId;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date leaseBegtime;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date leaseEndtime;
-
+    @JsonFormat(timezone="GMT+8",pattern = "yyyy-MM-dd")
     private Date leaseDate;
 
     private String leaseContacts;
@@ -46,6 +48,8 @@ public class TLeasingContractQueryForm implements Serializable {
     private Integer leasePraudit;
 
     private Double leaseProfee;
+
+    private TMerchant tMerchant;
 
     private Integer pageNum;    //当前页
     private Integer pageSize;   //页大小

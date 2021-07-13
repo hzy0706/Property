@@ -18,5 +18,7 @@ public interface TOwnerHouseService {
 
     List<TOwnerHouse> selectAllTOwnerHouseByTid(Integer ownerId);
 
+    TOwnerHouse selectTOwnerHouseByHouseId(Integer houseId);
+
     void updateByTOwnerHouseKeySelective(TOwnerHouse record);
 }
