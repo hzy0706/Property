@@ -26,4 +26,18 @@ public class TParKingsalesServiceImpl implements TParKingsalesService {
         tParkingsalesDao.updateTParkingSales(tParkingsales);
         return tParkingsales;
     }
+
+    @Override
+    public TParkingsales insertTParKing(TParkingsales tParkingsales) {
+        log.debug("新增成功");
+        tParkingsalesDao.insertTParKing(tParkingsales);
+        return tParkingsales;
+    }
+//模糊查询
+    @Override
+    public List<TParkingsales> selectlicense(String value1, String value2) {
+        return tParkingsalesDao.selectlicense(value1, value2);
+    }
+
+
 }

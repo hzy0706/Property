@@ -2,6 +2,8 @@ package com.trkj.property.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 /**
@@ -18,7 +20,7 @@ public class TParking implements Serializable {
 //楼盘id
     private Integer residenceId;
 
-    private Integer pNumber;
+    private Integer pnumber;
 
     private Integer state;
 

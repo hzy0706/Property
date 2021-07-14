@@ -2,6 +2,7 @@ package com.trkj.property.service.impl;
 
 import com.trkj.property.dao.TParkingDao;
 import com.trkj.property.entity.TParking;
+import com.trkj.property.entity.TParkingsales;
 import com.trkj.property.service.TParKingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,21 @@ public class TParKingServiceImpl implements TParKingService {
         return tParking;
     }
 
-//    根据车位状态查询11
+//    多条件查询
     @Override
-    public List<TParking> selectstate(String value3) {
-        return tParkingDao.selectstate(value3);
+    public List<TParking> selectstate(String value3,String value2) {
+        return tParkingDao.selectstate(value3,value2);
+    }
+    @Override
+    public List<TParkingsales> selectmanagemen() {
+        return tParkingDao.selectmanagemen();
+    }
+
+    @Override
+    public TParking updateState(TParking tParking) {
+        log.debug("修改状态");
+        tParkingDao.updateState(tParking);
+        return tParking;
     }
 
 

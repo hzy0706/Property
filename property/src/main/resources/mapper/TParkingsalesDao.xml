@@ -14,7 +14,7 @@
       <result column="saleContract_id" jdbcType="INTEGER" property="salecontractId" />
       <result column="LeaseContract_id" jdbcType="INTEGER" property="leasecontractId" />
       <result column="residence_id" jdbcType="INTEGER" property="residenceId" />
-      <result column="p_number" jdbcType="INTEGER" property="pNumber" />
+      <result column="p_number" jdbcType="INTEGER" property="pnumber" />
       <result column="state" jdbcType="INTEGER" property="state" />
       <result column="type" jdbcType="VARCHAR" property="type" />
       <result column="types" jdbcType="INTEGER" property="types" />
@@ -42,7 +42,7 @@
     </association>
   </resultMap>
   <sql id="TParKingsales">
-    s.parkingSales_id, s.saleContract_id, s.price, s.license, s.Parking, s.parking_id
+    s.parkingSales_id, s.saleContract_id, s.price, s.license, s.Parking, s.parking_id,s.owner_id
   </sql>
   <sql id="TParKing">
     p.parking_id, p.saleContract_id, p.LeaseContract_id, p.residence_id, p.p_number, p.`state`, p.`type`,
@@ -52,22 +52,39 @@
     o.owner_id, o.owner_type, o.owner_name, o.owner_sex, o.owner_birth, o.owner_nation, o.owner_education,
     o.owner_notype, o.owner_no, o.owner_work, o.owner_phone, o.urgent_name, o.urgent_phone
   </sql>
+
+
+
+<!--  显示车位销售信息-->
   <select id="selectTParKingsales" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="TParKingsales" />
+    <include refid="TParKingsales" />,
+    <include refid="TParKing" />
     from t_parkingSales s
+    inner join t_parking p on p.parking_id=s.parking_id
+    where p.managemen=0
   </select>
+  <select id="selectlicense" resultMap="BaseResultMap">
+    select
+    <include refid="TParKingsales" />,
+    <include refid="TParKing" />
+    from t_parkingSales s inner join t_parking p on p.parking_id=s.parking_id
+    where p.state = #{param1}  and s.license like #{param3}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_parkingSales
     where parkingSales_id = #{parkingsalesId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="parkingSales_id" keyProperty="parkingsalesId" parameterType="com.trkj.property.entity.TParkingsales" useGeneratedKeys="true">
     insert into t_parkingSales (saleContract_id, price, license, 
       Parking, parking_id)
     values (#{salecontractId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{license,jdbcType=VARCHAR}, 
       #{parking,jdbcType=VARCHAR}, #{parkingId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="parkingSales_id" keyProperty="parkingsalesId" parameterType="com.trkj.property.entity.TParkingsales" useGeneratedKeys="true">
+  <!--  增加车位信息-->
+  <insert id="insertTParKing" keyColumn="parkingSales_id" keyProperty="parkingsalesId" parameterType="com.trkj.property.entity.TParkingsales" useGeneratedKeys="true">
     insert into t_parkingSales
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="salecontractId != null">

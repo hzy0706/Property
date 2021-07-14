@@ -6,7 +6,7 @@
     <result column="saleContract_id" jdbcType="INTEGER" property="salecontractId" />
     <result column="LeaseContract_id" jdbcType="INTEGER" property="leasecontractId" />
     <result column="residence_id" jdbcType="INTEGER" property="residenceId" />
-    <result column="p_number" jdbcType="INTEGER" property="pNumber" />
+    <result column="p_number" jdbcType="INTEGER" property="pnumber" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="types" jdbcType="INTEGER" property="types" />
@@ -36,6 +36,17 @@
     r.residence_id, r.residence_name, r.green_area, r.floor_area, r.address, r.covered_area, r.road_area,
     r.task_name, r.developer
   </sql>
+
+
+
+  <!--  显示管理类别为出售的-->
+  <select id="selectmanagemen" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="TParKing" />
+    from t_parking p
+    where p.managemen=0
+  </select>
+
 <!--  显示车位信息-->
   <select id="selectTParKing" resultMap="BaseResultMap">
     select 
@@ -44,49 +55,41 @@
     from t_parking p inner join t_residence r on p.residence_id=r.residence_id
   </select>
 <!--模糊查询-->
-<!--  <select id="select1" resultMap="BaseResultMap">-->
-<!--    select-->
-<!--    <include refid="Base_Column_List"/>,-->
-<!--    <include refid="TResidence"/>-->
-<!--    from t_parking p-->
-<!--    inner join t_residence r on p.residence_id=r.residence_id-->
-<!--    <if test="value1=='2' and value15!=null">-->
-<!--      and e.`Emp_Name` like CONCAT('%' ,#{value15}, '%')-->
-
-<!--    </if>-->
-<!--    <if test='value5 == "1"'>-->
-<!--      and m.Mail_Title like CONCAT('%' ,#{value15}, '%')-->
-<!--    </if>-->
-<!--  </select>-->
+  <select id="selectstate" resultMap="BaseResultMap">
+    select
+    <include refid="TParKing"/>
+    from t_parking p
+    where state = #{param1} and p_number like #{param2}
+  </select>
 <!--  根据车位编号查询-->
 <!--  <select id="selectnumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
 <!--    select-->
-<!--    <include refid="Base_Column_List"/>-->
+<!--    <include refid="TParKing"/>-->
 <!--    from t_parking p-->
 <!--    <where>order by AddTime desc-->
-<!--      <if test="value2! = null">1-->
+<!--      <if test="value2! = null">-->
 <!--        and p.`p_number` like CONCAT('%' ,#{value2}, '%')-->
 <!--      </if>-->
 <!--    </where>-->
 <!--  </select>-->
 <!--  根据车位状态查询-->
-  <select id="selectstate" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="TParKing"/>
-    from t_parking p
-    <where>order by AddTime desc
-      <if test="value3==0">
-        p.state =0
-      </if>
-      <if test="value3==1">
-        p.state =1
-      </if>
-      <if test="value3==2">
-        p.state =2
-      </if>
-    </where>
+<!--  <select id="selectstate" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="TParKing"/>-->
+<!--    from t_parking p-->
+<!--    <where>order by parkingId desc-->
+<!--      <if test="value3==0">-->
+<!--        p.state =0-->
+<!--      </if>-->
+<!--      <if test="value3==1">-->
+<!--        p.state =1-->
+<!--      </if>-->
+<!--      <if test="value3==2">-->
+<!--        p.state =2-->
+<!--      </if>-->
+<!--    </where>-->
 
-  </select>
+<!--  </select>-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_parking
     where parking_id = #{parkingId,jdbcType=INTEGER}
@@ -98,7 +101,7 @@
       preSale, prePrice, `position`, 
       area, remarks)
     values (#{salecontractId,jdbcType=INTEGER}, #{leasecontractId,jdbcType=INTEGER}, 
-      #{residenceId,jdbcType=INTEGER}, #{pNumber,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{residenceId,jdbcType=INTEGER}, #{pnumber,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
       #{type,jdbcType=VARCHAR}, #{types,jdbcType=INTEGER}, #{managemen,jdbcType=INTEGER}, 
       #{presale,jdbcType=DECIMAL}, #{preprice,jdbcType=DECIMAL}, #{position,jdbcType=VARCHAR}, 
       #{area,jdbcType=DECIMAL}, #{remarks,jdbcType=VARCHAR})
@@ -116,7 +119,7 @@
       <if test="residenceId != null">
         residence_id,
       </if>
-      <if test="pNumber != null">
+      <if test="pnumber != null">
         p_number,
       </if>
       <if test="state != null">
@@ -157,8 +160,8 @@
       <if test="residenceId != null">
         #{residenceId,jdbcType=INTEGER},
       </if>
-      <if test="pNumber != null">
-        #{pNumber,jdbcType=INTEGER},
+      <if test="pnumber != null">
+        #{pnumber,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -202,8 +205,8 @@
       <if test="residenceId != null">
         residence_id = #{residenceId,jdbcType=INTEGER},
       </if>
-      <if test="pNumber != null">
-        p_number = #{pNumber,jdbcType=INTEGER},
+      <if test="pnumber != null">
+        p_number = #{pnumber,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         `state` = #{state,jdbcType=INTEGER},
@@ -240,7 +243,7 @@
     set saleContract_id = #{salecontractId,jdbcType=INTEGER},
       LeaseContract_id = #{leasecontractId,jdbcType=INTEGER},
       residence_id = #{residenceId,jdbcType=INTEGER},
-      p_number = #{pNumber,jdbcType=INTEGER},
+      p_number = #{pnumber,jdbcType=INTEGER},
       `state` = #{state,jdbcType=INTEGER},
       `type` = #{type,jdbcType=VARCHAR},
       types = #{types,jdbcType=INTEGER},
@@ -250,6 +253,11 @@
       `position` = #{position,jdbcType=VARCHAR},
       area = #{area,jdbcType=DECIMAL},
       remarks = #{remarks,jdbcType=VARCHAR}
+    where parking_id = #{parkingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateState" parameterType="com.trkj.property.entity.TParking">
+    update t_parking
+    set `state` = 1
     where parking_id = #{parkingId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -11,11 +11,15 @@ public interface TParkingsalesDao {
 
     int insert(TParkingsales record);
 
-    int insertSelective(TParkingsales record);
+    int insertTParKing(TParkingsales tParkingsales);//新增车位销售信息
 
     List<TParkingsales> selectTParKingsales();
+
+
 
     int updateByPrimaryKeySelective(TParkingsales record);
 
     int updateTParkingSales(TParkingsales record);//修改车位销售信息
+
+    List<TParkingsales> selectlicense(String value1,String value2);//多条件查询
 }
