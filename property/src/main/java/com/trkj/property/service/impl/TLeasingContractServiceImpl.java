@@ -109,9 +109,10 @@ public class TLeasingContractServiceImpl implements TLeasingContractService {
      */
     @Override
     public TLeasingContract update(TLeasingContract tLeasingContract) {
-        Integer month=tLeasingContract.getLeaseEndtime().getMonth()-tLeasingContract.getLeaseBegtime().getMonth();
-        System.out.println(month);
-        tLeasingContract.setLeaseTenterm(month);
+        if(tLeasingContract.getLeaseEndtime()!=null) {
+            Integer month = tLeasingContract.getLeaseEndtime().getMonth() - tLeasingContract.getLeaseBegtime().getMonth();
+            tLeasingContract.setLeaseTenterm(month);
+        }
         this.tLeasingContractDao.update(tLeasingContract);
         return this.queryById(tLeasingContract.getLeaseId());
     }
